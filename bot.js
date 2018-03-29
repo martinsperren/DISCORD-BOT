@@ -1,432 +1,138 @@
+// Load up the discord.js library
+const Discord = require("discord.js");
 
-const Discord = require('discord.js');
-const cliente = new Discord.Client();
+// This is your client. Some people call it `bot`, some people call it `self`, 
+// some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
+// this is what we're refering to. Your client.
+const client = new Discord.Client();
 
+// Here we load the config.json file that contains our token and our prefix values. 
+const config = require("./config.json");
+// config.token contains the bot's token
+// config.prefix contains the message prefix.
 
-const YoutubeDL = require('youtube-dl');
-const ytdl = require('ytdl-core');
+client.on("ready", () => {
+  // This event will run if the bot starts, and logs in, successfully.
+  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
+  // Example of changing the bot's playing game to something useful. `client.user` is what the
+  // docs refer to as the "ClientUser".
+  client.user.setGame(`on ${client.guilds.size} servers`);
+});
 
-/**
- * Takes a discord.js client and turns it into a music bot.
- * Thanks to 'derekmartinez18' for helping.
- *
- * @param {Client} client - The discord.js client.
- * @param {object} options - (Optional) Options to configure the music bot. Acceptable options are:
- * 							prefix: The prefix to use for the commands (default '!').
- * 							global: Whether to use a global queue instead of a server-specific queue (default false).
- * 							maxQueueSize: The maximum queue size (default 20).
- * 							anyoneCanSkip: Allow anybody to skip the song.
- * 							clearInvoker: Clear the command message.
- * 							volume: The default volume of the player.
- *							channel: Name of default voice channel to join.
- */
-module.exports = function (client, options) {
-	// Get all options.
-	let PREFIX = (options && options.prefix) || '!';
-	let GLOBAL = (options && options.global) || false;
-	let MAX_QUEUE_SIZE = (options && options.maxQueueSize) || 20;
-	let DEFAULT_VOLUME = (options && options.volume) || 50;
-	let ALLOW_ALL_SKIP = (options && options.anyoneCanSkip) || false;
-	let CLEAR_INVOKER = (options && options.clearInvoker) || false;
-	let CHANNEL = (options && options.channel) || false;
+client.on("guildCreate", guild => {
+  // This event triggers when the bot joins a guild.
+  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+  client.user.setGame(`on ${client.guilds.size} servers`);
+});
 
-	// Create an object of queues.
-	let queues = {};
-
-	// Catch message events.
-	client.on('message', msg => {
-		const message = msg.content.trim();
-
-		// Check if the message is a command.
-		if (message.toLowerCase().startsWith(PREFIX.toLowerCase())) {
-			// Get the command and suffix.
-			const command = message.substring(PREFIX.length).split(/[ \n]/)[0].toLowerCase().trim();
-			const suffix = message.substring(PREFIX.length + command.length).trim();
-
-			// Process the commands.
-			switch (command) {
-				case 'play':
-					return play(msg, suffix);
-				case 'skip':
-					return skip(msg, suffix);
-				case 'queue':
-					return queue(msg, suffix);
-				case 'pause':
-					return pause(msg, suffix);
-				case 'resume':
-					return resume(msg, suffix);
-				case 'volume':
-					return volume(msg, suffix);
-				case 'leave':
-					return leave(msg, suffix);
-				case 'clearqueue':
-					return clearqueue(msg, suffix);
-			}
-			if (CLEAR_INVOKER) {
-				msg.delete();
-			}
-		}
-	});
-
-	/**
-	 * Checks if a user is an admin.
-	 *
-	 * @param {GuildMember} member - The guild member
-	 * @returns {boolean} -
-	 */
-	function isAdmin(member) {
-		return member.hasPermission("ADMINISTRATOR");
-	}
-
-	/**
-	 * Checks if the user can skip the song.
-	 *
-	 * @param {GuildMember} member - The guild member
-	 * @param {array} queue - The current queue
-	 * @returns {boolean} - If the user can skip
-	 */
-	function canSkip(member, queue) {
-		if (ALLOW_ALL_SKIP) return true;
-		else if (queue[0].requester === member.id) return true;
-		else if (isAdmin(member)) return true;
-		else return false;
-	}
-
-	/**
-	 * Gets the song queue of the server.
-	 *
-	 * @param {integer} server - The server id.
-	 * @returns {object} - The song queue.
-	 */
-	function getQueue(server) {
-		// Check if global queues are enabled.
-		if (GLOBAL) server = '_'; // Change to global queue.
-
-		// Return the queue.
-		if (!queues[server]) queues[server] = [];
-		return queues[server];
-	}
-
-	/**
-	 * The command for adding a song to the queue.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 * @returns {<promise>} - The response edit.
-	 */
-	function play(msg, suffix) {
-		// Make sure the user is in a voice channel.
-		if (!CHANNEL && msg.member.voiceChannel === undefined) return msg.channel.send(wrap('You\'re not in a voice channel.'));
-
-		// Make sure the suffix exists.
-		if (!suffix) return msg.channel.send(wrap('No video specified!'));
-
-		// Get the queue.
-		const queue = getQueue(msg.guild.id);
-
-		// Check if the queue has reached its maximum size.
-		if (queue.length >= MAX_QUEUE_SIZE) {
-			return msg.channel.send(wrap('Maximum queue size reached!'));
-		}
-
-		// Get the video information.
-		msg.channel.send(wrap('Searching...')).then(response => {
-			var searchstring = suffix
-			if (!suffix.toLowerCase().startsWith('http')) {
-				searchstring = 'gvsearch1:' + suffix;
-			}
-
-			YoutubeDL.getInfo(searchstring, ['-q', '--no-warnings', '--force-ipv4'], (err, info) => {
-				// Verify the info.
-				if (err || info.format_id === undefined || info.format_id.startsWith('0')) {
-					return response.edit(wrap('Invalid video!'));
-				}
-
-				info.requester = msg.author.id;
-
-				// Queue the video.
-				response.edit(wrap('Queued: ' + info.title)).then(() => {
-					queue.push(info);
-					// Play if only one element in the queue.
-					if (queue.length === 1) executeQueue(msg, queue);
-				}).catch(console.log);
-			});
-		}).catch(console.log);
-	}
+client.on("guildDelete", guild => {
+  // this event triggers when the bot is removed from a guild.
+  console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+  client.user.setGame(`on ${client.guilds.size} servers`);
+});
 
 
-	/**
-	 * The command for skipping a song.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 * @returns {<promise>} - The response message.
-	 */
-	function skip(msg, suffix) {
-		// Get the voice connection.
-		const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-		if (voiceConnection === null) return msg.channel.send(wrap('No music being played.'));
+client.on("message", async message => {
+  // This event will run on every single message received, from any channel or DM.
+  
+  // It's good practice to ignore other bots. This also makes your bot ignore itself
+  // and not get into a spam loop (we call that "botception").
+  if(message.author.bot) return;
+  
+  // Also good practice to ignore any message that does not start with our prefix, 
+  // which is set in the configuration file.
+  if(message.content.indexOf(config.prefix) !== 0) return;
+  
+  // Here we separate our "command" name, and our "arguments" for the command. 
+  // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
+  // command = say
+  // args = ["Is", "this", "the", "real", "life?"]
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+  
+  // Let's go with a few common example commands! Feel free to delete or change those.
+  
+  if(command === "ping") {
+    // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
+    // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
+    const m = await message.channel.send("Ping?");
+    m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+  }
+  
+  if(command === "say") {
+    // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
+    // To get the "message" itself we join the `args` back into a string with spaces: 
+    const sayMessage = args.join(" ");
+    // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
+    message.delete().catch(O_o=>{}); 
+    // And we get the bot to say the thing: 
+    message.channel.send(sayMessage);
+  }
+  
+  if(command === "kick") {
+    // This command must be limited to mods and admins. In this example we just hardcode the role names.
+    // Please read on Array.some() to understand this bit: 
+    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
+    if(!message.member.roles.some(r=>["Administrator", "Moderator"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
+    
+    // Let's first check if we have a member and if we can kick them!
+    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("Please mention a valid member of this server");
+    if(!member.kickable) 
+      return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
+    
+    // slice(1) removes the first part, which here should be the user mention!
+    let reason = args.slice(1).join(' ');
+    if(!reason)
+      return message.reply("Please indicate a reason for the kick!");
+    
+    // Now, time for a swift kick in the nuts!
+    await member.kick(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
+    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
 
-		// Get the queue.
-		const queue = getQueue(msg.guild.id);
+  }
+  
+  if(command === "ban") {
+    // Most of this command is identical to kick, except that here we'll only let admins do it.
+    // In the real world mods could ban too, but this is just an example, right? ;)
+    if(!message.member.roles.some(r=>["Administrator"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
+    
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("Please mention a valid member of this server");
+    if(!member.bannable) 
+      return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
-		if (!canSkip(msg.member, queue)) return msg.channel.send(wrap('You cannot skip this as you didn\'t queue it.')).then((response) => {
-			response.delete(5000);
-		});
-
-		// Get the number to skip.
-		let toSkip = 1; // Default 1.
-		if (!isNaN(suffix) && parseInt(suffix) > 0) {
-			toSkip = parseInt(suffix);
-		}
-		toSkip = Math.min(toSkip, queue.length);
-
-		// Skip.
-		queue.splice(0, toSkip - 1);
-
-		// Resume and stop playing.
-		const dispatcher = voiceConnection.player.dispatcher;
-		if (voiceConnection.paused) dispatcher.resume();
-		dispatcher.end();
-
-		msg.channel.send(wrap('Skipped ' + toSkip + '!'));
-	}
-
-	/**
-	 * The command for listing the queue.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 */
-	function queue(msg, suffix) {
-		// Get the queue.
-		const queue = getQueue(msg.guild.id);
-
-		// Get the queue text.
-		const text = queue.map((video, index) => (
-			(index + 1) + ': ' + video.title
-		)).join('\n');
-
-		// Get the status of the queue.
-		let queueStatus = 'Stopped';
-		const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-		if (voiceConnection !== null) {
-			const dispatcher = voiceConnection.player.dispatcher;
-			queueStatus = dispatcher.paused ? 'Paused' : 'Playing';
-		}
-
-		// Send the queue and status.
-		msg.channel.send(wrap('Queue (' + queueStatus + '):\n' + text));
-	}
-
-	/**
-	 * The command for pausing the current song.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 * @returns {<promise>} - The response message.
-	 */
-	function pause(msg, suffix) {
-		// Get the voice connection.
-		const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-		if (voiceConnection === null) return msg.channel.send(wrap('No music being played.'));
-
-		if (!isAdmin(msg.member))
-			return msg.channel.send(wrap('You are not authorized to use this.'));
-
-		// Pause.
-		msg.channel.send(wrap('Playback paused.'));
-		const dispatcher = voiceConnection.player.dispatcher;
-		if (!dispatcher.paused) dispatcher.pause();
-	}
-
-	/**
-	 * The command for leaving the channel and clearing the queue.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 * @returns {<promise>} - The response message.
-	 */
-	function leave(msg, suffix) {
-		if (isAdmin(msg.member)) {
-			const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-			if (voiceConnection === null) return msg.channel.send(wrap('I\'m not in any channel!.'));
-			// Clear the queue.
-			const queue = getQueue(msg.guild.id);
-			queue.splice(0, queue.length);
-
-			// End the stream and disconnect.
-			voiceConnection.player.dispatcher.end();
-			voiceConnection.disconnect();
-		} else {
-			msg.channel.send(wrap('You don\'t have permission to use that command!'));
-		}
-	}
-
-	/**
-	 * The command for clearing the song queue.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 */
-	function clearqueue(msg, suffix) {
-		if (isAdmin(msg.member)) {
-			const queue = getQueue(msg.guild.id);
-
-			queue.splice(0, queue.length);
-			msg.channel.send(wrap('Queue cleared!'));
-		} else {
-			msg.channel.send(wrap('You don\'t have permission to use that command!'));
-		}
-	}
-
-	/**
-	 * The command for resuming the current song.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 * @returns {<promise>} - The response message.
-	 */
-	function resume(msg, suffix) {
-		// Get the voice connection.
-		const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-		if (voiceConnection === null) return msg.channel.send(wrap('No music being played.'));
-
-		if (!isAdmin(msg.member))
-			return msg.channel.send(wrap('You are not authorized to use this.'));
-
-		// Resume.
-		msg.channel.send(wrap('Playback resumed.'));
-		const dispatcher = voiceConnection.player.dispatcher;
-		if (dispatcher.paused) dispatcher.resume();
-	}
-
-	/**
-	 * The command for changing the song volume.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {string} suffix - Command suffix.
-	 * @returns {<promise>} - The response message.
-	 */
-	function volume(msg, suffix) {
-		// Get the voice connection.
-		const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-		if (voiceConnection === null) return msg.channel.send(wrap('No music being played.'));
-
-		if (!isAdmin(msg.member))
-			return msg.channel.send(wrap('You are not authorized to use this.'));
-
-		// Get the dispatcher
-		const dispatcher = voiceConnection.player.dispatcher;
-
-		if (suffix > 200 || suffix < 0) return msg.channel.send(wrap('Volume out of range!')).then((response) => {
-			response.delete(5000);
-		});
-
-		msg.channel.send(wrap("Volume set to " + suffix));
-		dispatcher.setVolume((suffix/100));
-	}
-
-	/**
-	 * Executes the next song in the queue.
-	 *
-	 * @param {Message} msg - Original message.
-	 * @param {object} queue - The song queue for this server.
-	 * @returns {<promise>} - The voice channel.
-	 */
-	function executeQueue(msg, queue) {
-		// If the queue is empty, finish.
-		if (queue.length === 0) {
-			msg.channel.send(wrap('Playback finished.'));
-
-			// Leave the voice channel.
-			const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-			if (voiceConnection !== null) return voiceConnection.disconnect();
-		}
-
-		new Promise((resolve, reject) => {
-			// Join the voice channel if not already in one.
-			const voiceConnection = client.voiceConnections.find(val => val.channel.guild.id == msg.guild.id);
-			if (voiceConnection === null) {
-				if (CHANNEL) {
-					msg.guild.channels.find('name', CHANNEL).join().then(connection => {
-						resolve(connection);
-					}).catch((error) => {
-						console.log(error);
-					});
-
-				// Check if the user is in a voice channel.
-				} else if (msg.member.voiceChannel) {
-					msg.member.voiceChannel.join().then(connection => {
-						resolve(connection);
-					}).catch((error) => {
-						console.log(error);
-					});
-				} else {
-					// Otherwise, clear the queue and do nothing.
-					queue.splice(0, queue.length);
-					reject();
-				}
-			} else {
-				resolve(voiceConnection);
-			}
-		}).then(connection => {
-			// Get the first item in the queue.
-			const video = queue[0];
-
-			console.log(video.webpage_url);
-
-			// Play the video.
-			msg.channel.send(wrap('Now Playing: ' + video.title)).then(() => {
-				let dispatcher = connection.playStream(ytdl(video.webpage_url, {filter: 'audioonly'}), {seek: 0, volume: (DEFAULT_VOLUME/100)});
-
-				connection.on('error', (error) => {
-					// Skip to the next song.
-					console.log(error);
-					queue.shift();
-					executeQueue(msg, queue);
-				});
-
-				dispatcher.on('error', (error) => {
-					// Skip to the next song.
-					console.log(error);
-					queue.shift();
-					executeQueue(msg, queue);
-				});
-
-				dispatcher.on('end', () => {
-					// Wait a second.
-					setTimeout(() => {
-						if (queue.length > 0) {
-							// Remove the song from the queue.
-							queue.shift();
-							// Play the next song in the queue.
-							executeQueue(msg, queue);
-						}
-					}, 1000);
-				});
-			}).catch((error) => {
-				console.log(error);
-			});
-		}).catch((error) => {
-			console.log(error);
-		});
-	}
-}
-
-/**
- * Wrap text in a code block and escape grave characters.
- *
- * @param {string} text - The input text.
- * @returns {string} - The wrapped text.
- */
-function wrap(text) {
-	return '```\n' + text.replace(/`/g, '`' + String.fromCharCode(8203)) + '\n```';
-}
-
-
-
-
+    let reason = args.slice(1).join(' ');
+    if(!reason)
+      return message.reply("Please indicate a reason for the ban!");
+    
+    await member.ban(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
+    message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+  }
+  
+  if(command === "purge") {
+    // This command removes all messages from all users in the channel, up to 100.
+    
+    // get the delete count, as an actual number.
+    const deleteCount = parseInt(args[0], 10);
+    
+    // Ooooh nice, combined conditions. <3
+    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+      return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
+    
+    // So we get our messages, and delete them. Simple enough, right?
+    const fetched = await message.channel.fetchMessages({count: deleteCount});
+    message.channel.bulkDelete(fetched)
+      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
+  }
+});
 
 
 cliente.login(process.env.BOT_TOKEN);
