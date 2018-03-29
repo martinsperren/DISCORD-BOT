@@ -11,6 +11,7 @@ const ypi = require('youtube-playlist-info');
 const Discord = require('discord.js');
 const PACKAGE = require('./package.json');
 const client = new Discord.Client();
+client.login(process.env.BOT_TOKEN);
 
 /*
  * Takes a discord.js client and turns it into a music bot.
@@ -1891,5 +1892,5 @@ module.exports = function(client, options) {
 	};
 };
 
-client.login(process.env.BOT_TOKEN);
+
 
