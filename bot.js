@@ -10,6 +10,7 @@ const { YTSearcher } = require('ytsearcher');
 const ypi = require('youtube-playlist-info');
 const Discord = require('discord.js');
 const PACKAGE = require('./package.json');
+const client = new Discord.Client();
 
 /*
  * Takes a discord.js client and turns it into a music bot.
@@ -18,6 +19,14 @@ const PACKAGE = require('./package.json');
  * @param {Client} client - The discord.js client.
  * @param {object} options - Options to configure the client bot.
  */
+
+client.on('message', msg => {
+  if (msg.content === 'ping') {
+    msg.reply('Pong!');
+  }
+});
+
+
 
 module.exports = function(client, options) {
 	// Node check.
