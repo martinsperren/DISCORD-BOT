@@ -9,7 +9,7 @@ client.on('message', message => {
     if (message.content === 'ping') {
          const m = await message.channel.send("Ping?");
     	message.reply(
-    `Tu Ping es de ${m.createdTimestamp - message.createdTimestamp}ms. el ping de la API es ${Math.round(client.ping)}ms`););
+    `Tu Ping es de ${m.createdTimestamp - message.createdTimestamp}ms. el ping de la API es ${Math.round(client.ping)}ms`);
   	}
 });
 
