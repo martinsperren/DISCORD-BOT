@@ -1,3 +1,4 @@
+
 /*
  * Original code from nexu-dev, https://github.com/nexu-dev/discord.js-client
  * Newly edited by Darko Pendragon (Demise).
@@ -11,8 +12,8 @@ const {
 } = require('ytsearcher');
 const ypi = require('youtube-playlist-info');
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const PACKAGE = require('./package.json');
+const client = new Discord.Client();
 
 /*
  * Takes a discord.js client and turns it into a music bot.
@@ -22,38 +23,6 @@ const PACKAGE = require('./package.json');
  * @param {object} options - Options to configure the client bot.
  */
 
- 
- 
- 
- client.on('ready', () => {
-    console.log('I am ready!');
-});
-
-client.on('message', message => {
-    if (message.content === 'ping') {
-    	message.reply('pong');
-  	}
-});
-
-client.on('guildMemberAdd', member => {
-  // Send the message to a designated channel on a server:
-  const channel = member.guild.channels.find('name', 'member-log');
-  // Do nothing if the channel wasn't found on this server
-  if (!channel) return;
-  // Send the message, mentioning the member
-  channel.send(`Welcome to the server, ${member}`);
-});
-
-client.on('message', message => {
-  // If the message is "what is my avatar"
-  if (message.content === 'avatar') {
-    // Send the user's avatar URL
-    message.reply(message.author.avatarURL);
-  }
-});
- 
- 
- 
 module.exports = function(client, options) {
   if (PACKAGE.version === "10.0.3-aplha") return console.log(`=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nThis is not a valid update. Please use a lower version. This update is to alert people that the old Discord server is down (see README.md for more).\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=`);
   // Get all options.
@@ -1927,8 +1896,8 @@ module.exports = function(client, options) {
       console.log(new Error(`${type} was an invalid type`));
     }
   };
-};
-
+}; 
+ 
 
 client.login(process.env.BOT_TOKEN);
 
