@@ -3,12 +3,6 @@
 //const cliente = new Discord.Client();
 
 
-cliente.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong');
-  }
-});
-
 const YoutubeDL = require('youtube-dl');
 const ytdl = require('ytdl-core');
 
