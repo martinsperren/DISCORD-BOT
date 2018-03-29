@@ -14,19 +14,14 @@
     "ytdl-core": "^0.20.1"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/DarkoPendragon/discord.js-musicbot-addon"
+  
   },
   "bugs": {
-    "url": "https://github.com/DarkoPendragon/discord.js-musicbot-addon/issues"
+    
   },
   "homepage": "https://github.com/DarkoPendragon/discord.js-musicbot-addon",
   "keywords": [
-    "discord",
-    "discord.js",
-    "music",
-    "bot",
-    "addon"
+   
   ],
   "author": "demisex",
   "license": "ISC"
