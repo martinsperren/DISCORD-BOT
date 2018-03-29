@@ -1,9 +1,9 @@
 
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const cliente = new Discord.Client();
 
 
-client.on('message', msg => {
+cliente.on('message', msg => {
   if (msg.content === 'ping') {
     msg.reply('pong');
   }
@@ -435,7 +435,7 @@ function wrap(text) {
 
 
 
-client.login(process.env.BOT_TOKEN);
+cliente.login(process.env.BOT_TOKEN);
 
 
 
