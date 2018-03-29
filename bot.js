@@ -1,6 +1,6 @@
 
 //const Discord = require('discord.js');
-const cliente = new Discord.Client();
+//const cliente = new Discord.Client();
 
 
 cliente.on('message', msg => {
@@ -435,7 +435,7 @@ function wrap(text) {
 
 
 
-cliente.login(process.env.BOT_TOKEN);
+//cliente.login(process.env.BOT_TOKEN);
 
 
 
