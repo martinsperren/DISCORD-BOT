@@ -20,5 +20,14 @@ client.on('guildMemberAdd', member => {
   channel.send(`Welcome to the server, ${member}`);
 });
 
+client.on('message', message => {
+  // If the message is "what is my avatar"
+  if (message.content === 'avatar') {
+    // Send the user's avatar URL
+    message.reply(message.author.avatarURL);
+  }
+});
+
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
