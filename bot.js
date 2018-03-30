@@ -102,7 +102,7 @@ client.on("message", async message => {
       return message.reply("menciona a un miembro con @");
     if(!member.kickable) 
       return message.reply("no puedo mutear a este usuario.");
-    await member.setMute();
+    await member.setMute(true);
     message.reply(`${member.user.username} muteado por ${message.author.username}`);
 
   }
