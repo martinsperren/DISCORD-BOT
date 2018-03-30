@@ -57,16 +57,6 @@ client.on("message", async message => {
   }
   
   
-  client.muteUser = function (user, channel, callback) {
-    var object = {"readMessages": false, "sendMessages": false};
-    self.bot.overwritePermissions(channel, user, object, callback);
-}
-
-client.unmuteUser = function (user, channel, callback) {
-    var object = {"readMessages": true, "sendMessages": true};
-    self.bot.overwritePermissions(channel, user, object, callback);
-}
-  
   
   
   if(command === "kick") {
@@ -112,7 +102,7 @@ client.unmuteUser = function (user, channel, callback) {
       return message.reply("menciona a un miembro con @");
     if(!member.kickable) 
       return message.reply("no puedo mutear a este usuario.");
-    
+    await member.kick;
     // slice(1) removes the first part, which here should be the user mention!
     let reason = args.slice(1).join(' ');
     
