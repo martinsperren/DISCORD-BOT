@@ -125,6 +125,7 @@ client.on("message", async message => {
   if(command === "music") {
 const music = require('discord.js-music');
 music(client);
+  }
 });
 
 
