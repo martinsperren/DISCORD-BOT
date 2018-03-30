@@ -123,18 +123,8 @@ client.on("message", async message => {
   
   
   if(command === "music") {
-   const Client = require('discord.js').Client;
 const music = require('discord.js-music');
-
-const client = new Client();
 music(client);
-
-client.loginWithToken('NDI5MDAzOTQzOTE4NDM2MzYy.DZ7Uyw.GTC3gdGn5c0BnxQ86xRE5P2iGIA');
-  }
-  
-  
-  
-
 });
 
 
