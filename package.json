@@ -8,10 +8,11 @@
   },
   "dependencies": {
     "discord.js": "11.1.0",
+    "discord.js-music": "^2.1.0",
     "request": "2.81.0",
-      "youtube-audio-stream": "0.0.50",
-    "ytsearcher": "^1.0.3",
+    "youtube-audio-stream": "0.0.50",
     "youtube-playlist-info": "^0.1.0",
-    "ytdl-core": "^0.20.1"
+    "ytdl-core": "^0.20.1",
+    "ytsearcher": "^1.0.3"
   }
 }
