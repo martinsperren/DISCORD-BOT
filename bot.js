@@ -103,14 +103,6 @@ client.on("message", async message => {
     if(!member.kickable) 
       return message.reply("no puedo mutear a este usuario.");
     await member.setMute();
-    // slice(1) removes the first part, which here should be the user mention!
-    let reason = args.slice(1).join(' ');
-    
-      
-    
-  
-   
-      
     message.reply(`${member.user.username} muteado por ${message.author.username}`);
 
   }
