@@ -102,7 +102,7 @@ client.on("message", async message => {
       return message.reply("menciona a un miembro con @");
     if(!member.kickable) 
       return message.reply("no puedo mutear a este usuario.");
-    await member.kick;
+    await member.mute;
     // slice(1) removes the first part, which here should be the user mention!
     let reason = args.slice(1).join(' ');
     
@@ -111,7 +111,7 @@ client.on("message", async message => {
   
    
       
-    message.reply(`${member.user.tag} muteado por ${message.author.tag}`);
+    message.reply(`${member.user.username} muteado por ${message.author.username}`);
 
   }
   
