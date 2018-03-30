@@ -56,6 +56,19 @@ client.on("message", async message => {
     message.channel.send(sayMessage);
   }
   
+  
+  client.muteUser = function (user, channel, callback) {
+    var object = {"readMessages": false, "sendMessages": false};
+    self.bot.overwritePermissions(channel, user, object, callback);
+}
+
+client.unmuteUser = function (user, channel, callback) {
+    var object = {"readMessages": true, "sendMessages": true};
+    self.bot.overwritePermissions(channel, user, object, callback);
+}
+  
+  
+  
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit: 
@@ -82,6 +95,36 @@ client.on("message", async message => {
     message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
 
   }
+  
+  
+  
+  if(command === "mute") {
+    // This command must be limited to mods and admins. In this example we just hardcode the role names.
+    // Please read on Array.some() to understand this bit: 
+    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
+    if(!message.member.roles.some(r=>["OWNER","ADMIN", "MOD"].includes(r.name)) )
+      return message.reply("no tienes permisos para usar este comando");
+    
+    // Let's first check if we have a member and if we can kick them!
+    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("menciona a un miembro con @");
+    if(!member.kickable) 
+      return message.reply("no puedo mutear a este usuario.");
+    
+    // slice(1) removes the first part, which here should be the user mention!
+    let reason = args.slice(1).join(' ');
+    
+      
+    
+  
+   
+      
+    message.reply(`${member.user.tag} muteado por ${message.author.tag}`);
+
+  }
+  
   
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
