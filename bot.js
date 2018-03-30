@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
+const client = new Discord.Client();
 const Util = require('discord.js');
-const {PREFIX, GOOGLE_API_KEY } = require('./config');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-const client = new Discord.Client();
-const youtube = new YouTube(GOOGLE_API_KEY);
+const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
+const PREFIX = '!';
 const queue = new Map();
 
 client.on('warn', console.warn);
