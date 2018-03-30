@@ -33,7 +33,20 @@ client.on("guildDelete", guild => {
 
 
 client.on("message", async message => {
- 
+  // This event will run on every single message received, from any channel or DM.
+  
+  // It's good practice to ignore other bots. This also makes your bot ignore itself
+  // and not get into a spam loop (we call that "botception").
+  if(message.author.bot) return;
+  
+  // Also good practice to ignore any message that does not start with our prefix, 
+  // which is set in the configuration file.
+  if(message.content.indexOf("!") !== 0) return;
+  
+  // Here we separate our "command" name, and our "arguments" for the command. 
+  // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
+  // command = say
+  // args = ["Is", "this", "the", "real", "life?"]
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
@@ -61,20 +74,20 @@ client.on("message", async message => {
     // Please read on Array.some() to understand this bit: 
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
     if(!message.member.roles.some(r=>["OWNER","ADMIN", "MOD"].includes(r.name)) )
-      return message.reply("no tienes permisos para usar este comando");
+      return message.reply("No tienes permisos para usar este comando");
     
     // Let's first check if we have a member and if we can kick them!
     // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
     let member = message.mentions.members.first();
     if(!member)
-      return message.reply("menciona a un miembro con @");
+      return message.reply("Menciona a un miembro con @");
     if(!member.kickable) 
-      return message.reply("no puedo kickear a este usuario.");
+      return message.reply("No puedo kickear a este usuario.");
     
     // slice(1) removes the first part, which here should be the user mention!
     let reason = args.slice(1).join(' ');
     if(!reason)
-      return message.reply("indica la razon luego del nombre.");
+      return message.reply("Indica la razon luego del nombre.");
     
     // Now, time for a swift kick in the nuts!
     await member.kick(reason)
@@ -87,17 +100,17 @@ client.on("message", async message => {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
     if(!message.member.roles.some(r=>["OWNER","ADMIN"].includes(r.name)) )
-      return message.reply("no tienes permisos para usar este comando");
+      return message.reply("No tienes permisos para usar este comando");
     
     let member = message.mentions.members.first();
     if(!member)
-      return message.reply("menciona a un miembro con @");
+      return message.reply("Menciona a un miembro con @");
     if(!member.bannable) 
-      return message.reply("no puedo banear a este usuario.");
+      return message.reply("No puedo banear a este usuario.");
 
     let reason = args.slice(1).join(' ');
     if(!reason)
-      return message.reply("indica la razon luego del nombre.");
+      return message.reply("Indica la razon luego del nombre.");
     
     await member.ban(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
@@ -112,7 +125,7 @@ client.on("message", async message => {
     
     // Ooooh nice, combined conditions. <3
     if(!deleteCount || deleteCount < 2 || deleteCount > 100)
-      return message.reply("coloca un numero entre 2 y 200 de lineas para borrar.");
+      return message.reply("Coloca un numero entre 2 y 200 de lineas para borrar.");
     
     // So we get our messages, and delete them. Simple enough, right?
     const fetched = await message.channel.fetchMessages({count: deleteCount});
