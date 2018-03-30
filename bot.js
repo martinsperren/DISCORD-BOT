@@ -32,6 +32,7 @@ client.on("guildDelete", guild => {
 });
 
 
+
 client.on("message", async message => {
  
   const args = message.content.slice("!".length).trim().split(/ +/g);
@@ -55,9 +56,6 @@ client.on("message", async message => {
     // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
   }
-  
-  
-  
   
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
@@ -85,28 +83,6 @@ client.on("message", async message => {
     message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
 
   }
-  
-  
-  
-  if(command === "mute") {
-    // This command must be limited to mods and admins. In this example we just hardcode the role names.
-    // Please read on Array.some() to understand this bit: 
-    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.roles.some(r=>["OWNER","ADMIN", "MOD"].includes(r.name)) )
-      return message.reply("no tienes permisos para usar este comando");
-    
-    // Let's first check if we have a member and if we can kick them!
-    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
-    let member = message.mentions.members.first();
-    if(!member)
-      return message.reply("menciona a un miembro con @");
-    if(!member.kickable) 
-      return message.reply("no puedo mutear a este usuario.");
-    await member.setMute(true);
-    message.reply(`${member.user.username} muteado por ${message.author.username}`);
-
-  }
-  
   
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
@@ -144,6 +120,21 @@ client.on("message", async message => {
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`No puedo borrar los mensajes por: ${error}`));
   }
+  
+  
+  if(command === "music") {
+   const Client = require('discord.js').Client;
+const music = require('discord.js-music');
+
+const client = new Client();
+music(client);
+
+client.loginWithToken('NDI5MDAzOTQzOTE4NDM2MzYy.DZ7Uyw.GTC3gdGn5c0BnxQ86xRE5P2iGIA');
+  }
+  
+  
+  
+
 });
 
 
