@@ -20,8 +20,23 @@ client.on('disconnect', () => console.log('I just disconnected, making sure you 
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
 
 client.on('message', async msg => { // eslint-disable-line
-	if (msg.author.bot) return undefined;
+	
+	
+	
+	
+	
+	
+	
+	
 	if (!msg.content.startsWith(PREFIX)) return undefined;
+	
+	
+	
+	
+	
+	
+	
+	
 
 	const args = msg.content.split(' ');
 	const searchString = args.slice(1).join(' ');
@@ -30,6 +45,98 @@ client.on('message', async msg => { // eslint-disable-line
 
 	let command = msg.content.toLowerCase().split(' ')[0];
 	command = command.slice(PREFIX.length)
+	
+	
+
+  
+  // Let's go with a few common example commands! Feel free to delete or change those.
+  
+  if(command === "ping") {
+    // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
+    // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
+    const m = await message.channel.send("Ping?");
+    m.edit(`Pong! Tu ping es ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms`);
+  }
+  
+  if(command === "say") {
+    // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
+    // To get the "message" itself we join the `args` back into a string with spaces: 
+    const sayMessage = args.join(" ");
+    // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
+    message.delete().catch(O_o=>{}); 
+    // And we get the bot to say the thing: 
+    message.channel.send(sayMessage);
+  }
+  
+  if(command === "kick") {
+    // This command must be limited to mods and admins. In this example we just hardcode the role names.
+    // Please read on Array.some() to understand this bit: 
+    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
+    if(!message.member.roles.some(r=>["OWNER","ADMIN", "MOD"].includes(r.name)) )
+      return message.reply("no tienes permisos para usar este comando");
+    
+    // Let's first check if we have a member and if we can kick them!
+    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("menciona a un miembro con @");
+    if(!member.kickable) 
+      return message.reply("no puedo kickear a este usuario.");
+    
+    // slice(1) removes the first part, which here should be the user mention!
+    let reason = args.slice(1).join(' ');
+    if(!reason)
+      return message.reply("indica la razon luego del nombre.");
+    
+    // Now, time for a swift kick in the nuts!
+    await member.kick(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
+    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
+
+  }
+  
+  if(command === "ban") {
+    // Most of this command is identical to kick, except that here we'll only let admins do it.
+    // In the real world mods could ban too, but this is just an example, right? ;)
+    if(!message.member.roles.some(r=>["OWNER","ADMIN"].includes(r.name)) )
+      return message.reply("no tienes permisos para usar este comando");
+    
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("menciona a un miembro con @");
+    if(!member.bannable) 
+      return message.reply("no puedo banear a este usuario.");
+
+    let reason = args.slice(1).join(' ');
+    if(!reason)
+      return message.reply("indica la razon luego del nombre.");
+    
+    await member.ban(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
+    message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+  }
+  
+  if(command === "cc") {
+    // This command removes all messages from all users in the channel, up to 100.
+    
+    // get the delete count, as an actual number.
+    const deleteCount = parseInt(args[0], 10);
+    
+    // Ooooh nice, combined conditions. <3
+    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+      return message.reply("coloca un numero entre 2 y 200 de lineas para borrar.");
+    
+    // So we get our messages, and delete them. Simple enough, right?
+    const fetched = await message.channel.fetchMessages({count: deleteCount});
+    message.channel.bulkDelete(fetched)
+      .catch(error => message.reply(`No puedo borrar los mensajes por: ${error}`));
+  }
+	
+	
+	
+	
+	
+	
 
 	if (command === 'play') {
 		const voiceChannel = msg.member.voiceChannel;
