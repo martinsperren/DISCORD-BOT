@@ -4,7 +4,7 @@ const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 
-const client = new Client({ disableEveryone: true });
+const client = new Discord.Client();
 
 const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
 
