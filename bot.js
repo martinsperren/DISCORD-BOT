@@ -1,3 +1,4 @@
+
 // Load up the discord.js library
 const Discord = require("discord.js");
 
@@ -6,7 +7,10 @@ const Discord = require("discord.js");
 // this is what we're refering to. Your client.
 const client = new Discord.Client();
 
+// Here we load the config.json file that contains our token and our prefix values. 
 
+// config.token contains the bot's token
+// config.prefix contains the message prefix.
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
@@ -44,7 +48,7 @@ client.on("message", async message => {
   // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
   // command = say
   // args = ["Is", "this", "the", "real", "life?"]
-  const args = message.content.slice("!".prefix.length).trim().split(/ +/g);
+  const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
   // Let's go with a few common example commands! Feel free to delete or change those.
@@ -133,6 +137,8 @@ client.on("message", async message => {
 
 
 client.login(process.env.BOT_TOKEN);
+
+
 
 
 
