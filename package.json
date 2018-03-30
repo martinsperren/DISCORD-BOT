@@ -1,0 +1,26 @@
+{
+  "name": "Yoshi-Bot",
+  "version": "0.1.9",
+  "description": "Simple bot for Discord",
+  "readme": "README.md",
+  "maintainers": [],
+  "author": "Woofie-Woof",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Woofie-Woof/Yoshi-Bot.git"
+  },
+  "license": "GNU",
+  "dependencies": {
+    "cleverbot.io": "^1.0.4",
+    "d20": "^1.4.0",
+    "discord.js": "^11.3.2",
+    "moment": "^2.21.0",
+    "node-opus": "^0.2.7",
+    "querystring": "0.2.x",
+    "simple-git": "^1.92.0",
+    "uws": "^9.14.0",
+    "youtube-node": "^1.3.2",
+    "ytdl-core": "^0.20.2"
+  },
+  "main": "YoshiBot.js"
+}
