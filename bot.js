@@ -1,21 +1,13 @@
-// Load up the discord.js library
-const Discord = require("discord.js");
+const { Client, Util } = require('discord.js');
+const YouTube = require('simple-youtube-api');
+const ytdl = require('ytdl-core');
 
-// This is your client. Some people call it `bot`, some people call it `self`, 
-// some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
-// this is what we're refering to. Your client.
+const client = new Client({ disableEveryone: true });
 
-
-const youtube = new YouTube(GOOGLE_API_KEY);
+const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
 
 const queue = new Map();
 
-
-const { Client, Util } = require('discord.js');
-const PREFIX = '!';
-const GOOGLE_API_KEY = 'AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ';
-const YouTube = require('simple-youtube-api');
-const ytdl = require('ytdl-core');
 
 
 // Here we load the config.json file that contains our token and our prefix values. 
