@@ -61,7 +61,7 @@ client.on("message", async message => {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit: 
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.roles.some(r=>["OWNER", "ADM"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["OWNER, Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
   
     // Let's first check if we have a member and if we can kick them!
@@ -85,12 +85,12 @@ client.on("message", async message => {
   }
   
     if(command === "mute") {
-  if(!message.member.roles.some(r=>["OWNER"].includes(r.name)) )
+  if(!message.member.roles.some(r=>["OWNER, Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
   let member = message.mentions.members.first();
       if(!member)
       return message.reply("Arrobá al petardo");
-      message.member.setMute(true, 'It needed to be done');
+      message.member.setMute(true);
       message.reply(`${member.user.username} se comio un mute de ${message.author.username}`);
       
   
@@ -98,12 +98,12 @@ client.on("message", async message => {
   
   
   if(command === "unmute") {
-  if(!message.member.roles.some(r=>["OWNER"].includes(r.name)) )
+  if(!message.member.roles.some(r=>["OWNER, Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
   let member = message.mentions.members.first();
       if(!member)
       return message.reply("Arrobá al petardo");
-      message.member.setMute(false, 'It needed to be done');
+      message.member.setMute(false);
       message.reply(`${member.user.username} le saco el mute a ${message.author.username}`);
       
   
