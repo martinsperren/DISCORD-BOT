@@ -64,10 +64,10 @@ client.on("message", async message => {
   }
 	if(command === "nick") {
 		let member = message.mentions.members.first();
-		let nickols = message.mentions.members.username;
+		let nickold = member.nickname;
 		let nick = args.slice(1).join(' ');
 		member.setNickname(nick);
-		message.reply(`${nickols} ahora se llama ${member.user.username} por: ${reason}`);
+		message.reply(`${nickold} ahora se llama ${nick}`);
 		
 		 }
 	
