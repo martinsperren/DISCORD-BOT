@@ -68,7 +68,7 @@ client.on("message", async message => {
     // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
     let member = message.mentions.members.first();
     if(!member)
-      return message.reply("Arroba al petardo");
+      return message.reply("Arrobá al petardo");
     if(!member.kickable) 
       return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
     
@@ -80,7 +80,7 @@ client.on("message", async message => {
     // Now, time for a swift kick in the nuts!
     await member.kick(reason)
       .catch(error => message.reply(`Sorry ${message.author} no lo puedo patear porque : ${error}`));
-    message.reply(`${member.user.tag} rajo a la mierda a ${message.author.tag} por: ${reason}`);
+    message.reply(`${member.user.username} rajo a la mierda a ${message.author.username} por: ${reason}`);
 
   }
   
@@ -89,9 +89,9 @@ client.on("message", async message => {
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
   let member = message.mentions.members.first();
       if(!member)
-      return message.reply("Arroba al petardo");
+      return message.reply("Arrobá al petardo");
       message.member.setMute(true, 'It needed to be done');
-      message.reply(`${member.user.tag} se comio un mute de ${message.author.tag}`);
+      message.reply(`${member.user.username} se comio un mute de ${message.author.username}`);
       
   
      }
@@ -99,10 +99,10 @@ client.on("message", async message => {
   
   if(command === "unmute") {
   if(!message.member.roles.some(r=>["OWNER"].includes(r.name)) )
-      return message.reply("Sorry, you don't have permissions to use this!");
+      return message.reply("No la tenes lo suficientemente larga para usar este comando");
   let member = message.mentions.members.first();
       if(!member)
-      return message.reply("Arroba al petardo");
+      return message.reply("Arrobá al petardo");
       message.member.setMute(false, 'It needed to be done');
       message.reply(`${member.user.username} le saco el mute a ${message.author.username}`);
       
@@ -127,7 +127,7 @@ client.on("message", async message => {
     
     await member.ban(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
-    message.reply(`${member.user.tag} le metio alto ban a ${message.author.tag} por: ${reason}`);
+    message.reply(`${member.user.username} le metio alto ban a ${message.author.username} por: ${reason}`);
   }
   
   if(command === "cc") {
