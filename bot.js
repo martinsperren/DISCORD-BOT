@@ -63,7 +63,7 @@ client.on("message", async message => {
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
     if(!message.member.roles.some(r=>["OWNER", "ADM"].includes(r.name)) )
       return message.reply("Sorry, you don't have permissions to use this!");
-    
+  
     // Let's first check if we have a member and if we can kick them!
     // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
     let member = message.mentions.members.first();
@@ -92,6 +92,19 @@ client.on("message", async message => {
       return message.reply("Please mention a valid member of this server");
       message.member.setMute(true, 'It needed to be done');
       message.reply(`${member.user.tag} se comio un mute de ${message.author.tag}`);
+      
+  
+     }
+  
+  
+  if(command === "unmute") {
+  if(!message.member.roles.some(r=>["OWNER"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
+  let member = message.mentions.members.first();
+      if(!member)
+      return message.reply("Arroba al petardo");
+      message.member.setMute(false, 'It needed to be done');
+      message.reply(`${member.user.username} le saco el mute a ${message.author.username}`);
       
   
      }
