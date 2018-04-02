@@ -120,7 +120,7 @@ member.addRole('429091253129576448');
    
     
 member.removeRole('429091253129576448');
-      message.reply(`${member.user.username} le saco el mute a ${message.author.username}`);
+      message.reply(`${message.author.username} desmuteo a ${member.user.username}`);
       
   
      }
