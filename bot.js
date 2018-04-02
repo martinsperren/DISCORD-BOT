@@ -102,9 +102,8 @@ client.on("message", async message => {
       if(!member)
       return message.reply("Arrobá al petardo");
      
-      let userToModify = message.mentions.users.first();
-let roleToAdd = '430261248765067274';
-userToModify.addRole(roleToAdd);
+      
+member.addRole('430261248765067274');
       message.reply(`${member.user.username} se comio un mute de ${message.author.username}`);
       
   
@@ -117,9 +116,9 @@ userToModify.addRole(roleToAdd);
   let member = message.mentions.members.first();
       if(!member)
       return message.reply("Arrobá al petardo");
-     let userToModify = message.mentions.users.first();
-let roleToAdd = '430261248765067274';
-userToModify.removeRole(roleToAdd);
+   
+    
+member.removeRole('430261248765067274');
       message.reply(`${member.user.username} le saco el mute a ${message.author.username}`);
       
   
