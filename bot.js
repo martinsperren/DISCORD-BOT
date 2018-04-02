@@ -69,7 +69,6 @@ client.on("message", async message => {
 	if(command === "nick") {
 		if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
-     return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick");
 	let member = message.mentions.members.first();
 	user = member.user.username;
 	let nick = args.slice(1).join(' ');
