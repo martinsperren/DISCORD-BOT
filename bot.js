@@ -103,7 +103,8 @@ client.on("message", async message => {
       return message.reply("Arrobá al petardo");
      
       
-member.addRole('430261248765067274');
+member.addRole('429091253129576448');
+     
       message.reply(`${member.user.username} se comio un mute de ${message.author.username}`);
       
   
@@ -118,7 +119,7 @@ member.addRole('430261248765067274');
       return message.reply("Arrobá al petardo");
    
     
-member.removeRole('430261248765067274');
+member.removeRole('429091253129576448');
       message.reply(`${member.user.username} le saco el mute a ${message.author.username}`);
       
   
