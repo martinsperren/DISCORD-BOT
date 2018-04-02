@@ -2,10 +2,7 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const stream = require('youtube-audio-stream')
-const ytdl = require('ytdl-core');
-const YTSearcher = require('ytsearcher');
-const ypi = require('youtube-playlist-info');
+
 
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
