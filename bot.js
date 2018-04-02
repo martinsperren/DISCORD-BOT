@@ -62,13 +62,15 @@ client.on("message", async message => {
 	 if(command === "cmds") {
      return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick");
   }
+	
+	
 	if(command === "nick") {
-		let member = message.mentions.members.first();
-		let nick = args.slice(1).join(' ');
-		member.setNickname(nick);
-		message.reply(`${member.username} ahora se llama ${nick}`);
-		
-		 }
+	let member = message.mentions.members.first();
+	user = member.username;
+	let nick = args.slice(1).join(' ');
+	member.setNickname(nick);
+	message.reply(`${user} ahora se llama ${nick}`);
+ }
 	
 	
 	
