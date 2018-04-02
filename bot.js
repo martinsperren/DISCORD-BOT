@@ -101,7 +101,7 @@ client.on("message", async message => {
   let member = message.mentions.members.first();
       if(!member)
       return message.reply("Arrobá al petardo");
-      message.member.setMute(true);
+      member.setMute(true);
       message.reply(`${member.user.username} se comio un mute de ${message.author.username}`);
       
   
@@ -114,7 +114,7 @@ client.on("message", async message => {
   let member = message.mentions.members.first();
       if(!member)
       return message.reply("Arrobá al petardo");
-      message.member.setMute(false);
+      member.setMute(false);
       message.reply(`${member.user.username} le saco el mute a ${message.author.username}`);
       
   
