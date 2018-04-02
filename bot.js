@@ -84,6 +84,18 @@ client.on("message", async message => {
 
   }
   
+    if(command === "mute") {
+  if(!message.member.roles.some(r=>["OWNER"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
+  let member = message.mentions.members.first();
+      if(!member)
+      return message.reply("Please mention a valid member of this server");
+      message.member.setMute(true, 'It needed to be done');
+      message.reply(`${member.user.tag} se comio un mute de ${message.author.tag}`);
+      
+  
+     }
+  
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
@@ -120,6 +132,10 @@ client.on("message", async message => {
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
+  
+ 
+     
+     
 });
 
 
