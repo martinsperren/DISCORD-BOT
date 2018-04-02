@@ -32,17 +32,18 @@ client.on("guildDelete", guild => {
 });
 
 
-bot.on("guildMemberAdd", member => {
-    let mem = member.guild;
-    mem.defaultChannel.sendMessage(member.user + " ahora vive en el bunker."); });
 
-}
 
-bot.on("guildMemberRemove", member => {
-    let mem = member.guild;
-    mem.defaultChannel.sendMessage(member.user + " se fue con Arnoldt."); });
+bot.on('guildMemberAdd', member => {
+    member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker!'); 
+});
 
-}
+bot.on('guildMemberRemove', member => {
+    member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, se fue con Arnoldt.');
+    //
+});
+
+
 
 
 client.on("message", async message => {
