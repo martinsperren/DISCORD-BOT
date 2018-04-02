@@ -32,6 +32,18 @@ client.on("guildDelete", guild => {
 });
 
 
+bot.on("guildMemberAdd", member => {
+    let mem = member.guild;
+    mem.defaultChannel.sendMessage(member.user + " ahora vive en el bunker."); });
+
+}
+
+bot.on("guildMemberRemove", member => {
+    let mem = member.guild;
+    mem.defaultChannel.sendMessage(member.user + " se fue con Arnoldt."); });
+
+}
+
 
 client.on("message", async message => {
  
@@ -80,7 +92,7 @@ client.on("message", async message => {
     // Now, time for a swift kick in the nuts!
     await member.kick(reason)
       .catch(error => message.reply(`Sorry ${message.author} no lo puedo patear porque : ${error}`));
-    message.reply(`${member.user.username} rajo a la mierda a ${message.author.username} por: ${reason}`);
+    message.reply(`${message.author.username} rajo a la mierda a ${member.user.username} por: ${reason}`);
 
   }
   
