@@ -32,13 +32,11 @@ client.on("guildDelete", guild => {
 });
 
 
-
-
-bot.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker!'); 
 });
 
-bot.on('guildMemberRemove', member => {
+client.on('guildMemberRemove', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, se fue con Arnoldt.');
     //
 });
