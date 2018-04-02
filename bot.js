@@ -174,7 +174,9 @@ member.removeRole('429091253129576448');
    
    
     class Music {
-    constructor(client, options) {
+    constructor(client, {
+  youtubeKey: 'AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ'
+}) {
       this.commands = new Map();
       this.aliases = new Map();
       this.youtubeKey = (options && options.youtubeKey);
