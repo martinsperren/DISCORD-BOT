@@ -61,7 +61,7 @@ client.on("message", async message => {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit: 
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.roles.some(r=>["OWNER, Admins"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
   
     // Let's first check if we have a member and if we can kick them!
@@ -85,7 +85,7 @@ client.on("message", async message => {
   }
   
     if(command === "mute") {
-  if(!message.member.roles.some(r=>["OWNER, Admins"].includes(r.name)) )
+  if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
   let member = message.mentions.members.first();
       if(!member)
@@ -98,7 +98,7 @@ client.on("message", async message => {
   
   
   if(command === "unmute") {
-  if(!message.member.roles.some(r=>["OWNER, Admins"].includes(r.name)) )
+  if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
   let member = message.mentions.members.first();
       if(!member)
@@ -112,7 +112,7 @@ client.on("message", async message => {
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
-    if(!message.member.roles.some(r=>["OWNER"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["OWNER","Admins"].includes(r.name)) )
       return message.reply("No la tenes lo suficientemente larga para usar este comando");
     
     let member = message.mentions.members.first();
