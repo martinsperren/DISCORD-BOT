@@ -6,7 +6,6 @@ const {
   YTSearcher
 } = require('ytsearcher');
 const ypi = require('youtube-playlist-info');
-const Discord = require('discord.js');
 const PACKAGE = require('./package.json');
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
