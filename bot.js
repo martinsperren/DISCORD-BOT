@@ -60,8 +60,16 @@ client.on("message", async message => {
   // Let's go with a few common example commands! Feel free to delete or change those.
   
 	 if(command === "cmds") {
-     return message.reply("!ping\n!say\nkick\nmute\nunmute\nban");
+     return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick");
   }
+	if(command === "nick") {
+		let member = message.mentions.members.first();
+		let nickols = message.mentions.members.username;
+		let nick = args.slice(1).join(' ');
+		message.member.setNickname(nick)
+		message.reply(`${nickols} ahora se llama ${member.user.username} por: ${reason}`);
+		
+		 }
 	
 	
 	
