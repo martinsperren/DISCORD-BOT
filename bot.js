@@ -193,7 +193,8 @@ member.removeRole('429091253129576448');
             }
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
-            console.log(fetched.size + ' messages found, deleting...'); // Lets post into console how many messages we are deleting
+           fetched = fetched +1;
+		   console.log(fetched.size + ' messages found, deleting...'); // Lets post into console how many messages we are deleting
 
             // Deleting the messages
             message.channel.bulkDelete(fetched)
