@@ -177,8 +177,8 @@ member.removeRole('429091253129576448');
   
   if(command === "cc") {
 	  
-	   async function purge() {
-            message.delete(); // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
+	   
+             // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
 
             // Now, we want to check if the user has the `bot-commander` role, you can change this to whatever you want.
            if(!message.member.roles.some(r=>["OWNER","Admins"].includes(r.name)) )
@@ -193,17 +193,15 @@ member.removeRole('429091253129576448');
             }
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
-           fetched = parseInt(fetched)+1;
-		   console.log(fetched.size + ' messages found, deleting...'); // Lets post into console how many messages we are deleting
-
-            // Deleting the messages
+          
+		   message.delete();
             message.channel.bulkDelete(fetched)
-                .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
+                
 
-        }
+        
 
         // We want to make sure we call the function whenever the purge command is run.
-        purge(); // Make sure this is inside the if(msg.startsWith)
+      
 	  
   }
   
