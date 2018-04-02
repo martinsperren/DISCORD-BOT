@@ -6,7 +6,7 @@ const {
   YTSearcher
 } = require('ytsearcher');
 const ypi = require('youtube-playlist-info');
-const PACKAGE = require('./package.json');
+
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -944,7 +944,7 @@ member.removeRole('429091253129576448');
         console.log(musicbot.aliveMessage);
       }, musicbot.aliveMessageTime);
     };
-    var startmsg = `------- ${client.user.username} -------\n> version: ${PACKAGE.version}\n> ytdl version: ${require('../ytdl-core/package.json').version}\n> Extra logging disabled.\n> Global queues are disabled.\n> node: ${process.version}\n------- ${client.user.username} -------`;
+    var startmsg = `------- ${client.user.username} -------\n> version: \n> ytdl version: \n> Extra logging disabled.\n> Global queues are disabled.\n> node: ${process.version}\n------- ${client.user.username} -------`;
     if (musicbot.logging) startmsg = startmsg.replace("Extra logging disabled.", "Extra logging enabled.");
     if (musicbot.global) startmsg = startmsg.replace("Global queues are disabled.", "Global queues are enabled.");
     console.log(startmsg);
@@ -2042,12 +2042,14 @@ member.removeRole('429091253129576448');
         .replace(/`/g, '\\`');
     } else {
       console.log(new Error(`${type} was an invalid type`));
-    }
+  }
   };
 
-
+ 
+ 
  }
-
+  
+  
   
    
      
