@@ -172,7 +172,7 @@ member.removeRole('429091253129576448');
     
     await member.ban(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
-    message.reply(`${member.user.username} le metio alto ban a ${message.author.username} por: ${reason}`);
+    message.reply(`${member.user.username} deleteó a ${message.author.username} por: ${reason}`);
   }
   
   if(command === "cc") {
