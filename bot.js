@@ -41,11 +41,11 @@ client.on("guildDelete", guild => {
 
 
 client.on('guildMemberAdd', member => {
-    member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker!'); 
+    member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker! :house:'); 
 });
 
 client.on('guildMemberRemove', member => {
-    member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, se fue con Arnoldt.');
+    member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, se fue con Arnoldt :hand_splayed: ');
     //
 });
 
