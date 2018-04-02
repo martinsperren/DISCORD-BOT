@@ -61,7 +61,7 @@ client.on("message", async message => {
   
 	 if(command === "cmds") {
 		   if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
-      return message.reply("No la tenes lo suficientemente larga para usar este comando");
+      return 0;
      return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick");
   }
 	
@@ -82,7 +82,7 @@ client.on("message", async message => {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
     const m = await message.channel.send("Ping?");
-    m.edit(`:amd: Tu ping es de ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms :amd: `);
+    m.edit(`Tu ping es de ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms`);
   }
   
   if(command === "say") {
