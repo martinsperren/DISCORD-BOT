@@ -176,19 +176,34 @@ member.removeRole('429091253129576448');
   }
   
   if(command === "cc") {
-    // This command removes all messages from all users in the channel, up to 100.
-    
-    // get the delete count, as an actual number.
-    const deleteCount = parseInt(args[0], 10);
-    
-    // Ooooh nice, combined conditions. <3
-    if(!deleteCount || deleteCount < 1 || deleteCount > 100)
-      return message.reply("Pone un numero del 1 al 100 despues del comando maquina");
-    
-    // So we get our messages, and delete them. Simple enough, right?
-    const fetched = await message.channel.fetchMessages({count: deleteCount});
-    message.channel.bulkDelete(fetched)
-      .catch(error => message.reply(`No pude borrar un carajo porque: ${error}`));
+	  
+	   async function purge() {
+            message.delete(); // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
+
+            // Now, we want to check if the user has the `bot-commander` role, you can change this to whatever you want.
+           if(!message.member.roles.some(r=>["OWNER","Admins"].includes(r.name)) )
+       return 0;
+
+            // We want to check if the argument is a number
+            if (isNaN(args[0])) {
+                // Sends a message to the channel.
+                message.channel.send('Pone un numero despues del comando para borrar'); //\n means new line.
+                // Cancels out of the script, so the rest doesn't run.
+                return;
+            }
+
+            const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
+            console.log(fetched.size + ' messages found, deleting...'); // Lets post into console how many messages we are deleting
+
+            // Deleting the messages
+            message.channel.bulkDelete(fetched)
+                .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
+
+        }
+
+        // We want to make sure we call the function whenever the purge command is run.
+        purge(); // Make sure this is inside the if(msg.startsWith)
+	  
   }
   
  if(command === "music") {
