@@ -172,17 +172,8 @@ member.removeRole('429091253129576448');
   
  if(command === "music") {
    
-   music(client,'AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
    
- }
-  
-  
-  
-  
-     function music (client, key) {
-  if (PACKAGE.version === "10.0.3-aplha") return console.log(`=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nThis is not a valid update. Please use a lower version. This update is to alert people that the old Discord server is down (see README.md for more).\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=`);
-  // Get all options.
-  class Music {
+    class Music {
     constructor(client, options) {
       this.commands = new Map();
       this.aliases = new Map();
@@ -2052,7 +2043,14 @@ member.removeRole('429091253129576448');
       console.log(new Error(`${type} was an invalid type`));
     }
   };
-};
+
+ 
+ }
+  
+  
+  
+  
+   
      
 });
 
