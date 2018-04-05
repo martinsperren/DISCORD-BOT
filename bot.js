@@ -220,32 +220,16 @@ member.removeRole('429091253129576448');
  if(command === "music") {
 
 	 
-	/*const streamOptions = { seek: 0, volume: 1 };
-var voiceChannel = message.member.voiceChannel;
-	 voiceChannel.join().then(connection => {
-            console.log("joined channel");
-            const stream = ytdl('https://www.youtube.com/watch?v=a5uQMwRMHcs', { filter : 'audioonly' });
-            const dispatcher = connection.playStream(stream, streamOptions);
-            dispatcher.on("end", end => {
-                console.log("left channel");
-                voiceChannel.leave();
-            });
-        }).catch(err => console.log(err)); 
-	 
-    
-	 */
-	 
 	
     // Only try to join the sender's voice channel if they are in one themselves
     if (message.member.voiceChannel) {
       const connection = await message.member.voiceChannel.join();
     } else {
       message.reply('Primero entra a un canal de voz capo!');
-    
-		
-	
-	 
+        
     }
+	 
+	 connection.play(ytdl('https://www.youtube.com/watch?v=ZlAU_w7-Xp8',{ filter: 'audioonly' }));
 	
 	return message.reply("OK"); 
 	 
