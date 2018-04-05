@@ -223,7 +223,7 @@ member.removeRole('429091253129576448');
 	const streamOptions = { seek: 0, volume: 1 };
 var voiceChannel = message.member.voiceChannel;
 	
-     client.voiceChannel.join().then(connection => {
+     voiceChannel.join().then(connection => {
             console.log("joined channel");
             const stream = ytdl('https://www.youtube.com/watch?v=a5uQMwRMHcs', { filter : 'audioonly' });
             const dispatcher = connection.playStream(stream, streamOptions);
