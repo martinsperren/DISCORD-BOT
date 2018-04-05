@@ -245,9 +245,9 @@ var voiceChannel = message.member.voiceChannel;
 		
 	
 	 
+    }
 	
-	
-	return message.reply("marca"); 
+	return message.reply("OK"); 
 	 
  }
   
