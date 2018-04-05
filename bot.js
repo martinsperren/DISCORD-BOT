@@ -218,6 +218,7 @@ member.removeRole('429091253129576448');
   }
   
  if(command === "music") {
+	 var voiceChannel = message.member.voiceChannel;
 voiceChannel.join().then(connection => {
   // You can play a file or a stream here:
   const dispatcher = connection.playFile('./file.mp3');
