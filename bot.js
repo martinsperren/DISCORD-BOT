@@ -218,7 +218,10 @@ member.removeRole('429091253129576448');
   }
   
  if(command === "music") {
- return message.reply("Todavia no anda bro");
+voiceChannel.join().then(connection => {
+  // You can play a file or a stream here:
+  const dispatcher = connection.playFile('./file.mp3');
+});
  }
   
   
