@@ -222,14 +222,14 @@ member.removeRole('429091253129576448');
 	 
 	
     // Only try to join the sender's voice channel if they are in one themselves
-    if (message.member.voiceChannel) {
+   
 	     return message.reply(${message.member.voiceChannel}); 
 	    
       const connection = await message.member.voiceChannel.join();
-    } else {
-      message.reply('Primero entra a un canal de voz capo!');
+   
+     
         
-    }
+    
 	 
 	 connection.play(ytdl('https://www.youtube.com/watch?v=ZlAU_w7-Xp8',{ filter: 'audioonly' }));
 	
