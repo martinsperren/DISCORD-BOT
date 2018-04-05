@@ -218,11 +218,21 @@ member.removeRole('429091253129576448');
   }
   
  if(command === "music") {
-	 var voiceChannel = message.member.voiceChannel;
-voiceChannel.join().then(connection => {
-  // You can play a file or a stream here:
-  const dispatcher = connection.playFile('./file.mp3');
-});
+
+	 
+	const streamOptions = { seek: 0, volume: 1 };
+var voiceChannel = message.member.voiceChannel;
+        voiceChannel.join().then(connection => {
+            console.log("joined channel");
+            const stream = ytdl('https://www.youtube.com/watch?v=a5uQMwRMHcs', { filter : 'audioonly' });
+            const dispatcher = connection.playStream(stream, streamOptions);
+            dispatcher.on("end", end => {
+                console.log("left channel");
+                voiceChannel.leave();
+            });
+        }).catch(err => console.log(err)); 
+	 
+	 
  }
   
   
