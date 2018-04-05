@@ -221,9 +221,9 @@ member.removeRole('429091253129576448');
 
 const channel = message.member.voiceChannel;
 
-    channel.join();
+    client.channel.join();
 	    
-	
+	return message.reply("OK"); 
 	
 	 
  }
