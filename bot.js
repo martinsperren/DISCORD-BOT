@@ -219,8 +219,9 @@ member.removeRole('429091253129576448');
   
  if(command === "music") {
 
+const channel = message.member.voiceChannel;
 
-	    return message.reply(${message.member.voiceChannel}); 
+    channel.join();
 	    
 	
 	
