@@ -232,6 +232,8 @@ var voiceChannel = message.member.voiceChannel;
             });
         }).catch(err => console.log(err)); 
 	 
+	
+	return message.reply("marca"); 
 	 
  }
   
