@@ -220,7 +220,7 @@ member.removeRole('429091253129576448');
  if(command === "music") {
 
 
-	 //    return message.reply(${message.member.voiceChannel}); 
+	    return message.reply(${message.member.voiceChannel}); 
 	    
 	
 	
