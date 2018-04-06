@@ -172,11 +172,10 @@ client.on("message", async message => {
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-	if(message.content.contains("huevo")) {
-   message.react(client.emojis.get("431656118952132630"));
-		
-   
-}
+	//if(message.content.contains("huevo")) {
+ //  message.react(client.emojis.get("431656118952132630"));
+
+//}
 	
   
   // Let's go with a few common example commands! Feel free to delete or change those.
@@ -184,7 +183,7 @@ client.on("message", async message => {
 	 if(command === "cmds") {
 		   if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
       return 0;
-     return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick");
+     return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick\n!huevo");
   }
 	
 	
