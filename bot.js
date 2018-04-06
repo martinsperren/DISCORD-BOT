@@ -125,8 +125,8 @@ function buildWebHook(twitchResponse, receiver) {
 function PlayCommand(searchTerm) {
 
     // if not connected to a voice channel then connect to first one
-    if (client.voiceConnections.array().length == 0) {
-        var defaultVoiceChannel = message.member.voiceChannel;
+    if (bot.voiceConnections.array().length == 0) {
+        var defaultVoiceChannel = bot.channels.find(val => val.type === 'voice').name;
         JoinCommand(defaultVoiceChannel);
     }
 
@@ -148,7 +148,7 @@ function PlayQueueCommand(message) {
 
 /// joins the bot to the specified voice channel
 function JoinCommand(channelName) {
-    var voiceChannel = message.member.voiceChannel;
+    var voiceChannel = GetChannelByName(channelName);
 
     if (voiceChannel) {
         voiceChannel.join();
