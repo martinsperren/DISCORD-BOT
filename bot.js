@@ -173,7 +173,7 @@ client.on("message", async message => {
   const command = args.shift().toLowerCase();
 
 	if(message.content === "huevo") {
-   essage.react("431657776725622814")
+   message.react("431657776725622814")
    
 }
 	
