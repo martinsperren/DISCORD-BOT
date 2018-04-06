@@ -35,20 +35,7 @@ client.on('guildMemberRemove', member => {
     //
 });
 
-voiceChannel.on('speaking', (user, speaking) => {
-    // the audio has finished playing, so remove it from the queue and start playing the next song
-    if (!speaking && ytAudioQueue.length > 1) {
-        ytAudioQueue.pop();
-        if (voiceChannel == null) {
-            JoinCommand(client.channels.find(val => val.type === 'voice').name).then(function() {
-                PlayStream(ytAudioQueue.first);
-            });
-        }
-        else {
-            PlayStream(ytAudioQueue.first);
-        }
-    }
-});
+
 
 const job = schedule.scheduleJob('/1 * * * * *', () => {
 	console.log("Job Started.");
