@@ -2,6 +2,7 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const Client = require('node-rest-client').Client;
 const stream = require('youtube-audio-stream')
 const ytdl = require('ytdl-core');
 const YTSearcher = require('ytsearcher');
