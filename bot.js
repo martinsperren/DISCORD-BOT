@@ -11,28 +11,13 @@ const jsonfile = require('jsonfile');
 var request = require('superagent');
 const restClient = new Client();
 const configFile = "config.json";
-const API_KEY = "<AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ>";
+const API_KEY = "AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ";
 var voiceChannel = null;
 var ytAudioQueue = [];
 
 
 
-voiceChannel.on('speaking', (user, speaking) => {
 
-    // the audio has finished playing, so remove it from the queue and start playing the next song
-    if (!speaking && ytAudioQueue.length > 1) {
-        ytAudioQueue.pop();
-
-        if (voiceChannel == null) {
-            JoinCommand(client.channels.find(val => val.type === 'voice').name).then(function() {
-                PlayStream(ytAudioQueue.first);
-            });
-        }
-        else {
-            PlayStream(ytAudioQueue.first);
-        }
-    }
-});
 
 
 
@@ -56,6 +41,23 @@ client.on('guildMemberRemove', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, se fue con Arnoldt :hand_splayed: ');
     //
 });
+voiceChannel.on('speaking', (user, speaking) => {
+
+    // the audio has finished playing, so remove it from the queue and start playing the next song
+    if (!speaking && ytAudioQueue.length > 1) {
+        ytAudioQueue.pop();
+
+        if (voiceChannel == null) {
+            JoinCommand(client.channels.find(val => val.type === 'voice').name).then(function() {
+                PlayStream(ytAudioQueue.first);
+            });
+        }
+        else {
+            PlayStream(ytAudioQueue.first);
+        }
+    }
+});
+
 const job = schedule.scheduleJob('/1 * * * * *', () => {
 	console.log("Job Started.");
 	jsonfile.readFile(configFile, (err, config) => {
@@ -261,6 +263,11 @@ JoinCommand(parameters[0], message);
  PlayCommand(parameters.join(" "), message);		
  }
 	
+	
+function PlayCommand(searchTerm) {
+    //client.sendMessage("Searching Youtube for audio...");
+    YoutubeSearch(searchTerm);
+}	
 function JoinCommand(channelName) {
 
     if (voiceChannel) {
@@ -269,6 +276,13 @@ function JoinCommand(channelName) {
 
     var voiceChannel = GetChannelByName(channelName);
     return voiceChannel.join();
+}	
+	
+	
+function GetChannelByName(name) {
+    var channel = client.channels.find(val => val.name === name);
+
+    return channel;
 }	
 	
 function YoutubeSearch(searchKeywords) {
