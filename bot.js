@@ -368,7 +368,9 @@ member.removeRole('429091253129576448');
   
  if(command === "play") {
 
-    const { voiceChannel } = message.member;
+    const voiceChannel = message.member.voiceChannel;
+
+   
 
         if (!voiceChannel) {
             return message.reply('please join a voice channel first!');
