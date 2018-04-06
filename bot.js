@@ -173,8 +173,8 @@ client.on("message", async message => {
   const command = args.shift().toLowerCase();
 
 	if(message.content === "huevo") {
-   const ayy = client.emojis.find("huevo", "ayy");
-   message.reply(`${huevo}`);
+   essage.react("431657776725622814")
+   
 }
 	
   
