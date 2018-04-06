@@ -13,7 +13,7 @@ const jsonfile = require('jsonfile');
 
 const restClient = new Client();
 const configFile = "config.json";
-
+const emojis = client.emojis.get("429004456504459274");
 
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
@@ -204,8 +204,12 @@ client.on("message", async message => {
     if(command === "huevo") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-    const m = await message.channel.send("¿Y el huevo?");
-    m.edit(`¿Y el :huevo:?`);
+   const huevo = client.emojis.find("huevo", "ayy");
+	    
+	
+message.channel.send("¿Y el ${huevo}?");
+	    
+	   
   }
 	
   
