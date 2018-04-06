@@ -1,0 +1,67 @@
+{
+  "twitchAuth": {
+    "clientID": "jceafu5cq49gyppqja6thwb8nnmhm9",
+    "apiVersion": 5
+  },
+  "streams": [
+    {
+      "id": "99625204",
+      "nickname": "tuber",
+      "latestStream": 25283115264,
+      "receivers": [
+        {
+          "nickname": "My Test Server",
+          "customMessage": "Che @everyone! Tuber está en vivo en Twitch!",
+          "webhook": ""
+        }
+      ]
+    },
+    {
+      "id": "112234256",
+      "nickname": "benex",
+      "latestStream": 25283115264,
+      "receivers": [
+        {
+          "nickname": "My Test Server",
+          "customMessage": "Che @everyone! Benex está en vivo en Twitch!",
+          "webhook": ""
+        }
+      ]
+    },
+    {
+      "id": "116571793",
+      "nickname": "matishi",
+      "latestStream": 25283115264,
+      "receivers": [
+        {
+          "nickname": "My Test Server",
+          "customMessage": "Che @everyone! Matishi está en vivo en Twitch!",
+          "webhook": ""
+        }
+      ]
+    },
+    {
+      "id": "193721055",
+      "nickname": "pancho",
+      "latestStream": 25281670208,
+      "receivers": [
+        {
+          "nickname": "Monster Truck Rally",
+          "customMessage": "Che @everyone! Moderador está en vivo en Twitch!",
+          "webhook": ""
+        }
+      ]
+    }, {
+      "id": "114200215",
+      "nickname": "flash",
+      "latestStream": 25283115264,
+      "receivers": [
+        {
+          "nickname": "My Test Server",
+          "customMessage": "Che @everyone! Flash está en vivo en Twitch!",
+          "webhook": ""
+        }
+      ]
+    }
+  ]
+}
