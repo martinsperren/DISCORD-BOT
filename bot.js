@@ -10,21 +10,17 @@ const twitch = require('twitch.tv');
 const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
-var youtube = require('./youtube.js'); 
-var ytAudioQueue = [];
-var dispatcher = null;
-
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-  client.user.setGame(`de ruta en ${client.guilds.size} servers`);
+  client.user.setGame(`on ${client.guilds.size} servers`);
 });
 client.on("guildCreate", guild => {
   console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setGame(`de ruta en ${client.guilds.size} servers`);
+  client.user.setGame(`on ${client.guilds.size} servers`);
 });
 client.on("guildDelete", guild => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  client.user.setGame(`de ruta en ${client.guilds.size} servers`);
+  client.user.setGame(`on ${client.guilds.size} servers`);
 });
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker! :house:'); 
@@ -34,9 +30,6 @@ client.on('guildMemberRemove', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, se fue con Arnoldt :hand_splayed: ');
     //
 });
-
-
-
 const job = schedule.scheduleJob('/1 * * * * *', () => {
 	console.log("Job Started.");
 	jsonfile.readFile(configFile, (err, config) => {
@@ -118,138 +111,9 @@ function buildWebHook(twitchResponse, receiver) {
 		}
 	};
 }
-
-
-
-
-function PlayCommand(searchTerm) {
-
-    // if not connected to a voice channel then connect to first one
-    if (client.voiceConnections.array().length == 0) {
-        var defaultVoiceChannel = client.channels.find(val => val.type === 'voice').name;
-        JoinCommand(defaultVoiceChannel);
-    }
-
-    // search youtube using the given search search term and perform callback action if video is found
-    youtube.search(searchTerm, QueueYtAudioStream);
-}
-
-/// lists out all music queued to play
-function PlayQueueCommand(message) {
-    var queueString = "";
-
-    for(var x = 0; x < ytAudioQueue.length; x++) {
-        queueString += ytAudioQueue[x].videoName + ", ";
-    }
-
-    queueString = queueString.substring(0, queueString.length - 2);
-    message.reply(queueString);
-}
-
-/// joins the bot to the specified voice channel
-function JoinCommand(channelName) {
-    var voiceChannel = GetChannelByName(channelName);
-
-    if (voiceChannel) {
-        voiceChannel.join();
-        console.log("Joined " + voiceChannel.name);
-    }
-
-    return voiceChannel;
-}
-
-
-
-/* HELPER METHODS */
-
-/// returns the channel that matches the name provided
-function GetChannelByName(name) {
-    var channel = client.channels.find(val => val.name === name);
-    
-	return channel;
-}
-
-/// Queues result of Youtube search into stream
-function QueueYtAudioStream(videoId, videoName) {
-    var streamUrl = `${youtube.watchVideoUrl}${videoId}`;
-
-    if (!ytAudioQueue.length) {
-        ytAudioQueue.push(
-            {
-                'streamUrl': streamUrl,
-                'videoName': videoName
-            }
-        );
-
-        console.log("Queued audio " + videoName);
-        PlayStream(ytAudioQueue[0].streamUrl);
-    }
-    else {
-        ytAudioQueue.push(
-            {
-                'streamUrl': streamUrl,
-                'videoName': videoName
-            }
-        );
-
-        console.log("Queued audio " + videoName);
-    }
-
-}
-
-/// Plays a given stream
-function PlayStream(streamUrl) {
-
-    const streamOptions = {seek: 0, volume: 1};
-
-    if (streamUrl) {
-        const stream = ytdl(streamUrl, {filter: 'audioonly'});
-
-        if (dispatcher == null) {
-
-            var voiceConnection = client.voiceConnections.first();
-            //console.log(voiceConnection);
-
-            if (voiceConnection) {
-
-                console.log("Now Playing " + ytAudioQueue[0].videoName);
-                dispatcher = client.voiceConnections.first().playStream(stream, streamOptions);
-
-                dispatcher.on('end', () => {
-                    PlayNextStreamInQueue();
-                });
-
-                dispatcher.on('error', (err) => {
-                    console.log(err);
-                });
-            }
-        }
-        else {
-            dispatcher = client.voiceConnections.first().playStream(stream, streamOptions);
-        }
-    }
-}
-
-/// Plays the next stream in the queue
-function PlayNextStreamInQueue() {
-
-    ytAudioQueue.splice(0, 1);
-
-    // if there are streams remaining in the queue then try to play
-    if (ytAudioQueue.length != 0) {
-        console.log("Now Playing " + ytAudioQueue[0].videoName);
-        PlayStream(ytAudioQueue[0].streamUrl);
-    }
-}
-/* END HELPER METHODS */
-
-
-
 client.on("message", async message => {
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-	 var messageParts = message.content.split(' ');
-    var parameters = messageParts.splice(1, messageParts.length);
       	if(message.content.includes("huevo")) {
   message.react(client.emojis.get("430508228976181248"));
 	}
@@ -357,13 +221,18 @@ member.removeRole('429091253129576448');
         purge(); // Make sure this is inside the if(msg.startsWith)
         // We want to make sure we call the function whenever the purge command is run.
   }
-if(command === "join") {	
-JoinCommand(parameters[0], message);	
- }	
-	if(command === "play") {	
- PlayCommand(parameters.join(" "), message);		
- }
+  if(command === "play") {	
+    const voiceChannel = message.member.voiceChannel;	
+       if (!voiceChannel) {	
+            return message.reply('please join a voice channel first!');	
+        }	
+        voiceChannel.join().then(connection => {	
+		message.channel.send(`Reproduciendo en ${voiceChannel}`); 
+            const stream = ytdl('https://www.youtube.com/watch?v=fKopy74weus', { filter: 'audioonly' });	
+            const dispatcher = connection.playStream(stream);	
+            dispatcher.on('end', () => voiceChannel.leave());	
+        });	
 		
-	
+ }
 });
 client.login(process.env.BOT_TOKEN);
