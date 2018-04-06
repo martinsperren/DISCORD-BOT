@@ -213,10 +213,7 @@ client.on("message", async message => {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
    message.delete();
-	    const huevo = client.emojis.find("huevo", "ayy");
-	    
-	
-message.channel.send("¿Y el ${huevo}?");
+	  message.reply(`${huevo}`);
 	    
 	   
   }
