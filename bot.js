@@ -49,6 +49,7 @@ client.on("guildDelete", guild => {
 
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker! :house:'); 
+	//member.addRole('193654001089118208');
 });
 
 client.on('guildMemberRemove', member => {
@@ -197,6 +198,16 @@ client.on("message", async message => {
     const m = await message.channel.send("Ping?");
     m.edit(`Tu ping es de ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms`);
   }
+	
+	
+	
+    if(command === "huevo") {
+    // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
+    // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
+    const m = await message.channel.send("¿Y el huevo?");
+    m.edit(`¿Y el :huevo:?`);
+  }
+	
   
   if(command === "say") {
 	    if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
