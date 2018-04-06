@@ -227,7 +227,7 @@ member.removeRole('429091253129576448');
             return message.reply('please join a voice channel first!');	
         }	
         voiceChannel.join().then(connection => {	
-		message.channel.send("Reproduciendo en ${message.member.voiceChannel}"); 
+		message.channel.send(`Reproduciendo en ${voiceChannel}`); 
             const stream = ytdl('https://www.youtube.com/watch?v=fKopy74weus', { filter: 'audioonly' });	
             const dispatcher = connection.playStream(stream);	
             dispatcher.on('end', () => voiceChannel.leave());	
