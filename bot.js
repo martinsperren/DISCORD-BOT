@@ -8,12 +8,12 @@ const ypi = require('youtube-playlist-info');
 const schedule = require('node-schedule');
 const twitch = require('twitch.tv');
 const jsonfile = require('jsonfile');
-var request = require('superagent');
 const restClient = new Client();
 const configFile = "config.json";
-const API_KEY = "AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ";
-var voiceChannel = null;
+var youtube = require('./youtube.js'); 
 var ytAudioQueue = [];
+var dispatcher = null;
+
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   client.user.setGame(`on ${client.guilds.size} servers`);
@@ -35,7 +35,20 @@ client.on('guildMemberRemove', member => {
     //
 });
 
-
+voiceChannel.on('speaking', (user, speaking) => {
+    // the audio has finished playing, so remove it from the queue and start playing the next song
+    if (!speaking && ytAudioQueue.length > 1) {
+        ytAudioQueue.pop();
+        if (voiceChannel == null) {
+            JoinCommand(client.channels.find(val => val.type === 'voice').name).then(function() {
+                PlayStream(ytAudioQueue.first);
+            });
+        }
+        else {
+            PlayStream(ytAudioQueue.first);
+        }
+    }
+});
 
 const job = schedule.scheduleJob('/1 * * * * *', () => {
 	console.log("Job Started.");
@@ -120,57 +133,126 @@ function buildWebHook(twitchResponse, receiver) {
 }
 
 
+
+
 function PlayCommand(searchTerm) {
-    //client.sendMessage("Searching Youtube for audio...");
-    YoutubeSearch(searchTerm);
-}	
-function JoinCommand(channelName) {
-    if (voiceChannel) {
-        voiceChannel.disconnet();
+
+    // if not connected to a voice channel then connect to first one
+    if (client.voiceConnections.array().length == 0) {
+        var defaultVoiceChannel = client.channels.find(val => val.type === 'voice').name;
+        JoinCommand(defaultVoiceChannel);
     }
+
+    // search youtube using the given search search term and perform callback action if video is found
+    youtube.search(searchTerm, QueueYtAudioStream);
+}
+
+/// lists out all music queued to play
+function PlayQueueCommand(message) {
+    var queueString = "";
+
+    for(var x = 0; x < ytAudioQueue.length; x++) {
+        queueString += ytAudioQueue[x].videoName + ", ";
+    }
+
+    queueString = queueString.substring(0, queueString.length - 2);
+    message.reply(queueString);
+}
+
+/// joins the bot to the specified voice channel
+function JoinCommand(channelName) {
     var voiceChannel = GetChannelByName(channelName);
-    return voiceChannel.join();
-}	
+
+    if (voiceChannel) {
+        voiceChannel.join();
+        console.log("Joined " + voiceChannel.name);
+    }
+
+    return voiceChannel;
+}
+
+
+/* HELPER METHODS */
+
+/// returns the channel that matches the name provided
 function GetChannelByName(name) {
     var channel = client.channels.find(val => val.name === name);
     return channel;
-}	
-function YoutubeSearch(searchKeywords) {
-    var requestUrl = 'https://www.googleapis.com/youtube/v3/search' + `?part=snippet&q=${escape(searchKeywords)}&key=${API_KEY}`;
-    request(requestUrl, (error, response) => {
-        if (!error && response.statusCode == 200) {
-            var body = response.body;
-            if (body.items.length == 0) {
-                console.log("Your search gave 0 results");
-                return videoId;
+}
+
+/// Queues result of Youtube search into stream
+function QueueYtAudioStream(videoId, videoName) {
+    var streamUrl = `${youtube.watchVideoUrl}${videoId}`;
+
+    if (!ytAudioQueue.length) {
+        ytAudioQueue.push(
+            {
+                'streamUrl': streamUrl,
+                'videoName': videoName
             }
-            for (var item of body.items) {
-                if (item.id.kind === 'youtube#video') {
-                    QueueYtAudioStream(item.id.videoId);
-                }
+        );
+
+        console.log("Queued audio " + videoName);
+        PlayStream(ytAudioQueue[0].streamUrl);
+    }
+    else {
+        ytAudioQueue.push(
+            {
+                'streamUrl': streamUrl,
+                'videoName': videoName
+            }
+        );
+
+        console.log("Queued audio " + videoName);
+    }
+
+}
+
+/// Plays a given stream
+function PlayStream(streamUrl) {
+
+    const streamOptions = {seek: 0, volume: 1};
+
+    if (streamUrl) {
+        const stream = ytdl(streamUrl, {filter: 'audioonly'});
+
+        if (dispatcher == null) {
+
+            var voiceConnection = client.voiceConnections.first();
+            //console.log(voiceConnection);
+
+            if (voiceConnection) {
+
+                console.log("Now Playing " + ytAudioQueue[0].videoName);
+                dispatcher = client.voiceConnections.first().playStream(stream, streamOptions);
+
+                dispatcher.on('end', () => {
+                    PlayNextStreamInQueue();
+                });
+
+                dispatcher.on('error', (err) => {
+                    console.log(err);
+                });
             }
         }
         else {
-            console.log("Unexpected error when searching YouTube");
-            return null;
+            dispatcher = client.voiceConnections.first().playStream(stream, streamOptions);
         }
-    });
-    return null;
-}
-/// Queues result of Youtube search into stream
-function QueueYtAudioStream(videoId) {
-    var streamUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    ytAudioQueue.push(streamUrl);
-}
-// plays a given stream
-function PlayStream(streamUrl) {
-    const streamOptions = {seek: 0, volume: 1};
-    console.log("Streaming audio from " + streamUrl);
-    if (streamUrl) {
-        const stream = ytdl(streamUrl, {filter: 'audioonly'});
-        const dispatcher = client.voiceConnections.first().playStream(stream, streamOptions);
     }
 }
+
+/// Plays the next stream in the queue
+function PlayNextStreamInQueue() {
+
+    ytAudioQueue.splice(0, 1);
+
+    // if there are streams remaining in the queue then try to play
+    if (ytAudioQueue.length != 0) {
+        console.log("Now Playing " + ytAudioQueue[0].videoName);
+        PlayStream(ytAudioQueue[0].streamUrl);
+    }
+}
+/* END HELPER METHODS */
 
 
 
@@ -294,23 +376,4 @@ JoinCommand(parameters[0], message);
  }
 	
 });
-
-voiceChannel.on('speaking', (user, speaking) => {
-    // the audio has finished playing, so remove it from the queue and start playing the next song
-    if (!speaking && ytAudioQueue.length > 1) {
-        ytAudioQueue.pop();
-        if (voiceChannel == null) {
-            JoinCommand(client.channels.find(val => val.type === 'voice').name).then(function() {
-                PlayStream(ytAudioQueue.first);
-            });
-        }
-        else {
-            PlayStream(ytAudioQueue.first);
-        }
-    }
-});
-
-
-
-
 client.login(process.env.BOT_TOKEN);
