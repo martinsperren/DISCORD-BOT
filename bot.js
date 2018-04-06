@@ -126,7 +126,7 @@ function PlayCommand(searchTerm) {
 
     // if not connected to a voice channel then connect to first one
     if (client.voiceConnections.array().length == 0) {
-        var defaultVoiceChannel = client.channels.find(val => val.type === 'voice').name;
+        var defaultVoiceChannel = message.member.voiceChannel;
         JoinCommand(defaultVoiceChannel);
     }
 
@@ -148,7 +148,7 @@ function PlayQueueCommand(message) {
 
 /// joins the bot to the specified voice channel
 function JoinCommand(channelName) {
-    var voiceChannel = GetChannelByName(channelName);
+    var voiceChannel = message.member.voiceChannel;
 
     if (voiceChannel) {
         voiceChannel.join();
@@ -158,17 +158,6 @@ function JoinCommand(channelName) {
     return voiceChannel;
 }
 
-
-function LeaveCommand(channelName) {
-    var voiceChannel = GetChannelByName(channelName);
-
-    if (voiceChannel) {
-        voiceChannel.leave();
-        console.log("Leaved " + voiceChannel.name);
-    }
-
-    return voiceChannel;
-}
 
 
 /* HELPER METHODS */
@@ -373,10 +362,7 @@ JoinCommand(parameters[0], message);
 	if(command === "play") {	
  PlayCommand(parameters.join(" "), message);		
  }
-	
-if(command === "leave") {	
- LeaveCommand(parameters.join(" "), message);		
- } 	
+		
 	
 });
 client.login(process.env.BOT_TOKEN);
