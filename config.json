@@ -62,6 +62,18 @@
           "webhook": "https://discordapp.com/api/webhooks/431610451864977429/LO51LvBEl3vWXvcKEcBq8PZIAGRNhrXYF8RDJCHSF9CCKBlvO6_9-jHPKZ1AuBw4_nwM"
         }
       ]
+    },
+    , {
+      "id": "54975899",
+      "nickname": "sntgx",
+      "latestStream": 25283115264,
+      "receivers": [
+        {
+          "nickname": "My Test Server",
+          "customMessage": "Che @everyone! El Cabe, si, EL CABE! está en vivo en Twitch!",
+          "webhook": "https://discordapp.com/api/webhooks/431610451864977429/LO51LvBEl3vWXvcKEcBq8PZIAGRNhrXYF8RDJCHSF9CCKBlvO6_9-jHPKZ1AuBw4_nwM"
+        }
+      ]
     }
   ]
 }
