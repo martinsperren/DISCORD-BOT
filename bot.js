@@ -177,6 +177,12 @@ client.on("message", async message => {
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
+	
+	
+      	if(message.content("huevo")) {
+  message.react(client.emojis.get("431656118952132630"));
+	}
+
 
 	  if(command === "huevo") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
