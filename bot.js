@@ -183,6 +183,9 @@ client.on("message", async message => {
   message.react(client.emojis.get("431656118952132630"));
 		
 	}
+	
+	
+	
 
 
 	  if(command === "huevo") {
@@ -190,7 +193,10 @@ client.on("message", async message => {
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
    message.delete();
 	const ayy = client.emojis.get("431656118952132630");
-   message.reply(`¿y el ${ayy}?`);
+   
+		message.channel.send(`¿y el ${ayy}?`);  
+		  
+		
 		  
 	    
 	   
