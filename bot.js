@@ -153,7 +153,9 @@ function JoinCommand(channelName) {
     }
 
     var voiceChannel = GetChannelByName(channelName);
+	message.channel.send(`${channelName}`);  
     return voiceChannel.join();
+	
 }
 
 
@@ -163,7 +165,8 @@ function JoinCommand(channelName) {
 /// returns the channel that matches the name provided
 function GetChannelByName(name) {
     var channel = client.channels.find(val => val.name === name);
-    return channel;
+    
+	return channel;
 }
 
 /// Queues result of Youtube search into stream
