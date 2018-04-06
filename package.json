@@ -13,6 +13,12 @@
     "youtube-audio-stream": "0.0.50",
     "youtube-playlist-info": "^0.1.0",
     "ytdl-core": "^0.20.1",
-    "ytsearcher": "^1.0.3"
+    "ytsearcher": "^1.0.3",
+    "jsonfile": "^3.0.0",
+		"node-rest-client": "^3.1.0",
+		"node-schedule": "^1.2.1",
+		"twitch.tv": "^2.1.0"
+    
+    
   }
 }
