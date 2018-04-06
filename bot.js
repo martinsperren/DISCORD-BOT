@@ -294,4 +294,23 @@ JoinCommand(parameters[0], message);
  }
 	
 });
+
+voiceChannel.on('speaking', (user, speaking) => {
+    // the audio has finished playing, so remove it from the queue and start playing the next song
+    if (!speaking && ytAudioQueue.length > 1) {
+        ytAudioQueue.pop();
+        if (voiceChannel == null) {
+            JoinCommand(client.channels.find(val => val.type === 'voice').name).then(function() {
+                PlayStream(ytAudioQueue.first);
+            });
+        }
+        else {
+            PlayStream(ytAudioQueue.first);
+        }
+    }
+});
+
+
+
+
 client.login(process.env.BOT_TOKEN);
