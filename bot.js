@@ -194,7 +194,7 @@ client.on("message", async message => {
    message.delete();
 	const ayy = client.emojis.get("430508228976181248");
    
-		message.channel.send(`¿y el ${ayy}?`);  
+		message.channel.send(`¿y el${ayy}?`);  
 		  
 		
 		  
