@@ -168,8 +168,15 @@ function buildWebHook(twitchResponse, receiver) {
 
 client.on("message", async message => {
  
+
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+
+	if(message.content === "huevo") {
+   const ayy = client.emojis.find("huevo", "ayy");
+   message.reply(`${huevo}`);
+}
+	
   
   // Let's go with a few common example commands! Feel free to delete or change those.
   
@@ -204,7 +211,8 @@ client.on("message", async message => {
     if(command === "huevo") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-   const huevo = client.emojis.find("huevo", "ayy");
+   message.delete();
+	    const huevo = client.emojis.find("huevo", "ayy");
 	    
 	
 message.channel.send("¿Y el ${huevo}?");
