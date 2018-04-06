@@ -164,6 +164,16 @@ function buildWebHook(twitchResponse, receiver) {
 
 
 
+client.on('message', function(message) {
+      	if(message.content.contains("huevo")) {
+  message.react(client.emojis.get("431656118952132630"));
+
+}
+});
+
+
+
+
 
 
 client.on("message", async message => {
@@ -172,13 +182,17 @@ client.on("message", async message => {
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-	//if(message.content.contains("huevo")) {
- //  message.react(client.emojis.get("431656118952132630"));
 
-//}
-	
+	  if(command === "huevo") {
+    // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
+    // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
+   message.delete();
+	const ayy = client.emojis.get("431656118952132630");
+   message.reply(`${ayy}`);
+	    
+	   
+  }
   
-  // Let's go with a few common example commands! Feel free to delete or change those.
   
 	 if(command === "cmds") {
 		   if(!message.member.roles.some(r=>["OWNER", "Admins"].includes(r.name)) )
@@ -208,15 +222,7 @@ client.on("message", async message => {
 	
 	
 	
-    if(command === "huevo") {
-    // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
-    // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-   message.delete();
-	const ayy = client.emojis.find("huevo", "huevo");
-   message.reply(`${ayy}`);
-	    
-	   
-  }
+  
 	
   
   if(command === "say") {
