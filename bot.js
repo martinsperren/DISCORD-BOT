@@ -179,7 +179,7 @@ client.on("message", async message => {
 
 	
 	
-      	if(message.content === 'huevo') {
+      	if(message.content.includes("huevo")) {
   message.react(client.emojis.get("431656118952132630"));
 		
 	}
@@ -191,7 +191,7 @@ client.on("message", async message => {
    message.delete();
 	const ayy = client.emojis.get("431656118952132630");
    message.reply(`¿y el ${ayy}?`);
-		  client.sendMessage(`¿y el ${ayy}?`);
+		  
 	    
 	   
   }
