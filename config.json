@@ -12,7 +12,7 @@
         {
           "nickname": "My Test Server",
           "customMessage": "Che @everyone! Tuber está en vivo en Twitch!",
-          "webhook": ""
+          "webhook": "https://discordapp.com/api/webhooks/431610451864977429/LO51LvBEl3vWXvcKEcBq8PZIAGRNhrXYF8RDJCHSF9CCKBlvO6_9-jHPKZ1AuBw4_nwM"
         }
       ]
     },
@@ -24,7 +24,7 @@
         {
           "nickname": "My Test Server",
           "customMessage": "Che @everyone! Benex está en vivo en Twitch!",
-          "webhook": ""
+          "webhook": "https://discordapp.com/api/webhooks/431610451864977429/LO51LvBEl3vWXvcKEcBq8PZIAGRNhrXYF8RDJCHSF9CCKBlvO6_9-jHPKZ1AuBw4_nwM"
         }
       ]
     },
@@ -36,7 +36,7 @@
         {
           "nickname": "My Test Server",
           "customMessage": "Che @everyone! Matishi está en vivo en Twitch!",
-          "webhook": ""
+          "webhook": "https://discordapp.com/api/webhooks/431610451864977429/LO51LvBEl3vWXvcKEcBq8PZIAGRNhrXYF8RDJCHSF9CCKBlvO6_9-jHPKZ1AuBw4_nwM"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "nickname": "Monster Truck Rally",
           "customMessage": "Che @everyone! Moderador está en vivo en Twitch!",
-          "webhook": ""
+          "webhook": "https://discordapp.com/api/webhooks/431610451864977429/LO51LvBEl3vWXvcKEcBq8PZIAGRNhrXYF8RDJCHSF9CCKBlvO6_9-jHPKZ1AuBw4_nwM"
         }
       ]
     }, {
@@ -59,7 +59,7 @@
         {
           "nickname": "My Test Server",
           "customMessage": "Che @everyone! Flash está en vivo en Twitch!",
-          "webhook": ""
+          "webhook": "https://discordapp.com/api/webhooks/431610451864977429/LO51LvBEl3vWXvcKEcBq8PZIAGRNhrXYF8RDJCHSF9CCKBlvO6_9-jHPKZ1AuBw4_nwM"
         }
       ]
     }
