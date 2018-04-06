@@ -180,7 +180,7 @@ client.on("message", async message => {
 	
 	
       	if(message.content.includes("huevo")) {
-  message.react(client.emojis.get("431656118952132630"));
+  message.react(client.emojis.get("430508228976181248"));
 		
 	}
 	
@@ -192,7 +192,7 @@ client.on("message", async message => {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
    message.delete();
-	const ayy = client.emojis.get("431656118952132630");
+	const ayy = client.emojis.get("430508228976181248");
    
 		message.channel.send(`¿y el ${ayy}?`);  
 		  
@@ -217,7 +217,7 @@ client.on("message", async message => {
 	user = member.user.username;
 	let nick = args.slice(1).join(' ');
 	member.setNickname(nick);
-	message.reply(`${user} ahora se llama ${nick}`);
+	message.channel.send(`${user} ahora se llama ${nick}`);
  }
 	
 	
@@ -269,7 +269,7 @@ client.on("message", async message => {
     // Now, time for a swift kick in the nuts!
     await member.kick(reason)
       .catch(error => message.reply(`Sorry ${message.author} no lo puedo patear porque : ${error}`));
-    message.reply(`${message.author.username} rajo a la mierda a ${member.user.username} por: ${reason}`);
+    message.channel.send(`${message.author.username} rajo a la mierda a ${member.user.username} por: ${reason}`);
 
   }
   
@@ -283,7 +283,7 @@ client.on("message", async message => {
       
 member.addRole('429091253129576448');
      
-      message.reply(`${member.user.username} se comio un mute de ${message.author.username}`);
+      message.channel.send(`${member.user.username} se comio un mute de ${message.author.username}`);
       
   
      }
@@ -298,7 +298,7 @@ member.addRole('429091253129576448');
    
     
 member.removeRole('429091253129576448');
-      message.reply(`${message.author.username} desmuteo a ${member.user.username}`);
+      message.channel.send(`${message.author.username} desmuteo a ${member.user.username}`);
       
   
      }
@@ -321,7 +321,7 @@ member.removeRole('429091253129576448');
     
     await member.ban(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
-    message.reply(`${member.user.username} deleteó a ${message.author.username} por: ${reason}`);
+   message.channel.send(`${member.user.username} deleteó a ${message.author.username} por: ${reason}`);
   }
   
   if(command === "cc") {
@@ -381,7 +381,7 @@ member.removeRole('429091253129576448');
             dispatcher.on('end', () => voiceChannel.leave());
         });
 	    
-	return message.reply("OK"); 
+	message.channel.send("OK"); 
 	
 	 
  }
