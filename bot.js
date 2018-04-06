@@ -139,6 +139,60 @@ function buildWebHook(twitchResponse, receiver) {
 		}
 	};
 }
+
+
+function PlayCommand(searchTerm) {
+    //client.sendMessage("Searching Youtube for audio...");
+    YoutubeSearch(searchTerm);
+}	
+function JoinCommand(channelName) {
+    if (voiceChannel) {
+        voiceChannel.disconnet();
+    }
+    var voiceChannel = GetChannelByName(channelName);
+    return voiceChannel.join();
+}	
+function GetChannelByName(name) {
+    var channel = client.channels.find(val => val.name === name);
+    return channel;
+}	
+function YoutubeSearch(searchKeywords) {
+    var requestUrl = 'https://www.googleapis.com/youtube/v3/search' + `?part=snippet&q=${escape(searchKeywords)}&key=${API_KEY}`;
+    request(requestUrl, (error, response) => {
+        if (!error && response.statusCode == 200) {
+            var body = response.body;
+            if (body.items.length == 0) {
+                console.log("Your search gave 0 results");
+                return videoId;
+            }
+            for (var item of body.items) {
+                if (item.id.kind === 'youtube#video') {
+                    QueueYtAudioStream(item.id.videoId);
+                }
+            }
+        }
+        else {
+            console.log("Unexpected error when searching YouTube");
+            return null;
+        }
+    });
+    return null;
+}
+/// Queues result of Youtube search into stream
+function QueueYtAudioStream(videoId) {
+    var streamUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    ytAudioQueue.push(streamUrl);
+}
+// plays a given stream
+function PlayStream(streamUrl) {
+    const streamOptions = {seek: 0, volume: 1};
+    console.log("Streaming audio from " + streamUrl);
+    if (streamUrl) {
+        const stream = ytdl(streamUrl, {filter: 'audioonly'});
+        const dispatcher = client.voiceConnections.first().playStream(stream, streamOptions);
+    }
+}
+
 client.on("message", async message => {
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
@@ -332,4 +386,8 @@ function PlayStream(streamUrl) {
 	
 	
 });
+
+
+
+
 client.login(process.env.BOT_TOKEN);
