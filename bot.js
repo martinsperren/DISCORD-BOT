@@ -159,6 +159,18 @@ function JoinCommand(channelName) {
 }
 
 
+function LeaveCommand(channelName) {
+    var voiceChannel = GetChannelByName(channelName);
+
+    if (voiceChannel) {
+        voiceChannel.leave();
+        console.log("Leaved " + voiceChannel.name);
+    }
+
+    return voiceChannel;
+}
+
+
 /* HELPER METHODS */
 
 /// returns the channel that matches the name provided
@@ -361,6 +373,10 @@ JoinCommand(parameters[0], message);
 	if(command === "play") {	
  PlayCommand(parameters.join(" "), message);		
  }
+	
+if(command === "leave") {	
+ LeaveCommand(parameters.join(" "), message);		
+ } 	
 	
 });
 client.login(process.env.BOT_TOKEN);
