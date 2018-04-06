@@ -172,8 +172,9 @@ client.on("message", async message => {
   const args = message.content.slice("!".length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-	if(message.content === "huevo") {
+	if(message.content =='huevo') {
    message.react(client.emojis.get("431656118952132630"));
+		message.reply('Pong');
    
 }
 	
