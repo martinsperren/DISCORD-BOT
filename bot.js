@@ -146,16 +146,15 @@ function PlayQueueCommand(message) {
     message.reply(queueString);
 }
 
-/// joins the bot to the specified voice channel
 function JoinCommand(channelName) {
-   if (voiceChannel) {
-        voiceChannel.disconnet();
+    var voiceChannel = GetChannelByName(channelName);
+
+    if (voiceChannel) {
+        voiceChannel.join();
+        console.log("Joined " + voiceChannel.name);
     }
 
-    var voiceChannel = GetChannelByName(channelName);
-	message.channel.send(`${channelName}`);  
-    return voiceChannel.join();
-	
+    return voiceChannel;
 }
 
 
