@@ -164,12 +164,7 @@ function buildWebHook(twitchResponse, receiver) {
 
 
 
-client.on('message', function(message) {
-      	if(message.content.contains("huevo")) {
-  message.react(client.emojis.get("431656118952132630"));
 
-}
-});
 
 
 
