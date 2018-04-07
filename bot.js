@@ -129,7 +129,7 @@ client.on("message", async message => {
 	
 ////music
 	
-	const argsMusicMusic = msg.content.split(' ');
+	const argsMusic = msg.content.split(' ');
 	const searchString = argsMusic.slice(1).join(' ');
 	const url = argsMusic[1] ? argsMusic[1].replace(/<(.+)>/g, '$1') : '';
 	const serverQueue = queue.get(msg.guild.id);
