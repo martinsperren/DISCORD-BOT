@@ -308,7 +308,7 @@ member.removeRole('429091253129576448');
   
   
   
-  if (command === 'py') {
+  if (command === 'play') {
 		const voiceChannel = message.member.voiceChannel;
 		if (!voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		const permissions = voiceChannel.permissionsFor(message.client.user);
@@ -364,14 +364,14 @@ Pone un numero de 1-10.
   	
 
 
-	if (command === 'saltar') {
+	if (command === 'skip') {
 		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		serverQueue.connection.dispatcher.end('Skipea3');
 		return undefined;
 	} 
 	
-	if (command === 'parar') {
+	if (command === 'stop') {
 		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		serverQueue.songs = [];
@@ -388,12 +388,12 @@ Pone un numero de 1-10.
 		return message.channel.send(`Volumen actual: **${argsM[1]}**`);
 	} 
 	
-	if (command === 'tema') {
+	if (command === 'song') {
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		return message.channel.send(`Reproduciendo: **${serverQueue.songs[0].title}**`);
 	} 
 
-	if (command === 'lista') {
+	if (command === 'list') {
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		return message.channel.send(`
 __**Lista de reproducción:**__\n
@@ -402,7 +402,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		`);
 	} 
 
-	if (command === 'pausa') {
+	if (command === 'pause') {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
@@ -418,6 +418,10 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 			return message.channel.send('Resumiending!');
 		}
 		return message.channel.send('No hay nada reproduciendose');
+	}
+	
+	if (command === 'music') {
+		return message.reply("\n!play (nombre) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!mute\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion");
 	}
   
   
