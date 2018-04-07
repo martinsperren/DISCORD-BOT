@@ -188,10 +188,10 @@ client.on("message", async message => {
   const command = args.shift().toLowerCase();
   
   
-  const argsM = msg.content.split(' ');
+   const argsM = message.content.split(' ');
 	const searchString = argsM.slice(1).join(' ');
 	const url = argsM[1] ? argsM[1].replace(/<(.+)>/g, '$1') : '';
-	const serverQueue = queue.get(msg.guild.id);
+	const serverQueue = queue.get(message.guild.id);
   
   
   
