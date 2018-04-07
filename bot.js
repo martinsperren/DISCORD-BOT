@@ -390,7 +390,7 @@ Pone un numero de 1-10.
 	
 	if (command === 'tema') {
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
-		return message.channel.send(`?? Reproduciendo: **${serverQueue.songs[0].title}**`);
+		return message.channel.send(`Reproduciendo: **${serverQueue.songs[0].title}**`);
 	} 
 
 	if (command === 'lista') {
