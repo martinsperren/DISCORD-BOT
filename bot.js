@@ -155,7 +155,7 @@ async function handleVideo(video, message, voiceChannel, playlist = false) {
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
-		else return message.channel.send(`? **${song.title}** has been added to the queue!`);
+		else return message.channel.send(`**${song.title}** agregado a la cola!`);
 	}
 	return undefined;
 }
@@ -180,7 +180,7 @@ function play(guild, song) {
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
-	serverQueue.textChannel.send(`?? Start playing: **${song.title}**`);
+	serverQueue.textChannel.send(`Reproduciendo: **${song.title}**`);
 }
 
 
@@ -310,13 +310,13 @@ member.removeRole('429091253129576448');
   
   if (command === 'play') {
 		const voiceChannel = message.member.voiceChannel;
-		if (!voiceChannel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
+		if (!voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		const permissions = voiceChannel.permissionsFor(message.client.user);
 		if (!permissions.has('CONNECT')) {
-			return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
+			return message.channel.send('No tengo permisos para entrar a este canal');
 		}
 		if (!permissions.has('SPEAK')) {
-			return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
+			return message.channel.send('No tengo permisos para hablar en este canal');
 		}
 
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
@@ -326,7 +326,7 @@ member.removeRole('429091253129576448');
 				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
 				await handleVideo(video2, message, voiceChannel, true); // eslint-disable-line no-await-in-loop
 			}
-			return message.channel.send(`? Playlist: **${playlist.title}** has been added to the queue!`);
+			return message.channel.send(`? Playlist: **${playlist.title}** ha sido agregado a la cola!`);
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -335,9 +335,9 @@ member.removeRole('429091253129576448');
 					var videos = await youtube.searchVideos(searchString, 10);
 					let index = 0;
 					message.channel.send(`
-__**Song selection:**__
+__**Selecciona el temaiken:**__
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-Please provide a value to select one of the search results ranging from 1-10.
+Pone un numero de 1-10.
 					`);
 					// eslint-disable-next-line max-depth
 					try {
@@ -348,13 +348,13 @@ Please provide a value to select one of the search results ranging from 1-10.
 						});
 					} catch (err) {
 						console.error(err);
-						return message.channel.send('No or invalid value entered, cancelling video selection.');
+						return message.channel.send('Ingresa un valor valido, busqueda cancelada.');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return message.channel.send('?? I could not obtain any search results.');
+					return message.channel.send('No hay resultados.');
 				}
 			}
 			return handleVideo(video, message, voiceChannel);
@@ -365,36 +365,36 @@ Please provide a value to select one of the search results ranging from 1-10.
 
 
 	if (command === 'skip') {
-		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return message.channel.send('There is nothing playing that I could skip for you.');
-		serverQueue.connection.dispatcher.end('Skip command has been used!');
+		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
+		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
+		serverQueue.connection.dispatcher.end('Skipea3');
 		return undefined;
 	} 
 	
 	if (command === 'stop') {
-		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
+		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		if (!serverQueue) return message.channel.send('There is nothing playing that I could stop for you.');
 		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Stop command has been used!');
+		serverQueue.connection.dispatcher.end('Stopea3');
 		return undefined;
 	} 
 	
-	if (command === 'volume') {
-		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return message.channel.send('There is nothing playing.');
-		if (!argsM[1]) return message.channel.send(`The current volume is: **${serverQueue.volume}**`);
+	if (command === 'vol') {
+		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
+		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
+		if (!argsM[1]) return message.channel.send(`Volumen actual: **${serverQueue.volume}**`);
 		serverQueue.volume = argsM[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(argsM[1] / 5);
-		return message.channel.send(`I set the volume to: **${argsM[1]}**`);
+		return message.channel.send(`No puedo poner el volumen en: **${argsM[1]}**`);
 	} 
 	
-	if (command === 'np') {
-		if (!serverQueue) return message.channel.send('There is nothing playing.');
+	if (command === 'tema') {
+		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		return message.channel.send(`?? Now playing: **${serverQueue.songs[0].title}**`);
 	} 
 
-	if (command === 'queue') {
-		if (!serverQueue) return message.channel.send('There is nothing playing.');
+	if (command === 'lista') {
+		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		return message.channel.send(`
 __**Song queue:**__
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
