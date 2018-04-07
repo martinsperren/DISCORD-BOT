@@ -16,9 +16,6 @@ const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
 const queue = new Map();
 
 
-
-//xd
-
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   client.user.setGame(`DE RUTA EN ${client.guilds.size} SERVERS`);
