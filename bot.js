@@ -308,7 +308,7 @@ member.removeRole('429091253129576448');
   
   
   
-  if (command === 'temaiken') {
+  if (command === 'py') {
 		const voiceChannel = message.member.voiceChannel;
 		if (!voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		const permissions = voiceChannel.permissionsFor(message.client.user);
@@ -402,7 +402,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		`);
 	} 
 
-	if (command === 'pause') {
+	if (command === 'pausa') {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
