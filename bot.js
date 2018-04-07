@@ -149,7 +149,7 @@ async function handleVideo(video, message, voiceChannel, playlist = false) {
 		} catch (error) {
 			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(message.guild.id);
-			return message.channel.send(`I could not join the voice channel: ${error}`);
+			return message.channel.send(`No puedo entrar al canal de voz: ${error}`);
 		}
 	} else {
 		serverQueue.songs.push(song);
@@ -335,7 +335,7 @@ member.removeRole('429091253129576448');
 					var videos = await youtube.searchVideos(searchString, 10);
 					let index = 0;
 					message.channel.send(`
-__**Selecciona el temaiken:**__
+__**Selecciona el temaiken:**__ \n
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 Pone un numero de 1-10.
 					`);
@@ -396,7 +396,7 @@ Pone un numero de 1-10.
 	if (command === 'lista') {
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		return message.channel.send(`
-__**Lista de reproducción:**__
+__**Lista de reproducción:**__\n
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 **Now playing:** ${serverQueue.songs[0].title}
 		`);
@@ -417,7 +417,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 			serverQueue.connection.dispatcher.resume();
 			return message.channel.send('Resumiending!');
 		}
-		return message.channel.send('There is nothing playing.');
+		return message.channel.send('No hay nada reproduciendose');
 	}
   
   
