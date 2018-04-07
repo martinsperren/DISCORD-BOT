@@ -373,7 +373,7 @@ Pone un numero de 1-10.
 	
 	if (command === 'stop') {
 		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
-		if (!serverQueue) return message.channel.send('There is nothing playing that I could stop for you.');
+		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Stopea3');
 		return undefined;
@@ -390,13 +390,13 @@ Pone un numero de 1-10.
 	
 	if (command === 'tema') {
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
-		return message.channel.send(`?? Now playing: **${serverQueue.songs[0].title}**`);
+		return message.channel.send(`?? Reproduciendo: **${serverQueue.songs[0].title}**`);
 	} 
 
 	if (command === 'lista') {
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		return message.channel.send(`
-__**Song queue:**__
+__**Lista de reproducción:**__
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 **Now playing:** ${serverQueue.songs[0].title}
 		`);
@@ -406,16 +406,16 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
-			return message.channel.send('? Paused the music for you!');
+			return message.channel.send('Pausa3!');
 		}
-		return message.channel.send('There is nothing playing.');
+		return message.channel.send('No hay nada reproduciendose');
 	} 
 	
 	if (command === 'resume') {
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return message.channel.send('? Resumed the music for you!');
+			return message.channel.send('Resumiending!');
 		}
 		return message.channel.send('There is nothing playing.');
 	}
