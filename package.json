@@ -1,6 +1,6 @@
 {
-  "name": "Test",
-  "description": "Test",
+  "name": "TuberBot",
+  "description": "testing",
   "version": "0.0.0",
   "main": "bot.js",
   "scripts": {
@@ -18,6 +18,8 @@
 		"node-rest-client": "^3.1.0",
 		"node-schedule": "^1.2.1",
 		"twitch.tv": "^2.1.0",
+	  "opusscript": "0.0.3",
+    "simple-youtube-api": "^3.0.0",
 	  "superagent": "^3.8.0"
     
     
