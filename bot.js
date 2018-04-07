@@ -308,7 +308,7 @@ member.removeRole('429091253129576448');
   
   
   
-  if (command === 'play') {
+  if (command === 'temaiken') {
 		const voiceChannel = message.member.voiceChannel;
 		if (!voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		const permissions = voiceChannel.permissionsFor(message.client.user);
@@ -364,14 +364,14 @@ Pone un numero de 1-10.
   	
 
 
-	if (command === 'skip') {
+	if (command === 'saltar') {
 		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		serverQueue.connection.dispatcher.end('Skipea3');
 		return undefined;
 	} 
 	
-	if (command === 'stop') {
+	if (command === 'parar') {
 		if (!message.member.voiceChannel) return message.channel.send('Metete en en canal de voz, crack!');
 		if (!serverQueue) return message.channel.send('No hay nada reproduciendose');
 		serverQueue.songs = [];
@@ -385,7 +385,7 @@ Pone un numero de 1-10.
 		if (!argsM[1]) return message.channel.send(`Volumen actual: **${serverQueue.volume}**`);
 		serverQueue.volume = argsM[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(argsM[1] / 5);
-		return message.channel.send(`No puedo poner el volumen en: **${argsM[1]}**`);
+		return message.channel.send(`Volumen actual: **${argsM[1]}**`);
 	} 
 	
 	if (command === 'tema') {
