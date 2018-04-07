@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const Client = require('node-rest-client').Client;
 const schedule = require('node-schedule');
 const twitch = require('twitch.tv');
+const ytdl = require('ytdl-core');
 const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
@@ -13,6 +14,7 @@ const Util  = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
 const queue = new Map();
+
 
 
 
