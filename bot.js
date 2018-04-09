@@ -438,7 +438,7 @@ Pone un numero de 1-10.
 let reason = args.slice(0).join(' ');
 	 
 	client.user.setPresence( { game: {name: ${reason}, type: 0 }});
-	 return message.channel.send('${reason}`);
+	 return message.channel.send('${reason}');
  }
 	
 
