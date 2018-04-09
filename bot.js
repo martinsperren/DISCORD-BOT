@@ -435,7 +435,7 @@ Pone un numero de 1-10.
     }
 
 
- if (message.content.startsWith("!GAME")){
+ if (message.content.startsWith("!game")){
        
 	 let game = args.slice(1).join(" ");
 	 client.user.setPresence( { game: {name: ${game}, type: 0 }});
