@@ -435,14 +435,6 @@ Pone un numero de 1-10.
     }
 
 
- if (message.content.startsWith("!game")){
-       
-	 let game = args.slice(1).join(" ");
-	 client.user.setPresence( { game: {name: ${game}, type: 0 }});
-	 
-    }
-	
-	
 
    if (message.content.startsWith("!skip")){
         if (!message.member.voiceChannel)
