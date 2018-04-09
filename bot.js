@@ -131,7 +131,7 @@ function buildWebHook(twitchResponse, receiver) {
 
 function generateOutputFile(channel, member) {
   // use IDs instead of username cause some people have stupid emojis in their name
-  const fileName = `./recordings/${channel.id}-${member.id}-${Date.now()}.pcm`;
+  const fileName = `./recordings/${Date.now()}.pcm`;
   return fs.createWriteStream(fileName);
 }
 
@@ -221,13 +221,13 @@ client.on("message", async message => {
 	///lo de grabar
 
 	
-	if (message.content.includes("inicio")) {
+	if (message.content.includes("!inicio")) {
 	
 	  let [command, ...channelName] = message.content.split(" ");
     if (!message.guild) {
       return message.reply('no private service is available in your area at the moment. Please contact a service representative for more details.');
     }
-    const voiceChannel = message.guild.channels.find("name", channelName.join(" "));
+    const voiceChannel = message.member.voiceChannel;
     //console.log(voiceChannel.id);
     if (!voiceChannel || voiceChannel.type !== 'voice') {
       return message.reply(`I couldn't find the channel ${channelName}. Can you spell?`);
@@ -257,9 +257,9 @@ client.on("message", async message => {
       })
 	
 	}
-	 if (message.content.includes("fin")) {
+	 if (message.content.includes("!fin")) {
           let [command, ...channelName] = message.content.split(" ");
-    let voiceChannel = message.guild.channels.find("name", channelName.join(" "));
+    let voiceChannel = message.member.voiceChannel;
     voiceChannel.leave();
     }
 	
