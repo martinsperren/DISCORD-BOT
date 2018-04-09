@@ -271,7 +271,7 @@ client.on("message", async message => {
     if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
     }
-    if (command === "huevo") {
+    if (message.content..startsWith("!huevo")){
         message.delete();
         const ayy = client.emojis.get("430508228976181248");
         message.channel.send(`¿y el ${ayy}?`);
