@@ -509,7 +509,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		
 		const sayMessage = args.join(" ");
 	client.user.setPresence({ game: { name: ${sayMessage}, type: 0 } });
-
+return undefined;
 
 	}
 
