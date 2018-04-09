@@ -15,13 +15,11 @@
     "ytdl-core": "^0.20.1",
     "ytsearcher": "^1.0.3",
     "jsonfile": "^3.0.0",
-		"node-rest-client": "^3.1.0",
-		"node-schedule": "^1.2.1",
-		"twitch.tv": "^2.1.0",
-	  "opusscript": "0.0.3",
+    "node-rest-client": "^3.1.0",
+    "node-schedule": "^1.2.1",
+    "twitch.tv": "^2.1.0",
+    "opusscript": "0.0.3",
     "simple-youtube-api": "^3.0.0",
-	  "superagent": "^3.8.0"
-    
-    
+    "superagent": "^3.8.0"
   }
 }
