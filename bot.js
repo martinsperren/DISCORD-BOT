@@ -505,9 +505,13 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
         return message.reply("\n!play (nombre) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion");
     }
 
+	if (message.content.startsWith("!game")){
+		
+		const sayMessage = args.join(" ");
+	client.user.setGame(sayMessage)
 
 
-
+	}
 
 
 
