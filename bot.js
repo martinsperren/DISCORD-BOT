@@ -16,8 +16,9 @@ const YouTube = require('simple-youtube-api');
 const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
 const queue = new Map();
 
-
-/*client.on("ready", () => {
+*client.on("ready", () => {
+	
+	/*
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
     client.user.setGame(`La Mamá de Fasted`);
 
