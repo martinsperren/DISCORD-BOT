@@ -271,12 +271,12 @@ client.on("message", async message => {
     if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
     }
-    if (message.content..startsWith("!huevo")){
+    if (message.content.startsWith("!huevo")){
         message.delete();
         const ayy = client.emojis.get("430508228976181248");
         message.channel.send(`¿y el ${ayy}?`);
     }
-    if (command === "cmds") {
+   if (message.content.startsWith("!cmds")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick\n!huevo");
