@@ -16,29 +16,22 @@ const YouTube = require('simple-youtube-api');
 const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
 const queue = new Map();
 
-client.on("ready", () => {
-	client.user.setPresence( { game: {name: `DE RUTA CON ${Discord.client.guilds.get(219256995574710272).members.size()} PONIS`, type: 0 }});
-	/*
-    console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
-    client.user.setGame(`La Mamá de Fasted`);
 
-client.user.setGame(`DE RUTA CON ${Discord.client.guilds.get(219256995574710272).members.size()} PONIS`);	
+client.on("ready", () => {
+    console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+    client.user.setGame(`DE RUTA CON ${Discord.client.guilds.get(219256995574710272).members.size()} PONIS`);
+
+//client.user.setGame(`DE RUTA CON ${Discord.client.guilds.get(219256995574710272).members.size()} PONIS`);	
 
 });
 client.on("guildCreate", guild => {
     console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-    client.user.setGame(`La Mamá de Fasted`);
+    client.user.setGame(`DE RUTA CON ${Discord.client.guilds.get(219256995574710272).members.size()} PONIS`);
 });
 client.on("guildDelete", guild => {
     console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-    client.user.setGame(`La Mamá de Fasted`);
+    client.user.setGame(`DE RUTA CON ${Discord.client.guilds.get(219256995574710272).members.size()} PONIS`);
 });
-*/
-
-
-
-
-
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker! :house:');
     //member.addRole('193654001089118208');
@@ -441,8 +434,13 @@ Pone un numero de 1-10.
         }
     }
 
-
-
+ if (message.content.startsWith("!game")){
+let reason = args.slice(0).join(' ');
+	 
+	client.user.setPresence( { game: {name: ${reason}, type: 0 }});
+	 return message.channel.send('${reason}`);
+ }
+	
 
    if (message.content.startsWith("!skip")){
         if (!message.member.voiceChannel)
