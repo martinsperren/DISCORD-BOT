@@ -220,8 +220,10 @@ client.on("message", async message => {
 	
 	///lo de grabar
 
-  if (message.content.startsWith('/inicio')) {
-    let [command, ...channelName] = message.content.split(" ");
+	
+	if (message.content.includes("inicio")) {
+	
+	  let [command, ...channelName] = message.content.split(" ");
     if (!message.guild) {
       return message.reply('no private service is available in your area at the moment. Please contact a service representative for more details.');
     }
@@ -253,19 +255,19 @@ client.on("message", async message => {
           }
         });
       })
-      .catch(console.log);
-  }
-  if(message.content.startsWith('/fin')) {
-    let [command, ...channelName] = message.content.split(" ");
+	
+	}
+	 if (message.content.includes("fin")) {
+          let [command, ...channelName] = message.content.split(" ");
     let voiceChannel = message.guild.channels.find("name", channelName.join(" "));
     voiceChannel.leave();
-  }
-
-  
-  ///lo de grabar fin
+    }
 	
 	
-
+	
+	
+	
+	///lo de grabar
     if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
     }
