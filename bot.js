@@ -221,7 +221,7 @@ client.on("message", async message => {
 	///lo de grabar
 
 	
-	if (message.content.includes("!inicio")) {
+	if (message.content.startsWith("!inicio")){
 	
 	  let [command, ...channelName] = message.content.split(" ");
     if (!message.guild) {
@@ -257,7 +257,7 @@ client.on("message", async message => {
       })
 	
 	}
-	 if (message.content.includes("!fin")) {
+	 if (message.content.startsWith("!fin")){
           let [command, ...channelName] = message.content.split(" ");
     let voiceChannel = message.member.voiceChannel;
     voiceChannel.leave();
@@ -281,7 +281,7 @@ client.on("message", async message => {
             return 0;
         return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick\n!huevo");
     }
-    if (command === "nick") {
+    if (message.content.startsWith("!nick")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
@@ -290,11 +290,11 @@ client.on("message", async message => {
         member.setNickname(nick);
         message.channel.send(`${user} ahora se llama ${nick}`);
     }
-    if (command === "ping") {
+    if (message.content.startsWith("!ping")){
         const m = await message.channel.send("Ping?");
         m.edit(`Tu ping es de ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms`);
     }
-    if (command === "say") {
+    if (message.content.startsWith("!say")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         const sayMessage = args.join(" ");
@@ -302,7 +302,7 @@ client.on("message", async message => {
         });
         message.channel.send(sayMessage);
     }
-    if (command === "kick") {
+    if (message.content.startsWith("!kick")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
@@ -317,7 +317,7 @@ client.on("message", async message => {
                 .catch(error => message.reply(`Sorry ${message.author} no lo puedo patear porque : ${error}`));
         message.channel.send(`${message.author.username} rajo a la mierda a ${member.user.username} por: ${reason}`);
     }
-    if (command === "mute") {
+   if (message.content.startsWith("!mute")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
@@ -326,7 +326,7 @@ client.on("message", async message => {
         member.addRole('429091253129576448');
         message.channel.send(`${member.user.username} se comio un mute de ${message.author.username}`);
     }
-    if (command === "unmute") {
+   if (message.content.startsWith("!unmute")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
@@ -335,7 +335,7 @@ client.on("message", async message => {
         member.removeRole('429091253129576448');
         message.channel.send(`${message.author.username} desmuteo a ${member.user.username}`);
     }
-    if (command === "ban") {
+    if (message.content.startsWith("!ban")){
         // Most of this command is identical to kick, except that here we'll only let admins do it.
         // In the real world mods could ban too, but this is just an example, right? ;)
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
@@ -352,7 +352,7 @@ client.on("message", async message => {
                 .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
         message.channel.send(`${member.user.username} deleteó a ${message.author.username} por: ${reason}`);
     }
-    if (command === "cc") {
+    if (message.content.startsWith("!cc")){
         // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
         // Now, we want to check if the user has the `bot-commander` role, you can change this to whatever you want.
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
@@ -380,7 +380,7 @@ client.on("message", async message => {
 
 
 
-    if (command === 'play') {
+    if (message.content.startsWith("!play")){
         const voiceChannel = message.member.voiceChannel;
         if (!voiceChannel)
             return message.channel.send('Metete en en canal de voz, crack!');
@@ -437,7 +437,7 @@ Pone un numero de 1-10.
 
 
 
-    if (command === 'skip') {
+   if (message.content.startsWith("!skip")){
         if (!message.member.voiceChannel)
             return message.channel.send('Metete en en canal de voz, crack!');
         if (!serverQueue)
@@ -446,7 +446,7 @@ Pone un numero de 1-10.
         return undefined;
     }
 
-    if (command === 'stop') {
+    if (message.content.startsWith("!stop")){
         if (!message.member.voiceChannel)
             return message.channel.send('Metete en en canal de voz, crack!');
         if (!serverQueue)
@@ -456,7 +456,7 @@ Pone un numero de 1-10.
         return undefined;
     }
 
-    if (command === 'vol') {
+    if (message.content.startsWith("!vol")){
         if (!message.member.voiceChannel)
             return message.channel.send('Metete en en canal de voz, crack!');
         if (!serverQueue)
@@ -468,13 +468,13 @@ Pone un numero de 1-10.
         return message.channel.send(`Volumen actual: **${argsM[1]}**`);
     }
 
-    if (command === 'song') {
+    if (message.content.startsWith("!song")){
         if (!serverQueue)
             return message.channel.send('No hay nada reproduciendose');
         return message.channel.send(`Reproduciendo: **${serverQueue.songs[0].title}**`);
     }
 
-    if (command === 'list') {
+   if (message.content.startsWith("!list")){
         if (!serverQueue)
             return message.channel.send('No hay nada reproduciendose');
         return message.channel.send(`
@@ -484,7 +484,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		`);
     }
 
-    if (command === 'pause') {
+    if (message.content.startsWith("!pause")){
         if (serverQueue && serverQueue.playing) {
             serverQueue.playing = false;
             serverQueue.connection.dispatcher.pause();
@@ -493,7 +493,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
         return message.channel.send('No hay nada reproduciendose');
     }
 
-    if (command === 'resume') {
+    if (message.content.startsWith("!resume")){
         if (serverQueue && !serverQueue.playing) {
             serverQueue.playing = true;
             serverQueue.connection.dispatcher.resume();
@@ -502,7 +502,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
         return message.channel.send('No hay nada reproduciendose');
     }
 
-    if (command === 'music') {
+    if (message.content.startsWith("!music")){
         return message.reply("\n!play (nombre) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion");
     }
 
