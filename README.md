@@ -1,2 +1,4 @@
-# super-super-heroku-bot
-Bot using heroku, 24/7!
+# TUBERBOT FOR DISCORD
+
+
+Moderation and music play boy for discord.
