@@ -508,7 +508,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	if (message.content.startsWith("!game")){
 		
 		const sayMessage = args.join(" ");
-	client.user.setGame(sayMessage)
+	client.user.setPresence({ game: { name: ${sayMessage}, type: 0 } });
 
 
 	}
