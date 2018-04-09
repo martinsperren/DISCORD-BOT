@@ -7,6 +7,7 @@ const ytdl = require('ytdl-core');
 const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
+const fs = require('fs');
 
 //TEST
 
@@ -125,6 +126,18 @@ function buildWebHook(twitchResponse, receiver) {
     };
 }
 
+
+///lo de grabar
+
+function generateOutputFile(channel, member) {
+  // use IDs instead of username cause some people have stupid emojis in their name
+  const fileName = `./recordings/${channel.id}-${member.id}-${Date.now()}.pcm`;
+  return fs.createWriteStream(fileName);
+}
+
+///fin de lo de grabar
+
+
 async function handleVideo(video, message, voiceChannel, playlist = false) {
     const serverQueue = queue.get(message.guild.id);
     console.log(video);
@@ -204,6 +217,54 @@ client.on("message", async message => {
     const serverQueue = queue.get(message.guild.id);
 
 
+	
+	///lo de grabar
+
+  if (message.content.startsWith('/inicio')) {
+    let [command, ...channelName] = message.content.split(" ");
+    if (!message.guild) {
+      return message.reply('no private service is available in your area at the moment. Please contact a service representative for more details.');
+    }
+    const voiceChannel = message.guild.channels.find("name", channelName.join(" "));
+    //console.log(voiceChannel.id);
+    if (!voiceChannel || voiceChannel.type !== 'voice') {
+      return message.reply(`I couldn't find the channel ${channelName}. Can you spell?`);
+    }
+    voiceChannel.join()
+      .then(conn => {
+        message.reply('Listo');
+        // create our voice receiver
+        const receiver = conn.createReceiver();
+
+        conn.on('speaking', (user, speaking) => {
+          if (speaking) {
+            message.channel.sendMessage(`I'm listening to ${user}`);
+            // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
+            const audioStream = receiver.createPCMStream(user);
+            // create an output stream so we can dump our data in a file
+            const outputStream = generateOutputFile(voiceChannel, user);
+            // pipe our audio data into the file stream
+            audioStream.pipe(outputStream);
+            outputStream.on("data", console.log);
+            // when the stream ends (the user stopped talking) tell the user
+            audioStream.on('end', () => {
+              message.channel.sendMessage(`I'm no longer listening to ${user}`);
+            });
+          }
+        });
+      })
+      .catch(console.log);
+  }
+  if(message.content.startsWith('/fin')) {
+    let [command, ...channelName] = message.content.split(" ");
+    let voiceChannel = message.guild.channels.find("name", channelName.join(" "));
+    voiceChannel.leave();
+  }
+
+  
+  ///lo de grabar fin
+	
+	
 
     if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
