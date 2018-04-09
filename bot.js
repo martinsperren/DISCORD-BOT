@@ -186,7 +186,7 @@ function play(guild, song) {
 
 
 client.on("message", async message => {
-  const args = message.content.slice("!".length).trim().split(/ +/g);
+  const args = message.content.slice(1).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
   
