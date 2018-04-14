@@ -527,7 +527,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
   var mins = Math.round((client.uptime % 3.6e6) / 6e4);	
 
 		
-message.channel.send(`UPTIME: ${days} DIAS ${hrs} HS ${mins} MINS`); 	
+message.channel.send(`__**UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`); 	
 		
 		
 		
