@@ -86,17 +86,6 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
 
 
 
-function dhm(ms){
-   var days = Math.floor(ms / (24*60*60*1000));
-   var daysms=ms % (24*60*60*1000);
-   var hours = Math.floor((daysms)/(60*60*1000));
-   var hoursms=ms % (60*60*1000);
-   var minutes = Math.floor((hoursms)/(60*1000));
-    var minutesms=ms % (60*1000);
-   var  sec = Math.floor((minutesms)/(1000));
-    return message.reply('${days} dias, ${horas} horas, ${minutes} minutos, ${sec} segundos'); 	
-}
-
 
 
 function buildWebHook(twitchResponse, receiver) {
@@ -531,7 +520,14 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	
 	
 	if (message.content.startsWith("!uptime")){
-	 dhm(client.uptime);
+	
+
+    var days = client.uptime / 8.64e7 | 0;
+  var hrs  = (client.uptime % 8.64e7)/ 3.6e6 | 0;
+  var mins = Math.round((client.uptime % 3.6e6) / 6e4);	
+
+return message.reply('${days} dias, ${hrs} horas, ${mins} minutos'); 	
+		
 		
 		
 		
