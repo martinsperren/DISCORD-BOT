@@ -507,7 +507,9 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 
 	 if (message.content.startsWith("!role")){
 	const sayMessage = args.join(" ");
-	message.guild.roles.find("name", sayMessage).id
+	var i = message.guild.roles.find("name", sayMessage).id;
+ return message.reply(i); 
+		 
 
 	 }
 
