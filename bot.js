@@ -20,7 +20,7 @@ const queue = new Map();
 client.on("ready", () => {
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
    
-client.user.setGame(`DE RUTA CON ${client.users.size} PONYS`);	
+client.user.setGame(`POBLACION: ${client.users.size}`);	
 
 });
 client.on("guildCreate", guild => {
