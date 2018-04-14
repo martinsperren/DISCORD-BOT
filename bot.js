@@ -20,7 +20,8 @@ const queue = new Map();
 
 client.on("ready", () => {
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
-   
+   let userToSend = 'Tuber#1119';
+userToSend.send("Bot Listo");
 client.user.setGame(`POBLACION: ${client.users.size}`);	
 
 });
