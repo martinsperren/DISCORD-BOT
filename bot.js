@@ -9,7 +9,7 @@ const restClient = new Client();
 const configFile = "config.json";
 const fs = require('fs');
 
-//TEST
+ OFFLINE SACAR COMENTARIO
 
 const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
