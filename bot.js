@@ -573,13 +573,14 @@ message.delete();
 
 		
 message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`); 	
-		
-		
-		
-		
-		
 	}
-
+	
+	
+	if (message.content.startsWith("!image")){
+		const sayMessage = args.join(" ");
+		randomGoogleImage(sayMessage);
+	
+}
 
 });
 client.login(process.env.BOT_TOKEN);
