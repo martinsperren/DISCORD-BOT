@@ -25,11 +25,11 @@ client.user.setGame(`POBLACION: ${client.users.size}`);
 });
 client.on("guildCreate", guild => {
     console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-    client.user.setGame(`DE RUTA CON ${client.users.size} PONYS`);	
+    client.user.setGame(`POBLACION: ${client.users.size}`);	
 });
 client.on("guildDelete", guild => {
     console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-   client.user.setGame(`DE RUTA CON ${client.users.size} PONYS`);	
+ client.user.setGame(`POBLACION: ${client.users.size}`);	
 });
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker! :house:');
