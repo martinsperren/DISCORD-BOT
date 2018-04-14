@@ -7,7 +7,7 @@ const ytdl = require('ytdl-core');
 const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
-const fs = require('fs');
+
 
 
 //OFFLINE SACAR COMENTARIO
@@ -20,8 +20,6 @@ const queue = new Map();
 
 client.on("ready", () => {
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
-   let userToSend = 'Tuber#1119';
-userToSend.send("Bot Listo");
 client.user.setGame(`POBLACION: ${client.users.size}`);	
 
 });
@@ -133,20 +131,6 @@ function buildWebHook(twitchResponse, receiver) {
 }
 
 
-///lo de grabar
-
-function generateOutputFile(channel, member) {
-  // use IDs instead of username cause some people have stupid emojis in their name
-  const fileName = `./recordings/${Date.now()}.pcm`;
-  return fs.createWriteStream(fileName);
-}
-
-///fin de lo de grabar
-
-
-
-
-
 async function handleVideo(video, message, voiceChannel, playlist = false) {
     const serverQueue = queue.get(message.guild.id);
     console.log(video);
@@ -226,57 +210,7 @@ client.on("message", async message => {
     const serverQueue = queue.get(message.guild.id);
 
 
-	
-	///lo de grabar
 
-	
-	if (message.content.startsWith("!inicio")){
-	
-	  let [command, ...channelName] = message.content.split(" ");
-    if (!message.guild) {
-      return message.reply('no private service is available in your area at the moment. Please contact a service representative for more details.');
-    }
-    const voiceChannel = message.member.voiceChannel;
-    //console.log(voiceChannel.id);
-    if (!voiceChannel || voiceChannel.type !== 'voice') {
-      return message.reply(`I couldn't find the channel ${channelName}. Can you spell?`);
-    }
-    voiceChannel.join()
-      .then(conn => {
-        message.reply('Listo');
-        // create our voice receiver
-        const receiver = conn.createReceiver();
-
-        conn.on('speaking', (user, speaking) => {
-          if (speaking) {
-            message.channel.sendMessage(`I'm listening to ${user}`);
-            // this creates a 16-bit signed PCM, stereo 48KHz PCM stream.
-            const audioStream = receiver.createPCMStream(user);
-            // create an output stream so we can dump our data in a file
-            const outputStream = generateOutputFile(voiceChannel, user);
-            // pipe our audio data into the file stream
-            audioStream.pipe(outputStream);
-            outputStream.on("data", console.log);
-            // when the stream ends (the user stopped talking) tell the user
-            audioStream.on('end', () => {
-              message.channel.sendMessage(`I'm no longer listening to ${user}`);
-            });
-          }
-        });
-      })
-	
-	}
-	 if (message.content.startsWith("!fin")){
-          let [command, ...channelName] = message.content.split(" ");
-    let voiceChannel = message.member.voiceChannel;
-    voiceChannel.leave();
-    }
-	
-	
-	
-	
-	
-	///lo de grabar
     if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
     }
@@ -535,11 +469,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	}
 	
 	
-	if (message.content.startsWith("!image")){
-		const sayMessage = args.join(" ");
-		
 	
-}
 
 });
 client.login(process.env.BOT_TOKEN);
