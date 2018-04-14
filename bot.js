@@ -513,8 +513,8 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	 }
 	
 	if (message.content.startsWith("!miembros")){
-	var memberCount = client.guilds.get(219256995574710272).members.size();
-	return message.reply('Poblacion del bunker: ${memberCount}'); 
+	int memberCount = client.guilds.get(219256995574710272).members.size();
+	return message.reply('memberCount'); 
  }
 
 });
