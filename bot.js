@@ -34,7 +34,8 @@ client.on("guildDelete", guild => {
 });
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, ahora vive en el bunker! :house:');
-    //member.addRole('193654001089118208');
+    client.addMemberToRole(user, server.roles.get("name", "RoleName"), function (err) { if (err) console.log(err) }
+message.member.addRole('371068035190226949');
 });
 client.on('guildMemberRemove', member => {
     member.guild.channels.get('219256995574710272').send('**' + member.user.username + '**, se fue con Arnoldt :hand_splayed: ');
