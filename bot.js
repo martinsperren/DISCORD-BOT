@@ -8,6 +8,8 @@ const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
 const fs = require('fs');
+const Promise = require('bluebird');
+const _ = require('lodash');
 
 //OFFLINE SACAR COMENTARIO
 
@@ -82,6 +84,23 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
         }
     });
 });
+
+
+function uptime() {
+  let message = 'Uptime: ';
+  const totalSeconds = process.uptime();
+  const days = Math.floor((totalSeconds % 31536000) / 86400);
+  const hours = _.parseInt(totalSeconds / 3600) % 24;
+  const minutes = _.parseInt(totalSeconds / 60) % 60;
+  const seconds = Math.floor(totalSeconds % 60);
+  message += days >= 1 ? `${days}d ` : '';
+  message += hours < 10 ? `0${hours}:` : `${hours}:`;
+  message += minutes < 10 ? `0${minutes}:` : `${minutes}:`;
+  message += seconds < 10 ? `0${seconds}` : `${seconds}`;
+  return Promise.resolve(message);
+}
+
+
 function buildWebHook(twitchResponse, receiver) {
     return {
         data: {
@@ -512,6 +531,10 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 
 	 }
 	
+	
+	if (message.content.startsWith("!uptime")){
+	 return message.reply(uptime()); 
+	}
 
 
 });
