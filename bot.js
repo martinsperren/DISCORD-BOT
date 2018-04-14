@@ -526,7 +526,8 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
   var hrs  = (client.uptime % 8.64e7)/ 3.6e6 | 0;
   var mins = Math.round((client.uptime % 3.6e6) / 6e4);	
 
-return message.reply('${days} dias, ${hrs} horas, ${mins} minutos'); 	
+		
+return message.reply(`${days} dias ${hrs} horas ${mins} minutos`); 	
 		
 		
 		
