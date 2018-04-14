@@ -513,7 +513,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	 }
 	
 	if (message.content.startsWith("!miembros")){
-	int memberCount = message.guild.memberCount;
+	int memberCount = client.guilds.get('219256995574710272').members.size();
 	return message.reply(${memberCount}); 
  }
 
