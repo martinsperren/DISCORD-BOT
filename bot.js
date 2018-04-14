@@ -521,13 +521,13 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	
 	if (message.content.startsWith("!uptime")){
 	
-
+message.delete();
     var days = client.uptime / 8.64e7 | 0;
   var hrs  = (client.uptime % 8.64e7)/ 3.6e6 | 0;
   var mins = Math.round((client.uptime % 3.6e6) / 6e4);	
 
 		
-message.channel.send(`__**UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`); 	
+message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`); 	
 		
 		
 		
