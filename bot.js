@@ -220,12 +220,12 @@ client.on("message", async message => {
         message.channel.send(`¿y el ${ayy}?`);
     }
    if (message.content.startsWith("!cmds")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick\n!huevo");
     }
     if (message.content.startsWith("!nick")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         user = member.user.username;
@@ -246,7 +246,7 @@ client.on("message", async message => {
         message.channel.send(sayMessage);
     }
     if (message.content.startsWith("!kick")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
@@ -261,7 +261,7 @@ client.on("message", async message => {
         message.channel.send(`${message.author.username} rajo a la mierda a ${member.user.username} por: ${reason}`);
     }
    if (message.content.startsWith("!mute")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
@@ -270,7 +270,7 @@ client.on("message", async message => {
         message.channel.send(`${member.user.username} se comio un mute de ${message.author.username}`);
     }
    if (message.content.startsWith("!unmute")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
