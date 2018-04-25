@@ -458,7 +458,8 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	
 	
 	if (message.content.startsWith("!uptime")){
-	
+	 if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+            return 0;
 message.delete();
     var days = client.uptime / 8.64e7 | 0;
   var hrs  = (client.uptime % 8.64e7)/ 3.6e6 | 0;
