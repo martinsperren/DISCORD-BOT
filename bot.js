@@ -472,7 +472,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	 if (message.content.startsWith("!rules")){
 	
-	message.channel.send(`No ser como Faste`); 
+	message.channel.send(`Reglas: No ser como Faste`); 
 	
 	}
 	
