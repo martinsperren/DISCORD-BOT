@@ -478,7 +478,11 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	}
 	
 	if (message.content.startsWith("!tmute")){
-	 let mutetime = args.slice(1).join(' ');
+	 
+		
+		let tomute = message.mentions.members.first();
+		
+		let mutetime = args.slice(1).join(' ');
   if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
 
   await(tomute.addRole('429091253129576448'));
