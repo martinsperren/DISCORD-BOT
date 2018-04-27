@@ -457,15 +457,19 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	if (message.content.startsWith("!tmute")){
+		if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+            return 0;		
 		let tomute = message.mentions.members.first();
-		let mutetime = args.slice(1).join(' ');
+		
+		var test = args.slice(1).join(' ');
+		let mutetime = test*1000;
   if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
   await(tomute.addRole('429091253129576448'));
 return message.channel.send(`<@${tomute.id}> ha sido muteado por ${message.author.username} durante ${ms(ms(mutetime))}`);
   setTimeout(function(){
     tomute.removeRole('429091253129576448');
     message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
-  }, ms(mutetime*1000));
+  }, ms(mutetime));
 	}
 });
 client.login(process.env.BOT_TOKEN);
