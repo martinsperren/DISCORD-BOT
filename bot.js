@@ -467,8 +467,6 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		
         if (!member)
             return message.reply("Arrobá al usuario.");
-        member.addRole('429091253129576448');
-        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}.`);
 		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
   await(member.addRole('429091253129576448'));
 		return message.channel.send(`${member.user.username} fue muteado por ${message.author.username} durante ${ms(ms(mutetime))}`);
