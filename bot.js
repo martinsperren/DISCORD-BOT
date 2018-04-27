@@ -470,12 +470,12 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mención!");
   
 		
-	 await(tomute.addRole(muterole.id));
-  message.reply(`<@${'429091253129576448'}> fue muteado po r${message.author.username} durante: ${ms(ms(mutetime))}`);
+	 await(tomute.addRole('429091253129576448'));
+  message.reply(`<@${tomute.id}> fue muteado po r${message.author.username} durante: ${ms(ms(mutetime))}`);
 
   setTimeout(function(){
-    tomute.removeRole(muterole.id);
-    message.channel.send(`<@${'429091253129576448'}> ha sido desmuteado!`);
+    tomute.removeRole('429091253129576448');
+    message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
   }, ms(mutetime));
 		
 		
