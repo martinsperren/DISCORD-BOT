@@ -1,4 +1,3 @@
-
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const Client = require('node-rest-client').Client;
@@ -9,6 +8,8 @@ const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
 const ms = require("ms");
+const sec = require("sec");
+
 const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
@@ -469,7 +470,7 @@ return message.channel.send(`<@${tomute.id}> ha sido muteado por ${message.autho
   setTimeout(function(){
     tomute.removeRole('429091253129576448');
     message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
-  }, ms(mutetime));
+  }, sec(mutetime));
 	}
 });
 client.login(process.env.BOT_TOKEN);
