@@ -8,7 +8,6 @@ const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
 const ms = require("ms");
-const sec = require("sec");
 
 const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
@@ -462,15 +461,15 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
             return 0;		
 		let tomute = message.mentions.members.first();
 		
-		var test = args.slice(1).join(' ');
-		let mutetime = test*1000;
+		var mutetime = args.slice(1).join(' ');
+		
   if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
   await(tomute.addRole('429091253129576448'));
 return message.channel.send(`<@${tomute.id}> ha sido muteado por ${message.author.username} durante ${ms(ms(mutetime))}`);
   setTimeout(function(){
     tomute.removeRole('429091253129576448');
     message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
-  }, sec(mutetime));
+  }, ms(mutetime));
 	}
 });
 client.login(process.env.BOT_TOKEN);
