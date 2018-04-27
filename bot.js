@@ -201,7 +201,7 @@ client.on("message", async message => {
    if (message.content.startsWith("!cmds")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
-        return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick\n!huevo");
+        return message.reply("\n!ping\n!say\n!kick\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario\n!nick @usuario nick\n!huevo");
     }
 	
 	
@@ -242,7 +242,7 @@ client.on("message", async message => {
             return message.reply("No se pudo kickear al usuario.");
         let reason = args.slice(1).join(' ');
         if (!reason)
-            return message.reply("No ingreaste una razón.");
+            return message.reply("No ingresaste una razón.");
         await member.kick(reason)
                 .catch(error => message.reply(`${message.author} no se pudo kickear. Error: ${error}.`));
         message.channel.send(`${message.author.username} kickeó a ${member.user.username} por: ${reason}.`);
@@ -255,8 +255,11 @@ client.on("message", async message => {
         let member = message.mentions.members.first();
         if (!member)
             return message.reply("Arrobá al usuario.");
+	   let reason = args.slice(1).join(' ');
+        if (!reason)
+		return message.reply("No ingresaste una razón.");
         member.addRole('429091253129576448');
-        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}.`);
+        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}. Razón: ${reason}`);
     }
 	
 	
@@ -283,7 +286,7 @@ client.on("message", async message => {
             return message.reply("No se pudo banear al usuario.");
         let reason = args.slice(1).join(' ');
         if (!reason)
-            return message.reply("No ingreaste una razón.");
+            return message.reply("No ingresaste una razón.");
         await member.ban(reason)
                 .catch(error => message.reply(`${message.author} no se pudo banear. Error: ${error}`));
         message.channel.send(`${member.user.username} le dio ban a ${message.author.username} por: ${reason}.`);
@@ -457,18 +460,27 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	if (message.content.startsWith("!tmute")){
+	
 		if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;		
-		let tomute = message.mentions.members.first();
 		
+		let member = message.mentions.members.first();
 		let mutetime = args.slice(1).join(' ');
+		let reason = args.slice(1).join(' ');
 		
-  if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
-  await(tomute.addRole('429091253129576448'));
-return message.channel.send(`<@${tomute.id}> ha sido muteado por ${message.author.username} durante ${ms(ms(mutetime))}`);
+        if (!member)
+            return message.reply("Arrobá al usuario.");
+        if (!reason)
+		return message.reply("No ingresaste una razón.");
+        member.addRole('429091253129576448');
+        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}. Razón: ${reason}`);
+		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
+  await(member.addRole('429091253129576448'));
+		return message.channel.send(`${member.user.username} fue muteado por ${message.author.username} durante ${ms(ms(mutetime))}. Razón: ${reason}`);
+		
   setTimeout(function(){
-    tomute.removeRole('429091253129576448');
-    message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
+    member.removeRole('429091253129576448');
+    message.channel.send(`<@${member.id}> ha sido desmuteado!`);
   }, ms(mutetime));	
 	}
 	
