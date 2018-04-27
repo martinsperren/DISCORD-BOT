@@ -469,11 +469,23 @@ return message.channel.send(`<@${tomute.id}> ha sido muteado por ${message.autho
   setTimeout(function(){
     tomute.removeRole('429091253129576448');
     message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
-  }, ms(mutetime*1000));
-		
-	
-		
-		
+  }, ms(mutetime));	
 	}
+	
+	if (message.content.startsWith("!server")){
+	let sicon = message.guild.iconURL;
+    let serverembed = new Discord.RichEmbed()
+    .setDescription("Informacion del Servidor")
+    .setColor("#15f153")
+    .setThumbnail(sicon)
+    .addField("Nombre", message.guild.name)
+    .addField("Fecha de Creación", message.guild.createdAt)
+    .addField("Fecha de Ingreso", message.member.joinedAt)
+    .addField("Cantidad de Miembros", message.guild.memberCount);
+
+    message.channel.send(serverembed);
+	}
+	
+	
 });
 client.login(process.env.BOT_TOKEN);
