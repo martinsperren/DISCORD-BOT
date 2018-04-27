@@ -1,3 +1,4 @@
+
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const Client = require('node-rest-client').Client;
@@ -8,21 +9,13 @@ const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
 const ms = require("ms");
-
-
-
-//OFFLINE SACAR COMENTARIO
-
 const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
 const queue = new Map();
-
-
 client.on("ready", () => {
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
 client.user.setGame(`POBLACION: ${client.users.size}`);	
-
 });
 client.on("guildCreate", guild => {
     console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
@@ -83,11 +76,6 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
         }
     });
 });
-
-
-
-
-
 function buildWebHook(twitchResponse, receiver) {
     return {
         data: {
@@ -130,8 +118,6 @@ function buildWebHook(twitchResponse, receiver) {
         }
     };
 }
-
-
 async function handleVideo(video, message, voiceChannel, playlist = false) {
     const serverQueue = queue.get(message.guild.id);
     console.log(video);
@@ -150,9 +136,7 @@ async function handleVideo(video, message, voiceChannel, playlist = false) {
             playing: true
         };
         queue.set(message.guild.id, queueConstruct);
-
         queueConstruct.songs.push(song);
-
         try {
             var connection = await voiceChannel.join();
             queueConstruct.connection = connection;
@@ -172,17 +156,14 @@ async function handleVideo(video, message, voiceChannel, playlist = false) {
     }
     return undefined;
 }
-
 function play(guild, song) {
     const serverQueue = queue.get(guild.id);
-
     if (!song) {
         serverQueue.voiceChannel.leave();
         queue.delete(guild.id);
         return;
     }
     console.log(serverQueue.songs);
-
     const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
             .on('end', reason => {
                 if (reason === 'Stream is not generating quickly enough.')
@@ -194,37 +175,36 @@ function play(guild, song) {
             })
             .on('error', error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-
     serverQueue.textChannel.send(`Reproduciendo: **${song.title}**`);
 }
-
-
-
 client.on("message", async message => {
     const args = message.content.slice(1).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
-
-
     const argsM = message.content.split(' ');
     const searchString = argsM.slice(1).join(' ');
     const url = argsM[1] ? argsM[1].replace(/<(.+)>/g, '$1') : '';
     const serverQueue = queue.get(message.guild.id);
-
-
-
+	
+	
     if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
     }
+	
+	
     if (message.content.startsWith("!huevo")){
         message.delete();
         const ayy = client.emojis.get("430508228976181248");
         message.channel.send(`¿y el ${ayy}?`);
     }
+	
+	
    if (message.content.startsWith("!cmds")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         return message.reply("\n!ping\n!say\n!kick\n!mute\n!unmute\n!ban\n!nick\n!huevo");
     }
+	
+	
     if (message.content.startsWith("!nick")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
@@ -234,10 +214,14 @@ client.on("message", async message => {
         member.setNickname(nick);
         message.channel.send(`${user} ahora se llama ${nick}`);
     }
+	
+	
     if (message.content.startsWith("!ping")){
         const m = await message.channel.send("Ping?");
         m.edit(`Tu ping es de ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms`);
     }
+	
+	
     if (message.content.startsWith("!say")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
@@ -246,39 +230,47 @@ client.on("message", async message => {
         });
         message.channel.send(sayMessage);
     }
+	
+	
     if (message.content.startsWith("!kick")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
-            return message.reply("Arrobá al petardo");
+            return message.reply("Arrobá al usuario.");
         if (!member.kickable)
-            return message.reply("Se rompio algo y no pude banear al petardo");
+            return message.reply("No se pudo kickear al usuario.");
         let reason = args.slice(1).join(' ');
         if (!reason)
-            return message.reply("Agrega despues del nombre del petardo la razon por la que se va deleteado");
+            return message.reply("No ingreaste una razón.");
         await member.kick(reason)
-                .catch(error => message.reply(`Sorry ${message.author} no lo puedo patear porque : ${error}`));
-        message.channel.send(`${message.author.username} rajo a la mierda a ${member.user.username} por: ${reason}`);
+                .catch(error => message.reply(`${message.author} no se pudo kickear. Error: ${error}.`));
+        message.channel.send(`${message.author.username} kickeó a ${member.user.username} por: ${reason}.`);
     }
+	
+	
    if (message.content.startsWith("!mute")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
-            return message.reply("Arrobá al petardo");
+            return message.reply("Arrobá al usuario.");
         member.addRole('429091253129576448');
-        message.channel.send(`${member.user.username} se comio un mute de ${message.author.username}`);
+        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}.`);
     }
+	
+	
    if (message.content.startsWith("!unmute")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
-            return message.reply("Arrobá al petardo");
+            return message.reply("Arrobá al usuario.");
         member.removeRole('429091253129576448');
-        message.channel.send(`${message.author.username} desmuteo a ${member.user.username}`);
+        message.channel.send(`${message.author.username} desmuteo a ${member.user.username}.`);
     }
+	
+	
     if (message.content.startsWith("!ban")){
         // Most of this command is identical to kick, except that here we'll only let admins do it.
         // In the real world mods could ban too, but this is just an example, right? ;)
@@ -286,16 +278,18 @@ client.on("message", async message => {
             return 0;
         let member = message.mentions.members.first();
         if (!member)
-            return message.reply("Arroba al petardo");
+            return message.reply("Arrobá al usuario.");
         if (!member.bannable)
-            return message.reply("Se rompio algo y no pude banear al petardo");
+            return message.reply("No se pudo banear al usuario.");
         let reason = args.slice(1).join(' ');
         if (!reason)
-            return message.reply("Agrega despues del nombre del petardo la razon por la que se va deleteado");
+            return message.reply("No ingreaste una razón.");
         await member.ban(reason)
-                .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
-        message.channel.send(`${member.user.username} deleteó a ${message.author.username} por: ${reason}`);
+                .catch(error => message.reply(`${message.author} no se pudo banear. Error: ${error}`));
+        message.channel.send(`${member.user.username} le dio ban a ${message.author.username} por: ${reason}.`);
     }
+	
+	
     if (message.content.startsWith("!cc")){
         // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
         // Now, we want to check if the user has the `bot-commander` role, you can change this to whatever you want.
@@ -307,7 +301,7 @@ client.on("message", async message => {
             // We want to check if the argument is a number
             if (isNaN(args[0])) {
                 // Sends a message to the channel.
-                message.channel.send('Pone un numero despues del comando'); //\n means new line.
+                message.channel.send('Pone un número despues del comando.'); //\n means new line.
                 // Cancels out of the script, so the rest doesn't run.
                 return;
             }
@@ -320,22 +314,19 @@ client.on("message", async message => {
         purge(); // Make sure this is inside the if(msg.startsWith)
         // We want to make sure we call the function whenever the purge command is run.
     }
-
-
-
-
+	
+	
     if (message.content.startsWith("!play")){
         const voiceChannel = message.member.voiceChannel;
         if (!voiceChannel)
             return message.channel.send('Metete en en canal de voz, crack!');
         const permissions = voiceChannel.permissionsFor(message.client.user);
         if (!permissions.has('CONNECT')) {
-            return message.channel.send('No tengo permisos para entrar a este canal');
+            return message.channel.send('No tengo permisos para entrar a este canal.');
         }
         if (!permissions.has('SPEAK')) {
-            return message.channel.send('No tengo permisos para hablar en este canal');
+            return message.channel.send('No tengo permisos para hablar en este canal.');
         }
-
         if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
             const playlist = await youtube.getPlaylist(url);
             const videos = await playlist.getVideos();
@@ -377,84 +368,75 @@ Pone un numero de 1-10.
             return handleVideo(video, message, voiceChannel);
         }
     }
-
-
-
    if (message.content.startsWith("!skip")){
         if (!message.member.voiceChannel)
-            return message.channel.send('Metete en en canal de voz, crack!');
+            return message.channel.send('Ingresa en un canal de voz!');
         if (!serverQueue)
-            return message.channel.send('No hay nada reproduciendose');
+            return message.channel.send('No hay nada reproduciendose.');
         serverQueue.connection.dispatcher.end('Skipea3');
         return undefined;
     }
-
     if (message.content.startsWith("!stop")){
         if (!message.member.voiceChannel)
-            return message.channel.send('Metete en en canal de voz, crack!');
+            return message.channel.send('Ingresa en un canal de voz!');
         if (!serverQueue)
-            return message.channel.send('No hay nada reproduciendose');
+            return message.channel.send('No hay nada reproduciendose.');
         serverQueue.songs = [];
-        serverQueue.connection.dispatcher.end('Stopea3');
+        serverQueue.connection.dispatcher.end('Reproducción detenida.');
         return undefined;
     }
-
     if (message.content.startsWith("!vol")){
         if (!message.member.voiceChannel)
-            return message.channel.send('Metete en en canal de voz, crack!');
+            return message.channel.send('Ingresa en un canal de voz!');
         if (!serverQueue)
-            return message.channel.send('No hay nada reproduciendose');
+            return message.channel.send('No hay nada reproduciendose.');
         if (!argsM[1])
             return message.channel.send(`Volumen actual: **${serverQueue.volume}**`);
         serverQueue.volume = argsM[1];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(argsM[1] / 5);
         return message.channel.send(`Volumen actual: **${argsM[1]}**`);
     }
-
     if (message.content.startsWith("!song")){
         if (!serverQueue)
-            return message.channel.send('No hay nada reproduciendose');
+            return message.channel.send('No hay nada reproduciendose.');
         return message.channel.send(`Reproduciendo: **${serverQueue.songs[0].title}**`);
     }
-
    if (message.content.startsWith("!list")){
         if (!serverQueue)
-            return message.channel.send('No hay nada reproduciendose');
+            return message.channel.send('No hay nada reproduciendose.');
         return message.channel.send(`
 __**Lista de reproducción:**__\n
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 **Now playing:** ${serverQueue.songs[0].title}
 		`);
     }
-
     if (message.content.startsWith("!pause")){
         if (serverQueue && serverQueue.playing) {
             serverQueue.playing = false;
             serverQueue.connection.dispatcher.pause();
             return message.channel.send('Pausa3!');
         }
-        return message.channel.send('No hay nada reproduciendose');
+        return message.channel.send('No hay nada reproduciendose.');
     }
-
     if (message.content.startsWith("!resume")){
         if (serverQueue && !serverQueue.playing) {
             serverQueue.playing = true;
             serverQueue.connection.dispatcher.resume();
             return message.channel.send('Resumiending!');
         }
-        return message.channel.send('No hay nada reproduciendose');
+        return message.channel.send('No hay nada reproduciendose.');
     }
-
+	
+	
     if (message.content.startsWith("!music")){
         return message.reply("\n!play (nombre) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion");
     }
-
+	
+	
 	 if (message.content.startsWith("!role")){
 	const sayMessage = args.join(" ");
 	var i = message.guild.roles.find("name", sayMessage).id;
  return message.reply(i); 
-		 
-
 	 }
 	
 	
@@ -465,36 +447,25 @@ message.delete();
     var days = client.uptime / 8.64e7 | 0;
   var hrs  = (client.uptime % 8.64e7)/ 3.6e6 | 0;
   var mins = Math.round((client.uptime % 3.6e6) / 6e4);	
-
-		
 message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`); 	
 	}
 	
 	
 	 if (message.content.startsWith("!rules")){
-	
 	message.channel.send(`Reglas: No ser como Faste`); 
-	
 	}
 	
+	
 	if (message.content.startsWith("!tmute")){
-	 
-		
 		let tomute = message.mentions.members.first();
-		
 		let mutetime = args.slice(1).join(' ');
   if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
-
   await(tomute.addRole('429091253129576448'));
-  message.reply(`<@${tomute.id}> ha sido muteado por ${message.author.username} durante ${ms(ms(mutetime))}`);
-
+return message.channel.send(`<@${tomute.id}> ha sido muteado por ${message.author.username} durante ${ms(ms(mutetime))}`);
   setTimeout(function(){
     tomute.removeRole('429091253129576448');
     message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
-  }, ms(mutetime));
-	
+  }, ms(mutetime*1000));
 	}
-	
-
 });
 client.login(process.env.BOT_TOKEN);
