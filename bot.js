@@ -461,29 +461,25 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;		
 		
-		let member = message.mentions.members.first();
+		let tomute = message.mentions.members.first();
 		let mutetime = args.slice(1).join(' ');
 		
 		
         if (!member)
             return message.reply("Arrobá al usuario.");
 		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mención!");
-  await(member.addRole('429091253129576448'));
-		return message.channel.send(`${member.user.username} fue muteado por ${message.author.username} durante ${ms(ms(mutetime))}.`);
+  
 		
+	 await(tomute.addRole(muterole.id));
+  message.reply(`<@${tomute.id}> fue muteado po r${message.author.username} durante: ${ms(ms(mutetime))}`);
+
   setTimeout(function(){
-    console.log('Fin del tiempo de mute');
-    member.removeRole('429091253129576448');
-    message.channel.send(`<@${member.id}> ha sido desmuteado!`);
-  }, ms(mutetime));	
-		
-		
+    tomute.removeRole(muterole.id);
+    message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
+  }, ms(mutetime));
 		
 		
 	}
-	
-	
-	
 	
 	
 	
