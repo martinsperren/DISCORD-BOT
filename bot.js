@@ -255,11 +255,8 @@ client.on("message", async message => {
         let member = message.mentions.members.first();
         if (!member)
             return message.reply("Arrobá al usuario.");
-	   let reason = args.slice(1).join(' ');
-        if (!reason)
-		return message.reply("No ingresaste una razón.");
         member.addRole('429091253129576448');
-        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}. Razón: ${reason}`);
+        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}.`);
     }
 	
 	
@@ -466,14 +463,12 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		
 		let member = message.mentions.members.first();
 		let mutetime = args.slice(1).join(' ');
-		let reason = args.slice(1).join(' ');
+		
 		
         if (!member)
             return message.reply("Arrobá al usuario.");
-        if (!reason)
-		return message.reply("No ingresaste una razón.");
         member.addRole('429091253129576448');
-        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}. Razón: ${reason}`);
+        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}.`);
 		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mencion!");
   await(member.addRole('429091253129576448'));
 		return message.channel.send(`${member.user.username} fue muteado por ${message.author.username} durante ${ms(ms(mutetime))}. Razón: ${reason}`);
