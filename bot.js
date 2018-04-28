@@ -245,7 +245,7 @@ client.on("message", async message => {
             return message.reply("No ingresaste una razón.");
         await member.kick(reason)
                 .catch(error => message.reply(`${message.author} no se pudo kickear. Error: ${error}.`));
-        message.channel.send(`${message.author.username} kickeó a ${member.user.username} por: ${reason}.`);
+        message.channel.send(`<@${message.author.id}> kickeó a <@${member.user.id}> por: ${reason}.`);
     }
 	
 	
@@ -256,7 +256,7 @@ client.on("message", async message => {
         if (!member)
             return message.reply("Arrobá al usuario.");
         member.addRole('429091253129576448');
-        message.channel.send(`${member.user.username} fue muteado por ${message.author.username}.`);
+        message.channel.send(`<@${member.user.id}> fue muteado por <@${message.author.id}>.`);
     }
 	
 	
@@ -267,7 +267,7 @@ client.on("message", async message => {
         if (!member)
             return message.reply("Arrobá al usuario.");
         member.removeRole('429091253129576448');
-        message.channel.send(`${message.author.username} desmuteo a ${member.user.username}.`);
+        message.channel.send(`$<@${message.author.id}> desmuteo a <@${member.user.id}>.`);
     }
 	
 	
@@ -286,7 +286,10 @@ client.on("message", async message => {
             return message.reply("No ingresaste una razón.");
         await member.ban(reason)
                 .catch(error => message.reply(`${message.author} no se pudo banear. Error: ${error}`));
-        message.channel.send(`${member.user.username} le dio ban a ${message.author.username} por: ${reason}.`);
+        message.channel.send(`<@${message.author.id}> le dio ban a <@${member.user.id}> por: ${reason}.`);
+	    
+	   
+	    
     }
 	
 	
@@ -471,7 +474,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
   
 		
 	 await(tomute.addRole('429091253129576448'));
-  message.reply(`<@${tomute.id}> fue muteado po r${message.author.username} durante: ${ms(ms(mutetime))}`);
+  message.channel.send(`<@${tomute.id}> fue muteado por ${message.author.username} durante: ${ms(ms(mutetime))}`);
 
   setTimeout(function(){
     tomute.removeRole('429091253129576448');
