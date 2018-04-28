@@ -465,7 +465,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		let mutetime = args.slice(1).join(' ');
 		
 		
-        if (!member)
+        if (!tomute)
             return message.reply("Arrobá al usuario.");
 		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mención!");
   
