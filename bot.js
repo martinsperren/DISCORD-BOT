@@ -201,7 +201,7 @@ client.on("message", async message => {
    if (message.content.startsWith("!cmds")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
-        return message.reply("\n!ping\n!say\n!kick\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario\n!nick @usuario nick\n!huevo");
+        return message.reply("\n!ping\n!say texto\n!kick @usuario razon\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario razon\n!nick @usuario nick\n!huevo");
     }
 	
 	
@@ -267,7 +267,7 @@ client.on("message", async message => {
         if (!member)
             return message.reply("Arrobá al usuario.");
         member.removeRole('429091253129576448');
-        message.channel.send(`$<@${message.author.id}> desmuteo a <@${member.user.id}>.`);
+        message.channel.send(`<@${message.author.id}> desmuteo a <@${member.user.id}>.`);
     }
 	
 	
