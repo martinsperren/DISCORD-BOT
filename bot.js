@@ -87,11 +87,11 @@ function buildWebHook(twitchResponse, receiver) {
                         "name": `${twitchResponse.stream.channel.display_name}`,
                         "icon_url": `${twitchResponse.stream.channel.logo}`
                     },
-                    "title": `?? LIVE: ${twitchResponse.stream.channel.status}`,
+                    "title": `EN VIVO: ${twitchResponse.stream.channel.status}`,
                     "url": `${twitchResponse.stream.channel.url}`,
                     "color": 6570404,
                     "fields": [{
-                            "name": "Game",
+                            "name": "Juego",
                             "value": `${twitchResponse.stream.game}`,
                             "inline": true
                         },
