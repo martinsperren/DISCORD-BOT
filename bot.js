@@ -11,7 +11,7 @@ const ms = require("ms");
 
 const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('AIzaSyC0J6jgmsMgmwWoZ9SsX7-QZugwCRhxKRQ');
+const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
 // client.user.setGame(`POBLACION: ${client.users.size}`);	
 
