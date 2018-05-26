@@ -382,7 +382,7 @@ Pone un numero de 1-10.
         return undefined;
     }
 	
-	 if (message.author.id=='355922192749428737'&&(message.content.includes("huevo"))){
+	 if (message.author.id=='355922192749428737'&&(message.content.includes("lol"))){
 	    return message.channel.send('No Faste, no rompas las bolas');
 	     
 	     }
