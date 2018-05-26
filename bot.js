@@ -383,7 +383,7 @@ Pone un numero de 1-10.
     }
 	
 	 if (message.author.id=='355922192749428737'&&(message.content.includes("lol"))){
-	    return message.channel.send('No Faste, no rompas las bolas');
+	    return message.channel.send('No Faste, no rompas las bolas.');
 	     
 	     }
 	
@@ -469,7 +469,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	if (message.content.startsWith("!check")){
 		 message.delete();
-	message.channel.send(`¿Ese dato esta chequeado?`); 
+	message.channel.send(`¿Ese dato está chequeado?`); 
 	}
 	
 	
