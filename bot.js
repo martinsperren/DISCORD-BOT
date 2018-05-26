@@ -467,6 +467,12 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	}
 	
 	
+	if (message.content.startsWith("!check")){
+	message.channel.send(`¿Ese dato esta chequeado?`); 
+	}
+	
+	
+	
 	if (message.content.startsWith("!tmute")){
 	
 		if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
