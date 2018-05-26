@@ -381,6 +381,12 @@ Pone un numero de 1-10.
         serverQueue.connection.dispatcher.end('Skipea3');
         return undefined;
     }
+	
+	 if (message.author.id=='341017122719399948'){
+	    return message.channel.send('Tu Vieja Pancho');
+	     
+	     }
+	
     if (message.content.startsWith("!stop")){
         if (!message.member.voiceChannel)
             return message.channel.send('Ingresa en un canal de voz!');
