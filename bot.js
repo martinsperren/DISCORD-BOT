@@ -381,8 +381,8 @@ Pone un numero de 1-10.
         serverQueue.connection.dispatcher.end('Skipea3');
         return undefined;
     }
-	///////////////////////355922192749428737
-	 if (message.author.id=='211602745231278093'&&message.content.startsWith("lol")){
+	
+	 if (message.author.id=='355922192749428737'&&(message.content.includes("huevo"))){
 	    return message.channel.send('No Faste, no rompas las bolas');
 	     
 	     }
