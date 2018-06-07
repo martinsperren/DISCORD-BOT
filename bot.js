@@ -233,6 +233,21 @@ client.on("message", async message => {
         message.channel.send(sayMessage);
     }
 	
+	
+	function isSpace(aChar){
+      myCharCode = aChar.charCodeAt(0);
+   
+      if(((myCharCode >  8) && (myCharCode < 14)) ||
+         (myCharCode == 32))
+      {
+         return true;
+      }
+   
+      return false;
+   }
+	
+	
+	
 	 if (message.content.startsWith("!big")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
