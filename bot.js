@@ -264,7 +264,7 @@ client.on("message", async message => {
     if(!isSpace(arr[i])){
         salida= salida + ":regional_indicator_"+arr[i]+":";   
 	}else{
-	salida = salida + " ";		
+	salida = salida + "   ";		
 	}
     }	 
 		 
