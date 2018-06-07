@@ -238,14 +238,14 @@ client.on("message", async message => {
             return 0;
         const sayMessage = args.join(" ");
 		 let arr = Array.from(sayMessage);
-		 var salida = [];
+		 var salida = "";
 		 var tam = arr.length;
            var i;
 	for (i = 0; i < tam; i++) {
-    if(!arr[i]==" "){
-        salida.push(":regional_indicator_"+arr[i]+":");   
+    if(!(/\s/.test(!arr[i]))){
+        salida= salida + ":regional_indicator_"+arr[i]+":");   
 	}else{
-	salida.push("  ");		
+	salida = salida + " ";		
 	}
     }	 
 		 
