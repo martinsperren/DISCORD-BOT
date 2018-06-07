@@ -243,7 +243,7 @@ client.on("message", async message => {
            var i;
 	for (i = 0; i < tam; i++) {
     if(!(/\s/.test(!arr[i]))){
-        salida= salida + ":regional_indicator_"+arr[i]+":");   
+        salida= salida + ":regional_indicator_"+arr[i]+":";   
 	}else{
 	salida = salida + " ";		
 	}
