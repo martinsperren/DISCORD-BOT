@@ -242,7 +242,7 @@ client.on("message", async message => {
 		 var tam = arr.length;
            var i;
 	for (i = 0; i < tam; i++) {
-    if(!arr[i]==null){
+    if(!arr[i].isSpace()){
         salida= salida + ":regional_indicator_"+arr[i]+":";   
 	}else{
 	salida = salida + " ";		
