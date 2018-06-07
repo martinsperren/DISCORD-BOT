@@ -246,7 +246,7 @@ client.on("message", async message => {
         salida.push(":regional_indicator_"+arr[i]+":");   
 	}else{
 	salida.push("  ");		
-       
+	}
     }	 
 		 
 		 
