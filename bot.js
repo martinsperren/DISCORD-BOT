@@ -251,7 +251,7 @@ client.on("message", async message => {
 		 
         message.delete().catch(O_o => {
         });
-        message.channel.send(arr);
+        message.channel.send(salida);
     }
 	
 	
