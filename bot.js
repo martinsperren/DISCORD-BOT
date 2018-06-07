@@ -261,7 +261,7 @@ client.on("message", async message => {
 		 var tam = arr.length;
            var i;
 	for (i = 0; i < tam; i++) {
-    if(!arr[i].isSpace()){
+    if(!isSpace(arr[i])){
         salida= salida + ":regional_indicator_"+arr[i]+":";   
 	}else{
 	salida = salida + " ";		
