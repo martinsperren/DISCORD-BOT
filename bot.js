@@ -233,6 +233,26 @@ client.on("message", async message => {
         message.channel.send(sayMessage);
     }
 	
+	 if (message.content.startsWith("!big")){
+        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+            return 0;
+        const sayMessage = args.join(" ");
+		 let arr = Array.from(sayMessage);
+		 var salida = [];
+           var i;
+	for (i = 0; i < tam; i++) {
+    
+        salida.push(":regional_indicator_"+arr[i]+":");   
+       
+    }	 
+		 
+		 
+		 
+        message.delete().catch(O_o => {
+        });
+        message.channel.send(arr);
+    }
+	
 	
     if (message.content.startsWith("!kick")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
