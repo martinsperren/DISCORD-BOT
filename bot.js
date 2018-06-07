@@ -242,8 +242,10 @@ client.on("message", async message => {
 		 var tam = arr.length;
            var i;
 	for (i = 0; i < tam; i++) {
-    
+    if(!arr[i]==" "){
         salida.push(":regional_indicator_"+arr[i]+":");   
+	}else{
+	salida.push("  ");		
        
     }	 
 		 
@@ -251,7 +253,7 @@ client.on("message", async message => {
 		 
         message.delete().catch(O_o => {
         });
-        message.channel.send(salida);
+        message.channel.send(salida.toString());
     }
 	
 	
