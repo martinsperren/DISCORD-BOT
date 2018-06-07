@@ -78,6 +78,21 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
         }
     });
 });
+
+
+function isSpace(aChar){ //para big
+      myCharCode = aChar.charCodeAt(0);
+   
+      if(((myCharCode >  8) && (myCharCode < 14)) ||
+         (myCharCode == 32))
+      {
+         return true;
+      }
+   
+      return false;
+   }
+
+
 function buildWebHook(twitchResponse, receiver) {
     return {
         data: {
@@ -234,19 +249,8 @@ client.on("message", async message => {
     }
 	
 	
-	function isSpace(aChar){
-      myCharCode = aChar.charCodeAt(0);
-   
-      if(((myCharCode >  8) && (myCharCode < 14)) ||
-         (myCharCode == 32))
-      {
-         return true;
-      }
-   
-      return false;
-   }
 	
-	
+
 	
 	 if (message.content.startsWith("!big")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
