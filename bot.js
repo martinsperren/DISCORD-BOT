@@ -239,7 +239,7 @@ client.on("message", async message => {
         const sayMessage = args.join(" ");
 		 let arr = Array.from(sayMessage);
 		 var salida = [];
-		 var tam = arr.lenght;
+		 var tam = arr.length;
            var i;
 	for (i = 0; i < tam; i++) {
     
