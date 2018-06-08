@@ -8,13 +8,11 @@ const jsonfile = require('jsonfile');
 const restClient = new Client();
 const configFile = "config.json";
 const ms = require("ms");
-
 const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
 // client.user.setGame(`POBLACION: ${client.users.size}`);	
-
 client.on("ready", () => {
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
 client.user.setGame(process.env.GAME);	
@@ -78,21 +76,18 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
         }
     });
 });
-
-
+function isNumber(input) {
+    return !isNaN(input);
+}
 function isSpace(aChar){ //para big
       myCharCode = aChar.charCodeAt(0);
-   
       if(((myCharCode >  8) && (myCharCode < 14)) ||
          (myCharCode == 32))
       {
          return true;
       }
-   
       return false;
    }
-
-
 function buildWebHook(twitchResponse, receiver) {
     return {
         data: {
@@ -201,27 +196,19 @@ client.on("message", async message => {
     const searchString = argsM.slice(1).join(' ');
     const url = argsM[1] ? argsM[1].replace(/<(.+)>/g, '$1') : '';
     const serverQueue = queue.get(message.guild.id);
-	
-	
     if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
     }
-	
-	
     if (message.content.startsWith("!huevo")){
         message.delete();
         const ayy = client.emojis.get("430508228976181248");
         message.channel.send(`¿y el ${ayy}?`);
     }
-	
-	
    if (message.content.startsWith("!cmds")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
         return message.reply("\n!ping\n!say texto\n!kick @usuario razon\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario razon\n!nick @usuario nick\n!huevo\n!music (ayuda de musica)");
     }
-	
-	
     if (message.content.startsWith("!nick")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
@@ -231,14 +218,10 @@ client.on("message", async message => {
         member.setNickname(nick);
         message.channel.send(`${user} ahora se llama ${nick}`);
     }
-	
-	
     if (message.content.startsWith("!ping")){
         const m = await message.channel.send("Ping?");
         m.edit(`Tu ping es de ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms`);
     }
-	
-	
     if (message.content.startsWith("!say")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
@@ -248,9 +231,31 @@ client.on("message", async message => {
         message.channel.send(sayMessage);
     }
 	
+	/*
+	
+	if (message.content.startsWith("!big")){
+        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+            return 0;
+        const sayMessage = args.join(" ");
+		 let arr = Array.from(sayMessage);
+		 var salida = "";
+		 var tam = arr.length;
+           var i;
+	for (i = 0; i < tam; i++) {
+    if(!isSpace(arr[i])&&!isNumber(arr[i])){
+        salida= salida + ":regional_indicator_"+arr[i]+":";   
+	}else{
+	salida = salida + "   ";		
+	}
+    }	 
+        message.delete().catch(O_o => {
+        });
+        message.channel.send(salida.toString());
+    }
 	
 	
-
+	*/
+	
 	
 	 if (message.content.startsWith("!big")){
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
@@ -261,19 +266,38 @@ client.on("message", async message => {
 		 var tam = arr.length;
            var i;
 	for (i = 0; i < tam; i++) {
-    if(!isSpace(arr[i])){
-        salida= salida + ":regional_indicator_"+arr[i]+":";   
+    if(isSpace(arr[i])){
+		salida = salida + "   ";	        
 	}else{
-	salida = salida + "   ";		
-	}
+	}if(isNumber(arr[i])){
+	
+	if(arr[i]=="0") salida= salida + "zero";
+	if(arr[i]=="1") salida= salida + "one";
+	if(arr[i]=="2") salida= salida + "two";
+	if(arr[i]=="3") salida= salida + "three";
+	if(arr[i]=="4") salida= salida + "four";
+	if(arr[i]=="5") salida= salida + "five";
+	if(arr[i]=="6") salida= salida + "six";
+	if(arr[i]=="7") salida= salida + "seven";
+	if(arr[i]=="8") salida= salida + "eight";
+	if(arr[i]=="9") salida= salida + "nine";
+	
+	
+}else{
+	salida= salida + ":regional_indicator_"+arr[i]+":";   
+	
+}
+		
+	
     }	 
-		 
-		 
-		 
         message.delete().catch(O_o => {
         });
         message.channel.send(salida.toString());
     }
+	
+	
+	
+	
 	
 	
     if (message.content.startsWith("!kick")){
@@ -291,8 +315,6 @@ client.on("message", async message => {
                 .catch(error => message.reply(`${message.author} no se pudo kickear. Error: ${error}.`));
         message.channel.send(`<@${message.author.id}> kickeó a <@${member.user.id}> por: ${reason}.`);
     }
-	
-	
    if (message.content.startsWith("!mute")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
@@ -302,8 +324,6 @@ client.on("message", async message => {
         member.addRole('429091253129576448');
         message.channel.send(`<@${member.user.id}> fue muteado por <@${message.author.id}>.`);
     }
-	
-	
    if (message.content.startsWith("!unmute")){
         if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
@@ -313,8 +333,6 @@ client.on("message", async message => {
         member.removeRole('429091253129576448');
         message.channel.send(`<@${message.author.id}> desmuteo a <@${member.user.id}>.`);
     }
-	
-	
     if (message.content.startsWith("!ban")){
         // Most of this command is identical to kick, except that here we'll only let admins do it.
         // In the real world mods could ban too, but this is just an example, right? ;)
@@ -331,12 +349,7 @@ client.on("message", async message => {
         await member.ban(reason)
                 .catch(error => message.reply(`${message.author} no se pudo banear. Error: ${error}`));
         message.channel.send(`<@${message.author.id}> le dio ban a <@${member.user.id}> por: ${reason}.`);
-	    
-	   
-	    
     }
-	
-	
     if (message.content.startsWith("!cc")){
         // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
         // Now, we want to check if the user has the `bot-commander` role, you can change this to whatever you want.
@@ -361,8 +374,6 @@ client.on("message", async message => {
         purge(); // Make sure this is inside the if(msg.startsWith)
         // We want to make sure we call the function whenever the purge command is run.
     }
-	
-	
     if (message.content.startsWith("!play")){
         const voiceChannel = message.member.voiceChannel;
         if (!voiceChannel)
@@ -423,12 +434,9 @@ Pone un numero de 1-10.
         serverQueue.connection.dispatcher.end('Skipea3');
         return undefined;
     }
-	
 	 if (message.author.id=='355922192749428737'&&(message.content.includes("lol")||(message.content.includes("sale")))){
 	    return message.channel.send('No Faste, no rompas las bolas.');
-	     
 	     }
-	
     if (message.content.startsWith("!stop")){
         if (!message.member.voiceChannel)
             return message.channel.send('Ingresa en un canal de voz!');
@@ -479,20 +487,14 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
         }
         return message.channel.send('No hay nada reproduciendose.');
     }
-	
-	
     if (message.content.startsWith("!music")){
         return message.reply("\n!play (nombre) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion");
     }
-	
-	
 	 if (message.content.startsWith("!role")){
 	const sayMessage = args.join(" ");
 	var i = message.guild.roles.find("name", sayMessage).id;
  return message.reply(i); 
 	 }
-	
-	
 	if (message.content.startsWith("!uptime")){
 	 if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;
@@ -502,47 +504,28 @@ message.delete();
   var mins = Math.round((client.uptime % 3.6e6) / 6e4);	
 message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`); 	
 	}
-	
-	
 	 if (message.content.startsWith("!rules")){
 	message.channel.send(`Reglas: No ser como Faste`); 
 	}
-	
-	
 	if (message.content.startsWith("!check")){
 		 message.delete();
 	message.channel.send(`¿Ese dato está chequeado?`); 
 	}
-	
-	
-	
 	if (message.content.startsWith("!tmute")){
-	
 		if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;		
-		
 		let tomute = message.mentions.members.first();
 		let mutetime = args.slice(1).join(' ');
-		
-		
         if (!tomute)
             return message.reply("Arrobá al usuario.");
 		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mención!");
-  
-		
 	 await(tomute.addRole('429091253129576448'));
   message.channel.send(`<@${tomute.id}> fue muteado por ${message.author.username} durante: ${ms(ms(mutetime))}`);
-
   setTimeout(function(){
     tomute.removeRole('429091253129576448');
     message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
   }, ms(mutetime));
-		
-		
 	}
-	
-	
-	
 	if (message.content.startsWith("!server")){
 	let sicon = message.guild.iconURL;
     let serverembed = new Discord.RichEmbed()
@@ -553,10 +536,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
     .addField("Fecha de Creación", message.guild.createdAt)
     .addField("Fecha de Ingreso", message.member.joinedAt)
     .addField("Cantidad de Miembros", message.guild.memberCount);
-
     message.channel.send(serverembed);
 	}
-	
-	
 });
 client.login(process.env.BOT_TOKEN);
