@@ -271,16 +271,16 @@ client.on("message", async message => {
 	}else{
 	}if(isNumber(arr[i])){
 	
-	if(arr[i]=="0") salida= salida + "zero";
-	if(arr[i]=="1") salida= salida + "one";
-	if(arr[i]=="2") salida= salida + "two";
-	if(arr[i]=="3") salida= salida + "three";
-	if(arr[i]=="4") salida= salida + "four";
-	if(arr[i]=="5") salida= salida + "five";
-	if(arr[i]=="6") salida= salida + "six";
-	if(arr[i]=="7") salida= salida + "seven";
-	if(arr[i]=="8") salida= salida + "eight";
-	if(arr[i]=="9") salida= salida + "nine";
+	if(arr[i]=="0") salida= salida + ":zero:";
+	if(arr[i]=="1") salida= salida + ":one:";
+	if(arr[i]=="2") salida= salida + ":two:";
+	if(arr[i]=="3") salida= salida + ":three:";
+	if(arr[i]=="4") salida= salida + ":four:";
+	if(arr[i]=="5") salida= salida + ":five:";
+	if(arr[i]=="6") salida= salida + ":six:";
+	if(arr[i]=="7") salida= salida + ":seven:";
+	if(arr[i]=="8") salida= salida + ":eight:";
+	if(arr[i]=="9") salida= salida + ":nine:";
 	
 	
 }else{
