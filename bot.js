@@ -79,7 +79,8 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
 function isNumber(input) {
     return !isNaN(input);
 }
-function isSpace(aChar){ //para big
+function isSpace(aChar){ //para 
+	
       myCharCode = aChar.charCodeAt(0);
       if(((myCharCode >  8) && (myCharCode < 14)) ||
          (myCharCode == 32))
@@ -261,7 +262,7 @@ client.on("message", async message => {
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         const sayMessage = args.join(" ");
-		 let arr = Array.from(sayMessage);
+		 let arr = Array.from(sayMessage.toLowerCase());
 		 var salida = "";
 		 var tam = arr.length;
            var i;
