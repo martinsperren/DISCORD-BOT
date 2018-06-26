@@ -1,4 +1,5 @@
-import webhook as wh './bot.js';
+import webhook as web './bot.js';
+const wh = web;
 
 {
   "twitchAuth": {
