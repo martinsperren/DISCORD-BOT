@@ -1,3 +1,5 @@
+import webhook as wh './bot.js';
+
 {
   "twitchAuth": {
     "clientID": "jceafu5cq49gyppqja6thwb8nnmhm9",
@@ -40,6 +42,28 @@
         }
       ]
     },
+    
+    
+    
+    
+    {
+      "id": "71166086",
+      "nickname": "deadmau5",
+      "latestStream": 25281670208,
+      "receivers": [
+        {
+          "nickname": "Monster Truck Rally",
+          "customMessage": "Che @everyone! Moderador está en vivo en Twitch!",
+          "webhook": wh
+        }
+      ]
+    },
+
+    
+    
+    
+    
+    
     {
       "id": "193721055",
       "nickname": "pancho",
