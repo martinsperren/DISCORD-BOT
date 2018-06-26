@@ -65,22 +65,6 @@
     },
     
     
-    {
-      "id": "71166086",
-      "nickname": "deadmau5",
-      "latestStream": 25283115264,
-      "receivers": [
-        {
-          "nickname": "My Test Server",
-          "customMessage": "Che @everyone! deadmau5 está en vivo en Twitch!",
-          "webhook": "https://discordapp.com/api/webhooks/461117727931629598/jlHWwQZPbempI64HHTmNzEQB9npt58T6Ok2A7OwS443_6VTsxvRDUWRo4DivkQRF2Y26"
-        }
-      ]
-    },
-    
-    
-    
-    
      {
       "id": "54975899",
       "nickname": "sntgx",
