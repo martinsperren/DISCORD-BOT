@@ -1,7 +1,8 @@
-import webhook as web './bot.js';
-const wh = web;
+
 
 {
+  import webhook as web './bot.js';
+const wh = web;
   "twitchAuth": {
     "clientID": "jceafu5cq49gyppqja6thwb8nnmhm9",
     "apiVersion": 5
