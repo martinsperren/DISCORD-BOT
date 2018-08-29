@@ -12,20 +12,21 @@ const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
-// client.user.setGame(`POBLACION: ${client.users.size}`);	
+
+
 client.on("ready", () => {
-    console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+    console.log(`Bot iniciado ${client.users.size} usuarios en ${client.channels.size} canales.`);
 client.user.setGame(process.env.GAME);	
 });
 client.on("guildCreate", guild => {
-    console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+    console.log(`Nuevo guild: ${guild.name} (id: ${guild.id}). Este guild tiene ${guild.memberCount} miembros.`);
     client.user.setGame(process.env.GAME);		
 });
 
 
 
 client.on("guildDelete", guild => {
-    console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+    console.log(`Quitado de guild: ${guild.name} (id: ${guild.id})`);
  client.user.setGame(process.env.GAME);		
 });
 client.on('guildMemberAdd', member => {
