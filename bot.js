@@ -512,6 +512,49 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	 if (message.content.startsWith("!rules")){
 	message.channel.send(`Reglas: No ser como Faste`); 
 	}
+	
+	
+	
+	
+	//////////////////////////
+	
+	if (message.content.startsWith("!live bene")){
+	message.channel.send(`BENE ESTA EN VIVO EN TWITCH: https://www.twitch.tv/benex_rs`); 
+	}
+	
+	if (message.content.startsWith("!live flash")){
+	message.channel.send(`FLASH ESTA EN VIVO EN TWITCH: https://www.twitch.tv/flashrockmann`); 
+	}
+	
+	if (message.content.startsWith("!live cabe")){
+	message.channel.send(`EL CABE ESTA EN VIVO EN TWITCH: https://www.twitch.tv/sntgx`); 
+	}
+	
+	if (message.content.startsWith("!live matishi")){
+	message.channel.send(`MATISHI ESTA EN VIVO EN TWITCH: https://www.twitch.tv/matishi`); 
+	}
+	
+	if (message.content.startsWith("!live matishi")){
+	message.channel.send(`TUBER ESTA EN VIVO EN TWITCH: https://www.twitch.tv/tubergg`); 
+	}
+	
+	
+	
+	
+	
+	
+	///////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	if (message.content.startsWith("!check")){
 		 message.delete();
 	message.channel.send(`¿Ese dato está chequeado?`); 
