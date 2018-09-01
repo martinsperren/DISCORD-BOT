@@ -518,9 +518,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	//////////////////////////
 	
-	if (message.content.startsWith("!twitch")){
-	message.channel.send(`!live bene/flash/cabe/matishi/tuber`); 
-	}
+
 	
 	
 	if (message.content.startsWith("!live bene")){
