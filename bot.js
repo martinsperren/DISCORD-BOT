@@ -541,7 +541,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	message.channel.send(`MATISHI ESTA EN VIVO EN TWITCH: https://www.twitch.tv/matishi`); 
 	}
 	
-	if (message.content.startsWith("!live matishi")){
+	if (message.content.startsWith("!live tuber")){
 		message.delete();
 	message.channel.send(`TUBER ESTA EN VIVO EN TWITCH: https://www.twitch.tv/tubergg`); 
 	}
