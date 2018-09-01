@@ -518,23 +518,33 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	//////////////////////////
 	
+	if (message.content.startsWith("!twitch")){
+	message.channel.send(`!live bene/flash/cabe/matishi/tuber`); 
+	}
+	
+	
 	if (message.content.startsWith("!live bene")){
+		message.delete();
 	message.channel.send(`BENE ESTA EN VIVO EN TWITCH: https://www.twitch.tv/benex_rs`); 
 	}
 	
 	if (message.content.startsWith("!live flash")){
+		message.delete();
 	message.channel.send(`FLASH ESTA EN VIVO EN TWITCH: https://www.twitch.tv/flashrockmann`); 
 	}
 	
 	if (message.content.startsWith("!live cabe")){
+		message.delete();
 	message.channel.send(`EL CABE ESTA EN VIVO EN TWITCH: https://www.twitch.tv/sntgx`); 
 	}
 	
 	if (message.content.startsWith("!live matishi")){
+		message.delete();
 	message.channel.send(`MATISHI ESTA EN VIVO EN TWITCH: https://www.twitch.tv/matishi`); 
 	}
 	
 	if (message.content.startsWith("!live matishi")){
+		message.delete();
 	message.channel.send(`TUBER ESTA EN VIVO EN TWITCH: https://www.twitch.tv/tubergg`); 
 	}
 	
