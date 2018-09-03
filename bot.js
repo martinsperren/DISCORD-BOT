@@ -16,6 +16,7 @@ const queue = new Map();
 
 client.on("ready", () => {
     console.log(`Bot iniciado ${client.users.size} usuarios en ${client.channels.size} canales.`);
+	client.sendMessage('454541386969251860', 'test');
 client.user.setGame(process.env.GAME);	
 });
 client.on("guildCreate", guild => {
