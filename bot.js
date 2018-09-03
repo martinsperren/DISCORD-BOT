@@ -533,7 +533,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
     .then(connection => console.log('Connected!'))
     .catch(console.error);
 	message.channel.send(`!play https://www.youtube.com/watch?v=2VcOvpeymjA`); 
-		message.channel.send(`!cc 3); 
+		message.channel.send('!cc 3'); 
 	}
 	
 	
