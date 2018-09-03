@@ -526,7 +526,10 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	///////////////////////
 	
 	
-	
+	if (message.content.startsWith("!luz")){	 
+	message.channel.send(`!play https://www.youtube.com/watch?v=2VcOvpeymjA`); 
+		message.delete();
+	}
 	
 	
 	
