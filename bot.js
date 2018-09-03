@@ -236,30 +236,7 @@ client.on("message", async message => {
         message.channel.send(sayMessage);
     }
 	
-	/*
 	
-	if (message.content.startsWith("!big")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
-            return 0;
-        const sayMessage = args.join(" ");
-		 let arr = Array.from(sayMessage);
-		 var salida = "";
-		 var tam = arr.length;
-           var i;
-	for (i = 0; i < tam; i++) {
-    if(!isSpace(arr[i])&&!isNumber(arr[i])){
-        salida= salida + ":regional_indicator_"+arr[i]+":";   
-	}else{
-	salida = salida + "   ";		
-	}
-    }	 
-        message.delete().catch(O_o => {
-        });
-        message.channel.send(salida.toString());
-    }
-	
-	
-	*/
 	
 	
 	 if (message.content.startsWith("!big")){
@@ -339,8 +316,7 @@ client.on("message", async message => {
         message.channel.send(`<@${message.author.id}> desmuteo a <@${member.user.id}>.`);
     }
     if (message.content.startsWith("!ban")){
-        // Most of this command is identical to kick, except that here we'll only let admins do it.
-        // In the real world mods could ban too, but this is just an example, right? ;)
+     
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
@@ -356,28 +332,26 @@ client.on("message", async message => {
         message.channel.send(`<@${message.author.id}> le dio ban a <@${member.user.id}> por: ${reason}.`);
     }
     if (message.content.startsWith("!cc")){
-        // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
-        // Now, we want to check if the user has the `bot-commander` role, you can change this to whatever you want.
+        
         if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
             return 0;
         async function purge() {
-            message.delete(); // Let's delete the command message, so it doesn't interfere with the messages we are going to delete.
-            // Now, we want to check if the user has the `bot-commander` role, you can change this to whatever you want.
-            // We want to check if the argument is a number
+            message.delete(); 
+            
             if (isNaN(args[0])) {
-                // Sends a message to the channel.
-                message.channel.send('Pone un número despues del comando.'); //\n means new line.
-                // Cancels out of the script, so the rest doesn't run.
+               
+                message.channel.send('Pone un número despues del comando.'); 
+                
                 return;
             }
-            const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
-            console.log(fetched.size + ' messages found, deleting...'); // Lets post into console how many messages we are deleting
-            // Deleting the messages
+            const fetched = await message.channel.fetchMessages({limit: args[0]}); 
+            console.log(fetched.size + ' messages found, deleting...'); 
+          
             message.channel.bulkDelete(fetched);
         }
-        // We want to make sure we call the function whenever the purge command is run.
-        purge(); // Make sure this is inside the if(msg.startsWith)
-        // We want to make sure we call the function whenever the purge command is run.
+      
+        purge(); 
+       
     }
     if (message.content.startsWith("!play")){
         const voiceChannel = message.member.voiceChannel;
@@ -394,8 +368,8 @@ client.on("message", async message => {
             const playlist = await youtube.getPlaylist(url);
             const videos = await playlist.getVideos();
             for (const video of Object.values(videos)) {
-                const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-                await handleVideo(video2, message, voiceChannel, true); // eslint-disable-line no-await-in-loop
+                const video2 = await youtube.getVideoByID(video.id); 
+                await handleVideo(video2, message, voiceChannel, true); 
             }
             return message.channel.send(`? Playlist: **${playlist.title}** ha sido agregado a la cola!`);
         } else {
@@ -410,7 +384,7 @@ __**Selecciona el temaiken:**__ \n
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 Pone un numero de 1-10.
 					`);
-                    // eslint-disable-next-line max-depth
+                 
                     try {
                         var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11, {
                             maxMatches: 1,
@@ -514,11 +488,9 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	}
 	
 	
-	
+
 	
 	//////////////////////////
-	
-
 	
 	
 	if (message.content.startsWith("!live bene")){
