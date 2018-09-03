@@ -526,7 +526,12 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	///////////////////////
 	
 	
-	if (message.content.startsWith("!luz")){	 
+	if (message.content.startsWith("!luz")){
+		const channel = message.member.voiceChannel;
+
+    channel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
 	message.channel.send(`!play https://www.youtube.com/watch?v=2VcOvpeymjA`); 
 		message.delete();
 	}
