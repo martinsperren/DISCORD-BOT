@@ -534,8 +534,21 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
     .then(connection => console.log('Connected!'))
     .catch(console.error);
 	message.channel.send(`!play https://www.youtube.com/watch?v=2VcOvpeymjA`); 
-		message.channel.send('!cc 4'); 
+		message.channel.send('!cc 3'); 
 	}
+	
+	if (message.content.startsWith("!cubilla")){
+		const channel = message.member.voiceChannel;
+
+    channel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
+	message.channel.send(`!play https://www.youtube.com/watch?v=8HbVDzZPCPA`); 
+		message.channel.send('!cc 3'); 
+	}
+	
+	
+	
 	
 	
 	
