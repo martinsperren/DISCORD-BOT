@@ -16,7 +16,9 @@ const queue = new Map();
 
 client.on("ready", () => {
     console.log(`Bot iniciado ${client.users.size} usuarios en ${client.channels.size} canales.`);
-	client.sendMessage('454541386969251860', 'test');
+	var channel = 454541386969251860;
+	client.sendMessage(channel, 'ready')
+	
 client.user.setGame(process.env.GAME);	
 });
 client.on("guildCreate", guild => {
@@ -541,13 +543,6 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	
-	
-	
-	
-	if (message.content.startsWith("!check")){
-		 message.delete();
-	message.channel.send(`¿Ese dato está chequeado?`); 
-	}
 	if (message.content.startsWith("!tmute")){
 		if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
             return 0;		
