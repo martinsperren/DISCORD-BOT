@@ -1,12 +1,8 @@
-# TUBERBOT FOR DISCORD
-
-
-Moderation and music play bot for **Heroku**.
-
+# DISCORD BOT
 
 * Moderation features (kick, ban, mute, nick change, chat cleanup)
 * YouTube Music
-* Twitch Stream alerts 
+* Twitch Stream alerts *
 * Custom commands
 
 
