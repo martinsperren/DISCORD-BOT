@@ -415,7 +415,10 @@ Pone un numero de 1-10.
         return undefined;
     }
 	 if (message.author.id=='355922192749428737'&&(message.content.includes("lol")||(message.content.includes("sale")))){
-	    return message.channel.send('No Faste, no rompas las bolas.');
+	    
+		
+		 
+		 return message.channel.send('No Faste, no rompas las bolas.');
 	     }
     if (message.content.startsWith("!stop")){
         if (!message.member.voiceChannel)
@@ -563,11 +566,15 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	if (message.content.startsWith("!drop")){	
+		if (message.author.id=='271230507692457984'){
+		message.reply(`Para vos no hay.`);
+		}else{
+		
 		const ayy = client.emojis.get("487031984514924569");
         
 		message.reply(`${ayy}`);
 
-	
+		}
 	}
 	
 	
