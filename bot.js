@@ -563,7 +563,11 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	if (message.content.startsWith("!drop")){	
-		message.channel.send(':drop:'); 
+		const ayy = client.emojis.get("487032046301085707");
+        
+		message.reply(`${ayy}`);
+
+	
 	}
 	
 	
