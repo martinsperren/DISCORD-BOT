@@ -562,6 +562,11 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	
+	if (message.content.startsWith("!drop")){	
+		message.channel.send(':drop:'); 
+	}
+	
+	
 	
 	
 	
