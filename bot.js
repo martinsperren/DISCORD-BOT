@@ -12,6 +12,13 @@ const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
+var rn = require('random-number');
+var options = {
+  min:  -1000
+, max:  1000
+, integer: true
+}
+
 
 
 client.on("ready", () => {
@@ -576,6 +583,14 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 
 		}
 	}
+	
+	
+	if (message.content.startsWith("!number")){	
+		message.reply(rn(options));
+	}
+	
+	
+	
 	
 	
 	
