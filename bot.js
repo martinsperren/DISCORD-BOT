@@ -601,16 +601,16 @@ var options = {
        message.reply(`${drop}`);
         break;
 				 case 2:
-        message.reply(`${cabe}`);
+        message.reply(`Ganaste un cabe de la suerte ${cabe}`);
         break;
 				 case 3:
         message.reply(`${drop}`);
         break;
 				 case 4:
-        message.reply(`${matishi}`);
+        message.reply(`Ganaste un toxictishi ${matishi}`);
         break;
 				 case 5:
-        message.reply(`${chiva}`);
+        message.reply(`Ganaste un IEEEEEEE ${chiva}`);
         break;
 		
 		}
