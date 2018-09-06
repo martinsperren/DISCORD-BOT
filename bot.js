@@ -567,7 +567,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	if (message.content.startsWith("!drop")){	
 		if (message.author.id=='271230507692457984'){
-		message.reply(`Para vos no hay.`);
+		message.reply(`Para vos no hay, negro delincuente.`);
 		}else{
 		
 		const ayy = client.emojis.get("487031984514924569");
