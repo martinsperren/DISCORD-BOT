@@ -12,12 +12,8 @@ const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
-var rn = require('random-number');
-var options = {
-  min:  -1000
-, max:  1000
-, integer: true
-}
+
+
 
 
 
@@ -572,21 +568,48 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	
-	if (message.content.startsWith("!drop")){	
-		if (message.author.id=='271230507692457984'){
-		message.reply(`Para vos no hay, negro delincuente.`);
-		}else{
-		
-		const ayy = client.emojis.get("487031984514924569");
-        
-		message.reply(`${ayy}`);
 
-		}
-	}
-	
 	
 	if (message.content.startsWith("!number")){	
-		message.reply(rn(options));
+		const drop = client.emojis.get("487031984514924569");
+		const cabe = client.emojis.get("352337869940981761");
+		const matishi = client.emojis.get("443794838517972992");
+		const egg = client.emojis.get("430508228976181248");
+		
+		
+		
+		var rn = require('random-number');
+		var options = {
+  min:  0
+, max:  5
+, integer: true
+}
+if (message.author.id=='271230507692457984'){
+		message.reply(`Segui participando.`);
+		}else{		
+		
+		
+		switch(rn(options)) {
+          
+				 case 1:
+       message.reply(`${drop}`);
+        break;
+				 case 2:
+        message.reply(`${cabe}`);
+        break;
+				 case 3:
+        message.reply(`${drop}`);
+        break;
+				 case 4:
+        message.reply(`${matishi}`);
+        break;
+				 case 5:
+        message.reply(`${egg}`);
+        break;
+		
+		}
+		}	
+		
 	}
 	
 	
