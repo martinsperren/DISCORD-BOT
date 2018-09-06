@@ -584,7 +584,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		const matishi = client.emojis.get("443794838517972992");
 		const chiva = client.emojis.get("352676747470438400");
 		const fito = client.emojis.get("354070485241298945");
-		const humo = client.emojis.get(487377504731136003");
+		const humo = client.emojis.get("487377504731136003");
 			
 			
 		
