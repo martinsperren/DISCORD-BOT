@@ -583,7 +583,8 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		const cabe = client.emojis.get("352337869940981761");
 		const matishi = client.emojis.get("443794838517972992");
 		const chiva = client.emojis.get("352676747470438400");
-		const 600 = client.emojis.get("354070485241298945");
+		const fito = client.emojis.get("354070485241298945");
+		const humo = client.emojis.get(487377504731136003");
 			
 			
 		
@@ -592,7 +593,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		
 var options = {
   min:  1
-, max:  5
+, max:  6
 , integer: true
 }
 	
@@ -601,7 +602,7 @@ var options = {
 		switch(rn(options)) {
           
 				 case 1:
-       message.reply(`Ganaste un 600 fundido! ${600}`);
+       message.reply(`Ganaste un Fiat 600 humeante! ${fito}`);
         break;
 				 case 2:
         message.reply(`Ganaste un cabe de la suerte! ${cabe}`);
@@ -614,6 +615,9 @@ var options = {
         break;
 				 case 5:
         message.reply(`Ganaste un IEEEEEEE! ${chiva}`);
+        break;
+			case 6:
+        message.reply(`Ganaste un Ricardo Caruso Lombardi! ${humo}`);
         break;
 		
 		}
