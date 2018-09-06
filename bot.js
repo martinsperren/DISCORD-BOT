@@ -12,6 +12,7 @@ const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
+var rn = require('random-number');
 
 
 
@@ -571,22 +572,27 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 
 	
 	if (message.content.startsWith("!number")){	
+		
+		
+		if (message.author.id=='271230507692457984'){
+		message.reply(`Segui participando.`);
+		}else{	
+		
+		
 		const drop = client.emojis.get("487031984514924569");
 		const cabe = client.emojis.get("352337869940981761");
 		const matishi = client.emojis.get("443794838517972992");
-		const egg = client.emojis.get("430508228976181248");
+		const chiva = client.emojis.get("35267674747043840");
 		
 		
 		
-		var rn = require('random-number');
-		var options = {
-  min:  0
+		
+var options = {
+  min:  1
 , max:  5
 , integer: true
 }
-if (message.author.id=='271230507692457984'){
-		message.reply(`Segui participando.`);
-		}else{		
+	
 		
 		
 		switch(rn(options)) {
@@ -604,7 +610,7 @@ if (message.author.id=='271230507692457984'){
         message.reply(`${matishi}`);
         break;
 				 case 5:
-        message.reply(`${egg}`);
+        message.reply(`${chiva}`);
         break;
 		
 		}
