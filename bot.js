@@ -571,7 +571,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 
 	
-	if (message.content.startsWith("!number")){	
+	if (message.content.startsWith("!drop")){	
 		
 		
 		if (message.author.id=='271230507692457984'){
@@ -582,7 +582,10 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		const drop = client.emojis.get("487031984514924569");
 		const cabe = client.emojis.get("352337869940981761");
 		const matishi = client.emojis.get("443794838517972992");
-		const chiva = client.emojis.get("35267674747043840");
+		const chiva = client.emojis.get("352676747470438400");
+		const 600 = client.emojis.get("354070485241298945");
+			
+			
 		
 		
 		
@@ -598,19 +601,19 @@ var options = {
 		switch(rn(options)) {
           
 				 case 1:
-       message.reply(`${drop}`);
+       message.reply(`Ganaste un 600 fundido! ${600}`);
         break;
 				 case 2:
-        message.reply(`Ganaste un cabe de la suerte ${cabe}`);
+        message.reply(`Ganaste un cabe de la suerte! ${cabe}`);
         break;
 				 case 3:
         message.reply(`${drop}`);
         break;
 				 case 4:
-        message.reply(`Ganaste un toxictishi ${matishi}`);
+        message.reply(`Ganaste un toxictishi! ${matishi}`);
         break;
 				 case 5:
-        message.reply(`Ganaste un IEEEEEEE ${chiva}`);
+        message.reply(`Ganaste un IEEEEEEE! ${chiva}`);
         break;
 		
 		}
