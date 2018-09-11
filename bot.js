@@ -574,7 +574,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	if (message.content.startsWith("!drop")){	
 		
 		
-		if (message.author.id=='271230507692457984'){
+		if (message.author.id=='271230507692457984'||message.author.id=='355922192749428737'){
 		message.reply(`Segui participando.`);
 		}else{	
 		
