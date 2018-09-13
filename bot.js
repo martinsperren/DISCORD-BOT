@@ -566,8 +566,17 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		message.channel.send('!cc 3'); 
 	}
 	
+	if (message.content.startsWith("!bobo")){
+		const channel = message.member.voiceChannel;
+
+    channel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
 	
+	message.channel.send(`!play https://www.youtube.com/watch?v=57DmGvPzlfU`);
 	
+		message.channel.send('!cc 3'); 
+	}
 	
 
 	
