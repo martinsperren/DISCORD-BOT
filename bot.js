@@ -562,7 +562,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
     channel.join()
     .then(connection => console.log('Connected!'))
     .catch(console.error);
-	message.channel.send(`!https://www.youtube.com/watch?v=rUkCjI1OkcA`); 
+	message.channel.send(`!play https://www.youtube.com/watch?v=rUkCjI1OkcA`); 
 		message.channel.send('!cc 3'); 
 	}
 	
@@ -577,6 +577,9 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	message.channel.send(`!play https://www.youtube.com/watch?v=4ue2a6wN_wo`); 
 		message.channel.send('!cc 3'); 
 	}
+	
+	
+	
 	
 	if (message.content.startsWith("!bobo")){
 		const channel = message.member.voiceChannel;
