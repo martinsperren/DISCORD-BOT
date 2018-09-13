@@ -556,6 +556,18 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	
+	if (message.content.startsWith("!groso")){
+		const channel = message.member.voiceChannel;
+
+    channel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
+	message.channel.send(`!https://www.youtube.com/watch?v=rUkCjI1OkcA`); 
+		message.channel.send('!cc 3'); 
+	}
+	
+	
+	
 	if (message.content.startsWith("!miami")){
 		const channel = message.member.voiceChannel;
 
