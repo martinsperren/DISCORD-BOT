@@ -13,6 +13,7 @@ const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
 var rn = require('random-number');
+var roles = [Owner", "Admin", "Bunker Support"];
 
 
 
@@ -215,12 +216,12 @@ client.on("message", async message => {
         message.channel.send(`¿y el ${ayy}?`);
     }
    if (message.content.startsWith("!cmds")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         return message.reply("\n!ping\n!say texto\n!kick @usuario razon\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario razon\n!nick @usuario nick\n!huevo\n!music (ayuda de musica)");
     }
     if (message.content.startsWith("!nick")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         user = member.user.username;
@@ -233,7 +234,7 @@ client.on("message", async message => {
         m.edit(`Tu ping es de ${m.createdTimestamp - message.createdTimestamp}ms. API ping: ${Math.round(client.ping)}ms`);
     }
     if (message.content.startsWith("!say")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         const sayMessage = args.join(" ");
         message.delete().catch(O_o => {
@@ -245,7 +246,7 @@ client.on("message", async message => {
 	
 	
 	 if (message.content.startsWith("!big")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         const sayMessage = args.join(" ");
 		 let arr = Array.from(sayMessage.toLowerCase());
@@ -288,7 +289,7 @@ client.on("message", async message => {
 	
 	
     if (message.content.startsWith("!kick")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
@@ -303,7 +304,7 @@ client.on("message", async message => {
         message.channel.send(`<@${message.author.id}> kickeó a <@${member.user.id}> por: ${reason}.`);
     }
    if (message.content.startsWith("!mute")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
@@ -312,7 +313,7 @@ client.on("message", async message => {
         message.channel.send(`<@${member.user.id}> fue muteado por <@${message.author.id}>.`);
     }
    if (message.content.startsWith("!unmute")){
-        if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
@@ -322,7 +323,7 @@ client.on("message", async message => {
     }
     if (message.content.startsWith("!ban")){
      
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         let member = message.mentions.members.first();
         if (!member)
@@ -338,7 +339,7 @@ client.on("message", async message => {
     }
     if (message.content.startsWith("!cc")){
         
-        if (!message.member.roles.some(r => ["OWNER", "Admins"].includes(r.name)))
+        if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         async function purge() {
             message.delete(); 
@@ -483,7 +484,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
  return message.reply(i); 
 	 }
 	if (message.content.startsWith("!uptime")){
-	 if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+	 if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
 message.delete();
     var days = client.uptime / 8.64e7 | 0;
@@ -658,7 +659,7 @@ var options = {
 	
 	
 	if (message.content.startsWith("!tmute")){
-		if (!message.member.roles.some(r => ["OWNER", "Admins","Mod"].includes(r.name)))
+		if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;		
 		let tomute = message.mentions.members.first();
 		let mutetime = args.slice(1).join(' ');
