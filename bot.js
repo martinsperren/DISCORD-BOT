@@ -13,7 +13,7 @@ const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
 var rn = require('random-number');
-var roles = [Owner", "Admin", "Bunker Support"];
+var roles = ["Owner", "Admin", "Bunker Support"];
 
 
 
