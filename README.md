@@ -1,9 +1,6 @@
 # DISCORD BOT
 
-* Moderation features (kick, ban, mute, nick change, chat cleanup)
-* YouTube Music
-* Twitch Stream alerts *
-* Custom commands
+Bot personalizado para server de discord. Host en Heroku.
 
 
 
