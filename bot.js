@@ -48,12 +48,7 @@ client.on('guildMemberRemove', member => {
 
 client.on('presenceUpdate', (oldMember, newMember) => {
   
-  if(newMember.presence.game.streaming){
-	newMember.roles.has(490589406705745941);
-	  
-  }
-  newMember.guild.channels.get('459448629212479488').send('live');
-});
+
 
 async function handleVideo(video, message, voiceChannel, playlist = false) {
     const serverQueue = queue.get(message.guild.id);
