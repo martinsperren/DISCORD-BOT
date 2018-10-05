@@ -33,11 +33,14 @@ client.on("guildCreate", guild => {
 
 
 client.on('presenceUpdate', (oldMember, newMember) => {
- if(/*newMember.roles.has('490589406705745941')&&*/newMember.presence.game.streaming){	
+ if(newMember.presence.game!=null){ 
+ /*newMember.roles.has('490589406705745941')&&*/
+ if(newMember.presence.game.streaming){	
 	
 	console.log(`alv`);
 //member.guild.channels.get('352289537747320842').send('live');
-	  	
+	  
+ }	  
   }	
   
 });
