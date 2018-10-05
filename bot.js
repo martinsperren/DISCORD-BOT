@@ -26,7 +26,9 @@ client.user.setGame(process.env.GAME);
 });
 client.on("guildCreate", guild => {
     console.log(`Nuevo guild: ${guild.name} (id: ${guild.id}). Este guild tiene ${guild.memberCount} miembros.`);
-    client.user.setGame(process.env.GAME);		
+    client.user.setPresence({ game: { name: 'porno en HD', type: "streaming", url: "https://www.twitch.tv/ninja"}});
+	
+	//client.user.setGame(process.env.GAME);		
 });
 
 
