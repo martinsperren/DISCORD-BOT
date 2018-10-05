@@ -22,11 +22,11 @@ var roles = ["Owner", "Admin", "Bunker Support"];
 client.on("ready", () => {
     console.log(`Bot iniciado ${client.users.size} usuarios en ${client.channels.size} canales.`);
 	
- client.user.setPresence({ game: { name: 'porno en HD', type: "streaming", url: "https://www.twitch.tv/ninja"}});
+ client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/ninja"}});
 });
 client.on("guildCreate", guild => {
     console.log(`Nuevo guild: ${guild.name} (id: ${guild.id}). Este guild tiene ${guild.memberCount} miembros.`);
-    client.user.setPresence({ game: { name: 'porno en HD', type: "streaming", url: "https://www.twitch.tv/ninja"}});
+    client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/ninja"}});
 	
 	//client.user.setGame(process.env.GAME);		
 });
