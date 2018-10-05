@@ -35,7 +35,7 @@ client.on("guildCreate", guild => {
 client.on('presenceUpdate', (oldMember, newMember) => {
  if(newMember.presence.game.streaming){	
 	//newMember.roles.has(490589406705745941)&&
-	 newMember.createDM('x')	
+	
 	  	
   }	
   
