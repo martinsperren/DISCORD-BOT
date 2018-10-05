@@ -56,7 +56,7 @@ client.on('guildMemberRemove', member => {
 });
 
 
-client.on('presenceUpdate', (oldMember, newMember) => {
+
   
 
 
