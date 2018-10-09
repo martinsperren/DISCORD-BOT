@@ -451,7 +451,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	if (message.content.startsWith("!luz")){
 		const voiceChannel = message.member.voiceChannel;
-		var video = await youtube.getVideo(https://www.youtube.com/watch?v=2VcOvpeymjA)
+		var video = await youtube.getVideo(https://www.youtube.com/watch?v=2VcOvpeymjA);
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
 		message.channel.send('!cc 2'); 
