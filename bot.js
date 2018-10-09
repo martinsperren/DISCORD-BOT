@@ -446,7 +446,20 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	
-	///////////////////////
+	switch(message.content.startsWith()) {
+    case "!luz":
+        message.channel.send('xd'); 
+        break;
+    case y:
+        code block
+        break;
+    default:
+        code block
+}
+	
+	
+	
+	
 	
 	
 	if (message.content.startsWith("!luz")){
