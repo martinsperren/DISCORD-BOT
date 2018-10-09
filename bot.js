@@ -446,7 +446,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=2VcOvpeymjA');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-			wait(1500);
+			wait(2500);
 		message.channel.send('!cc 2'); 
 	}
 	
@@ -464,7 +464,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=8HbVDzZPCPA');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-			wait(1500);
+			wait(2500);
 		message.channel.send('!cc 2'); 
 		
 	}
@@ -482,7 +482,7 @@ const voiceChannel = message.member.voiceChannel;
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=4ue2a6wN_wo');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-			wait(1500);
+			wait(2500);
 		message.channel.send('!cc 2'); 
 		
 	}
@@ -497,7 +497,7 @@ const voiceChannel = message.member.voiceChannel;
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=57DmGvPzlfU');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-			wait(1500);
+			wait(2500);
 		message.channel.send('!cc 2'); 
 		
 		
