@@ -1,11 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const Client = require('node-rest-client').Client;
-const schedule = require('node-schedule');
-const twitch = require('twitch.tv');
 const ytdl = require('ytdl-core');
 const jsonfile = require('jsonfile');
-const restClient = new Client();
 const configFile = "config.json";
 const ms = require("ms");
 const Util = require('discord.js');
@@ -442,81 +439,68 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	}
 	
 	
-	
-	
-	
-	
-	switch(message.content.startsWith()) {
-    case "!luz":
-        message.channel.send('xd'); 
-        break;
-    case y:
-        code block
-        break;
-    default:
-        code block
-}
-	
-	
-	
-	
-	
+
 	
 	if (message.content.startsWith("!luz")){
 		const voiceChannel = message.member.voiceChannel;
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=2VcOvpeymjA');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
+			wait(1500);
 		message.channel.send('!cc 2'); 
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 	if (message.content.startsWith("!cubilla")){
-		const channel = message.member.voiceChannel;
-
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-	message.channel.send(`!play https://www.youtube.com/watch?v=8HbVDzZPCPA`); 
-		message.channel.send('!cc 3'); 
+		
+		
+		const voiceChannel = message.member.voiceChannel;
+		var video = await youtube.getVideo('https://www.youtube.com/watch?v=8HbVDzZPCPA');
+		var playlist = false;
+	handleVideo(video, message, voiceChannel, playlist);
+			wait(1500);
+		message.channel.send('!cc 2'); 
+		
 	}
+		
 	
-	
-	
-	if (message.content.startsWith("!groso")){
-		const channel = message.member.voiceChannel;
 
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-	message.channel.send(`!play https://www.youtube.com/watch?v=rUkCjI1OkcA`); 
-		message.channel.send('!cc 3'); 
-	}
+	
 	
 	
 	
 	if (message.content.startsWith("!miami")){
-		const channel = message.member.voiceChannel;
+	
 
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-	message.channel.send(`!play https://www.youtube.com/watch?v=4ue2a6wN_wo`); 
-		message.channel.send('!cc 3');
+const voiceChannel = message.member.voiceChannel;
+		var video = await youtube.getVideo('https://www.youtube.com/watch?v=4ue2a6wN_wo');
+		var playlist = false;
+	handleVideo(video, message, voiceChannel, playlist);
+			wait(1500);
+		message.channel.send('!cc 2'); 
+		
 	}
 	
 	
 	
 	
 	if (message.content.startsWith("!bobo")){
-		const channel = message.member.voiceChannel;
-
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-	
-	message.channel.send(`!play https://www.youtube.com/watch?v=57DmGvPzlfU`);
-	
-		message.channel.send('!cc 3'); 
+		
+		
+		const voiceChannel = message.member.voiceChannel;
+		var video = await youtube.getVideo('https://www.youtube.com/watch?v=57DmGvPzlfU');
+		var playlist = false;
+	handleVideo(video, message, voiceChannel, playlist);
+			wait(1500);
+		message.channel.send('!cc 2'); 
+		
+		
 	}
 	
 
