@@ -270,6 +270,9 @@ client.on("message", async message => {
         purge(); 
        
     }
+	
+	
+	
     if (message.content.startsWith("!play")){
         const voiceChannel = message.member.voiceChannel;
         if (!voiceChannel)
@@ -447,13 +450,10 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	if (message.content.startsWith("!luz")){
-		const channel = message.member.voiceChannel;
-
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-	message.channel.send(`!play https://www.youtube.com/watch?v=2VcOvpeymjA`); 
-		message.channel.send('!cc 3'); 
+		const voiceChannel = message.member.voiceChannel;
+		var video = https://www.youtube.com/watch?v=2VcOvpeymjA;
+	handleVideo(video, message, voiceChannel, playlist = false);
+		message.channel.send('!cc 2'); 
 	}
 	
 	if (message.content.startsWith("!cubilla")){
@@ -487,9 +487,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
     .then(connection => console.log('Connected!'))
     .catch(console.error);
 	message.channel.send(`!play https://www.youtube.com/watch?v=4ue2a6wN_wo`); 
-		message.channel.send('!cc 3'); 
-		wait(500);
-		message.channel.send('!cc 2'); 
+		message.channel.send('!cc 3');
 	}
 	
 	
