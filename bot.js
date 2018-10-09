@@ -21,29 +21,17 @@ var roles = ["Owner", "Admin", "Bunker Support"];
 client.on("ready", () => {
     console.log(`Bot iniciado ${client.users.size} usuarios en ${client.channels.size} canales.`);
 	
- client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/ninja"}});
+ client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/benex_rs"}});
 });
 client.on("guildCreate", guild => {
     console.log(`Nuevo guild: ${guild.name} (id: ${guild.id}). Este guild tiene ${guild.memberCount} miembros.`);
-    client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/ninja"}});
+    client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/benex_rs"}});
 	
 	//client.user.setGame(process.env.GAME);		
 });
 
 
 
-client.on('presenceUpdate', (oldMember, newMember) => {
- if(newMember.presence.game!=null){ 
- /*newMember.roles.has('490589406705745941')&&*/
- if(newMember.presence.game.streaming){	
-	
-	console.log(`alv`);
-//member.guild.channels.get('352289537747320842').send('live');
-	  
- }	  
-  }	
-  
-});
 
 
 client.on("guildDelete", guild => {
