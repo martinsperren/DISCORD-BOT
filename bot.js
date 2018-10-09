@@ -488,6 +488,8 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
     .catch(console.error);
 	message.channel.send(`!play https://www.youtube.com/watch?v=4ue2a6wN_wo`); 
 		message.channel.send('!cc 3'); 
+		wait(500);
+		message.channel.send('!cc 2'); 
 	}
 	
 	
