@@ -364,6 +364,7 @@ if (message.content.includes("huevo")) {
 	
 	if (message.content.startsWith("!quit")){
         message.member.voiceChannel.leave();
+	message.delete();
 	}
 		
     if (message.content.startsWith("!cc")){
