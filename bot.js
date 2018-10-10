@@ -348,6 +348,11 @@ client.on("message", async message => {
                 .catch(error => message.reply(`${message.author} no se pudo banear. Error: ${error}`));
         message.channel.send(`<@${message.author.id}> le dio ban a <@${member.user.id}> por: ${reason}.`);
     }
+	
+	if (message.content.startsWith("!quit")){
+        client.leaveVoiceChannel(message.member.voiceState.channelID);
+	}
+		
     if (message.content.startsWith("!cc")){
         
         if (!message.member.roles.some(r => roles.includes(r.name)))
