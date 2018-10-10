@@ -11,7 +11,9 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Tuber está en vivo en Twitch!"
+          "customMessage": "Che @everyone! Tuber está en vivo en Twitch!",
+		  "url": "https://www.twitch.tv/tubergg"
+		  
         }
       ]
     },
@@ -22,7 +24,8 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Benex está en vivo en Twitch!"
+          "customMessage": "Che @everyone! Benex está en vivo en Twitch!",
+		  "url": "https://www.twitch.tv/benex_rs"
         }
       ]
     },
@@ -33,7 +36,8 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Matishi está en vivo en Twitch!"
+          "customMessage": "Che @everyone! Matishi está en vivo en Twitch!",
+		  "url": "https://www.twitch.tv/matishi"
         }
       ]
     },
@@ -44,7 +48,8 @@
       "receivers": [
         {
           "nickname": "Monster Truck Rally",
-          "customMessage": "Che @everyone! Moderador está en vivo en Twitch!"
+          "customMessage": "Che @everyone! Moderador está en vivo en Twitch!",
+		  "url": "https://www.twitch.tv/panchocaccio"
         }
       ]
     }, {
@@ -54,7 +59,8 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Flash está en vivo en Twitch!"
+          "customMessage": "Che @everyone! Flash está en vivo en Twitch!",
+		  "url": "https://www.twitch.tv/flashrockmann"
         }
       ]
     },
@@ -65,7 +71,8 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! El Cabe, si, EL CABE! está en vivo en Twitch!"
+          "customMessage": "Che @everyone! El Cabe, si, EL CABE! está en vivo en Twitch!",
+		  "url": "https://www.twitch.tv/sntgx"
         }
       ]
     }

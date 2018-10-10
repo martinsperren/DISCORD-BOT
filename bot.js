@@ -20,14 +20,15 @@ var webhook = process.env.WEBHOOK;
 
 client.on("ready", () => {
     console.log(`Bot iniciado ${client.users.size} usuarios en ${client.channels.size} canales.`);
-	
- client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/benex_rs"}});
+	client.user.setGame(process.env.GAME);	
+ //client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/benex_rs"}});
 });
 client.on("guildCreate", guild => {
     console.log(`Nuevo guild: ${guild.name} (id: ${guild.id}). Este guild tiene ${guild.memberCount} miembros.`);
-    client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/benex_rs"}});
+	client.user.setGame(process.env.GAME);
+   // client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: "https://www.twitch.tv/benex_rs"}});
 	
-	//client.user.setGame(process.env.GAME);		
+		
 });
 
 
@@ -44,17 +45,8 @@ member.addRole('352996000572637185');
 });
 client.on('guildMemberRemove', member => {
     member.guild.channels.get('459448629212479488').send('**' + member.user.username + '** no sacó la mano de ahí y se quedo trificado. :hand_splayed: ');
-    //
+    
 });
-
-
-
-  //TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH
-
-
-
-
-
 
 
 
@@ -104,6 +96,9 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
 });
 
 function buildWebHook(twitchResponse, receiver) {
+	
+	client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: receiver.url}});
+	
     return {
         data: {
             "username": `${twitchResponse.stream.channel.display_name}`,
