@@ -4,6 +4,7 @@ const Client = require('node-rest-client').Client;
 const ytdl = require('ytdl-core');
 const twitch = require('twitch.tv');
 const jsonfile = require('jsonfile');
+const schedule = require('node-schedule');
 const configFile = "config.json";
 const ms = require("ms");
 const Util = require('discord.js');
