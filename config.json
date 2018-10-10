@@ -1,7 +1,4 @@
-
-
 {
- 
   "twitchAuth": {
     "clientID": "jceafu5cq49gyppqja6thwb8nnmhm9",
     "apiVersion": 5
@@ -14,8 +11,7 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Tuber está en vivo en Twitch!",
-          
+          "customMessage": "Che @everyone! Tuber está en vivo en Twitch!"
         }
       ]
     },
@@ -26,7 +22,7 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Benex está en vivo en Twitch!",
+          "customMessage": "Che @everyone! Benex está en vivo en Twitch!"
         }
       ]
     },
@@ -37,13 +33,10 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Matishi está en vivo en Twitch!",
-          
+          "customMessage": "Che @everyone! Matishi está en vivo en Twitch!"
         }
       ]
     },
-    
-    
     {
       "id": "193721055",
       "nickname": "pancho",
@@ -51,8 +44,7 @@
       "receivers": [
         {
           "nickname": "Monster Truck Rally",
-          "customMessage": "Che @everyone! Moderador está en vivo en Twitch!",
-         
+          "customMessage": "Che @everyone! Moderador está en vivo en Twitch!"
         }
       ]
     }, {
@@ -62,13 +54,10 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! Flash está en vivo en Twitch!",
-         
+          "customMessage": "Che @everyone! Flash está en vivo en Twitch!"
         }
       ]
     },
-    
-    
      {
       "id": "54975899",
       "nickname": "sntgx",
@@ -76,8 +65,7 @@
       "receivers": [
         {
           "nickname": "My Test Server",
-          "customMessage": "Che @everyone! El Cabe, si, EL CABE! está en vivo en Twitch!",
-         
+          "customMessage": "Che @everyone! El Cabe, si, EL CABE! está en vivo en Twitch!"
         }
       ]
     }
