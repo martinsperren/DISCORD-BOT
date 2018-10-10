@@ -12,7 +12,7 @@ const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
 var rn = require('random-number');
 var roles = ["Owner", "Admin", "Bunker Support"];
-
+var webhook = process.env.WEBHOOK;
 
 
 
@@ -47,7 +47,112 @@ client.on('guildMemberRemove', member => {
 
 
 
-  
+  //TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH
+
+
+
+
+
+
+
+
+
+const job = schedule.scheduleJob('/1 * * * * *', () => {
+    console.log("Job Started.");
+    jsonfile.readFile(configFile, (err, config) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("Config Loaded, checking streams...");
+        for (const stream of config.streams) {
+            console.log(`Checking Twitch ID ${stream.id}`);
+            twitch(`streams/${stream.id}`, config.twitchAuth, (err, twitchResponse) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if (!twitchResponse.stream) {
+                    console.log(`Twitch ID ${stream.id} (${stream.nickname}) is not live`);
+                    return;
+                }
+                if (stream.latestStream === twitchResponse.stream._id) {
+                    console.log(`Already tracked this stream from Twitch ID ${stream.id} (${stream.nickname})`);
+                    return;
+                }
+                console.log(`Twitch ID ${stream.id} (${stream.nickname}) has started streaming!`);
+                stream.latestStream = twitchResponse.stream._id;
+                jsonfile.writeFile(configFile, config, (err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+                if (!twitchResponse.stream.game) {
+                    twitchResponse.stream.game = "Not Playing";
+                }
+                stream.receivers.forEach((receiver) => {
+                    const args = buildWebHook(twitchResponse, receiver);
+                    restClient.post(webhook, args, function (data, webhookResponse) {
+                        console.log(`Sent webhook to ${receiver.nickname}`);
+                    });
+                });
+            });
+        }
+    });
+});
+
+function buildWebHook(twitchResponse, receiver) {
+    return {
+        data: {
+            "username": `${twitchResponse.stream.channel.display_name}`,
+            "avatar_url": `${twitchResponse.stream.channel.logo}`,
+            "content": `${receiver.customMessage}`,
+            "embeds": [{
+                    "author": {
+                        "name": `${twitchResponse.stream.channel.display_name}`,
+                        "icon_url": `${twitchResponse.stream.channel.logo}`
+                    },
+                    "title": `EN VIVO: ${twitchResponse.stream.channel.status}`,
+                    "url": `${twitchResponse.stream.channel.url}`,
+                    "color": 6570404,
+                    "fields": [{
+                            "name": "Juego",
+                            "value": `${twitchResponse.stream.game}`,
+                            "inline": true
+                        },
+                        {
+                            "name": "Viewers",
+                            "value": `${twitchResponse.stream.viewers}`,
+                            "inline": true
+                        }
+                    ],
+                    "image": {
+                        "url": `${twitchResponse.stream.preview.large}`
+                    },
+                    "thumbnail": {
+                        "url": `${twitchResponse.stream.channel.logo}`
+                    },
+                    "footer": {
+                        "text": `/${twitchResponse.stream.channel.name}`,
+                        "icon_url": `https://cdn.discordapp.com/attachments/250501026958934020/313483431088619520/GlitchBadge_Purple_256px.png`
+                    }
+                }]
+        },
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+}
+
+
+
+
+
+
+
+
+
+//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH
 
 
 async function handleVideo(video, message, voiceChannel, playlist = false) {
