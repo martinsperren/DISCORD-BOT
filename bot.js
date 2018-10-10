@@ -350,7 +350,7 @@ client.on("message", async message => {
     }
 	
 	if (message.content.startsWith("!quit")){
-        client.leaveVoiceChannel(message.member.voiceState.channelID);
+        message.member.voiceChannel.leave();
 	}
 		
     if (message.content.startsWith("!cc")){
@@ -506,6 +506,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	 if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
 message.delete();
+		
     var days = client.uptime / 8.64e7 | 0;
   var hrs  = (client.uptime % 8.64e7)/ 3.6e6 | 0;
   var mins = Math.round((client.uptime % 3.6e6) / 6e4);	
@@ -518,33 +519,6 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 
 	
-	//////////////////////////
-	
-	
-	if (message.content.startsWith("!live bene")){
-		message.delete();
-	message.channel.send(`BENE ESTA EN VIVO EN TWITCH: https://www.twitch.tv/benex_rs`); 
-	}
-	
-	if (message.content.startsWith("!live flash")){
-		message.delete();
-	message.channel.send(`FLASH ESTA EN VIVO EN TWITCH: https://www.twitch.tv/flashrockmann`); 
-	}
-	
-	if (message.content.startsWith("!live cabe")){
-		message.delete();
-	message.channel.send(`EL CABE ESTA EN VIVO EN TWITCH: https://www.twitch.tv/sntgx`); 
-	}
-	
-	if (message.content.startsWith("!live matishi")){
-		message.delete();
-	message.channel.send(`MATISHI ESTA EN VIVO EN TWITCH: https://www.twitch.tv/matishi`); 
-	}
-	
-	if (message.content.startsWith("!live tuber")){
-		message.delete();
-	message.channel.send(`TUBER ESTA EN VIVO EN TWITCH: https://www.twitch.tv/tubergg`); 
-	}
 	
 	
 
@@ -554,13 +528,9 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=2VcOvpeymjA');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-			wait(2500);
 		message.channel.send('!cc 2'); 
+		message.delete();
 	}
-	
-	
-	
-	
 	
 	
 	
