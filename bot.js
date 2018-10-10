@@ -97,7 +97,7 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
 
 function buildWebHook(twitchResponse, receiver) {
 	
-	client.user.setPresence({ game: { name: 'Bunker', type: "streaming", url: receiver.url}});
+	client.user.setPresence({ game: { name: receiver.nickname, type: "streaming", url: receiver.url}});
 	
     return {
         data: {
