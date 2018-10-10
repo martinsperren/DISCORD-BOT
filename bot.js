@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const Client = require('node-rest-client').Client;
 const ytdl = require('ytdl-core');
+const twitch = require('twitch.tv');
 const jsonfile = require('jsonfile');
 const configFile = "config.json";
 const ms = require("ms");
