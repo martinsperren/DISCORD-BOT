@@ -10,7 +10,7 @@
       "latestStream": 25283115264,
       "receivers": [
         {
-          "nickname": "My Test Server",
+          "nickname": "Tuber",
           "customMessage": "Che @everyone! Tuber está en vivo en Twitch!",
 		  "url": "https://www.twitch.tv/tubergg"
 		  
@@ -19,7 +19,7 @@
     },
     {
       "id": "112234256",
-      "nickname": "benex",
+      "nickname": "Benex",
       "latestStream": 25283115264,
       "receivers": [
         {
@@ -31,7 +31,7 @@
     },
     {
       "id": "116571793",
-      "nickname": "matishi",
+      "nickname": "Matishi",
       "latestStream": 25283115264,
       "receivers": [
         {
@@ -43,7 +43,7 @@
     },
     {
       "id": "193721055",
-      "nickname": "pancho",
+      "nickname": "Merodeador",
       "latestStream": 25281670208,
       "receivers": [
         {
@@ -54,7 +54,7 @@
       ]
     }, {
       "id": "114200215",
-      "nickname": "flash",
+      "nickname": "Flash",
       "latestStream": 25283115264,
       "receivers": [
         {
@@ -66,7 +66,7 @@
     },
      {
       "id": "54975899",
-      "nickname": "sntgx",
+      "nickname": "Sntgx",
       "latestStream": 25283115264,
       "receivers": [
         {
