@@ -18,6 +18,12 @@ var webhook = process.env.WEBHOOK;
 
 
 
+
+//  START  //  START  //  START  //  START  //  START  //  START  //  START  //  START  //  START  //  START  //  START  
+
+
+
+
 client.on("ready", () => {
     console.log(`Bot iniciado ${client.users.size} usuarios en ${client.channels.size} canales.`);
 	client.user.setGame(process.env.GAME);	
@@ -32,9 +38,6 @@ client.on("guildCreate", guild => {
 });
 
 
-
-
-
 client.on("guildDelete", guild => {
     console.log(`Quitado de guild: ${guild.name} (id: ${guild.id})`);
  client.user.setGame(process.env.GAME);		
@@ -47,6 +50,10 @@ client.on('guildMemberRemove', member => {
     member.guild.channels.get('459448629212479488').send('**' + member.user.username + '** no sacó la mano de ahí y se quedo trificado. :hand_splayed: ');
     
 });
+
+
+
+//  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  
 
 
 
@@ -143,13 +150,9 @@ function buildWebHook(twitchResponse, receiver) {
 
 
 
+//  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  
 
 
-
-
-
-
-//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH//TWITCH
 
 
 async function handleVideo(video, message, voiceChannel, playlist = false) {
@@ -211,6 +214,15 @@ function play(guild, song) {
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
     serverQueue.textChannel.send(`Reproduciendo: **${song.title}**`);
 }
+
+
+
+
+//   COMANDOS   //   COMANDOS   //   COMANDOS   //   COMANDOS   //   COMANDOS   //   COMANDOS   //   COMANDOS   //   COMANDOS   //   COMANDOS   
+ 
+
+
+
 client.on("message", async message => {
     const args = message.content.slice(1).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
@@ -218,15 +230,17 @@ client.on("message", async message => {
     const searchString = argsM.slice(1).join(' ');
     const url = argsM[1] ? argsM[1].replace(/<(.+)>/g, '$1') : '';
     const serverQueue = queue.get(message.guild.id);
-    if (message.content.includes("huevo")) {
+   
+if (message.content.includes("huevo")) {
         message.react(client.emojis.get("430508228976181248"));
     }
+	
     if (message.content.startsWith("!huevo")){
         message.delete();
         const ayy = client.emojis.get("430508228976181248");
         message.channel.send(`¿y el ${ayy}?`);
     }
-   if (message.content.startsWith("!cmds")){
+   if (message.content.startsWith("!cmds")||message.content.startsWith("!help")){
         if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
         return message.reply("\n!ping\n!say texto\n!kick @usuario razon\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario razon\n!nick @usuario nick\n!huevo\n!music (ayuda de musica)");
@@ -253,8 +267,7 @@ client.on("message", async message => {
         message.channel.send(sayMessage);
     }
 	
-	
-	
+
 	
 	 if (message.content.startsWith("!big")){
         if (!message.member.roles.some(r => roles.includes(r.name)))
@@ -528,7 +541,7 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=2VcOvpeymjA');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-		message.channel.send('!cc 2'); 
+		message.delete();
 		message.delete();
 	}
 	
