@@ -6,6 +6,7 @@ const twitch = require('twitch.tv');
 const jsonfile = require('jsonfile');
 const schedule = require('node-schedule');
 const configFile = "config.json";
+const restClient = new Client();
 const ms = require("ms");
 const Util = require('discord.js');
 const YouTube = require('simple-youtube-api');
