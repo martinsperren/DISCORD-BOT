@@ -6,7 +6,7 @@
   "streams": [
     {
       "id": "99625204",
-      "nickname": "tuber",
+      "nickname": "Tuber",
       "latestStream": 25283115264,
       "receivers": [
         {
@@ -23,7 +23,7 @@
       "latestStream": 25283115264,
       "receivers": [
         {
-          "nickname": "My Test Server",
+          "nickname": "Benex",
           "customMessage": "Che @everyone! Benex está en vivo en Twitch!",
 		  "url": "https://www.twitch.tv/benex_rs"
         }
@@ -35,7 +35,7 @@
       "latestStream": 25283115264,
       "receivers": [
         {
-          "nickname": "My Test Server",
+          "nickname": "Matishi",
           "customMessage": "Che @everyone! Matishi está en vivo en Twitch!",
 		  "url": "https://www.twitch.tv/matishi"
         }
@@ -48,7 +48,7 @@
       "latestStream": 25283115264,
       "receivers": [
         {
-          "nickname": "My Test Server",
+          "nickname": "Heitren",
           "customMessage": "Che @everyone! Heitren está en vivo en Twitch!",
 		  "url": "https://www.twitch.tv/heitren_box"
         }
@@ -62,7 +62,7 @@
       "latestStream": 25281670208,
       "receivers": [
         {
-          "nickname": "Monster Truck Rally",
+          "nickname": "Merodeador",
           "customMessage": "Che @everyone! Moderador está en vivo en Twitch!",
 		  "url": "https://www.twitch.tv/panchocaccio"
         }
@@ -73,7 +73,7 @@
       "latestStream": 25283115264,
       "receivers": [
         {
-          "nickname": "My Test Server",
+          "nickname": "Flash",
           "customMessage": "Che @everyone! Flash está en vivo en Twitch!",
 		  "url": "https://www.twitch.tv/flashrockmann"
         }
@@ -85,7 +85,7 @@
       "latestStream": 25283115264,
       "receivers": [
         {
-          "nickname": "My Test Server",
+          "nickname": "Sntgx",
           "customMessage": "Che @everyone! El Cabe, si, EL CABE! está en vivo en Twitch!",
 		  "url": "https://www.twitch.tv/sntgx"
         }
