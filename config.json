@@ -41,6 +41,21 @@
         }
       ]
     },
+	  
+    {
+      "id": "53431450",
+      "nickname": "Heitren",
+      "latestStream": 25283115264,
+      "receivers": [
+        {
+          "nickname": "My Test Server",
+          "customMessage": "Che @everyone! Heitren está en vivo en Twitch!",
+		  "url": "https://www.twitch.tv/heitren_box"
+        }
+      ]
+    },
+	  
+	  
     {
       "id": "193721055",
       "nickname": "Merodeador",
