@@ -2,9 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const Client = require('node-rest-client').Client;
 const ytdl = require('ytdl-core');
-const twitch = require('twitch.tv');
 const jsonfile = require('jsonfile');
-const schedule = require('node-schedule');
 const configFile = "config.json";
 const restClient = new Client();
 const ms = require("ms");
@@ -14,7 +12,6 @@ const youtube = new YouTube(process.env.YT_API);
 const queue = new Map();
 var rn = require('random-number');
 var roles = ["Owner", "Admin", "Bunker Support"];
-var webhook = process.env.WEBHOOK;
 
 
 
@@ -50,109 +47,6 @@ client.on('guildMemberRemove', member => {
     member.guild.channels.get('459448629212479488').send('**' + member.user.username + '** no sacó la mano de ahí y se quedo trificado. :hand_splayed: ');
     
 });
-
-
-
-//  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  //  TWITCH  
-
-
-
-
-const job = schedule.scheduleJob('/1 * * * * *', () => {
-    console.log("Job Started.");
-    jsonfile.readFile(configFile, (err, config) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log("Config Loaded, checking streams...");
-        for (const stream of config.streams) {
-            console.log(`Checking Twitch ID ${stream.id}`);
-            twitch(`streams/${stream.id}`, config.twitchAuth, (err, twitchResponse) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                if (!twitchResponse.stream) {
-                    console.log(`Twitch ID ${stream.id} (${stream.nickname}) está off.`);
-                    return;
-                }
-                if (stream.latestStream === twitchResponse.stream._id) {
-                    console.log(`Stream ya posteado. Twitch ID ${stream.id} (${stream.nickname})`);
-                    return;
-                }
-                console.log(`Twitch ID ${stream.id} (${stream.nickname}) está stremeando!`);
-                stream.latestStream = twitchResponse.stream._id;
-                jsonfile.writeFile(configFile, config, (err) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-                if (!twitchResponse.stream.game) {
-                    twitchResponse.stream.game = "Not Playing";
-                }
-                stream.receivers.forEach((receiver) => {
-                    const args = buildWebHook(twitchResponse, receiver);
-                    restClient.post(webhook, args, function (data, webhookResponse) {
-                        console.log(`Sent webhook to ${receiver.nickname}`);
-                    });
-                });
-            });
-        }
-    });
-});
-
-function buildWebHook(twitchResponse, receiver) {
-	
-	
-	//Seteo el estado del bot al stream.
-	client.user.setPresence({ game: { name: receiver.nickname, type: "streaming", url: receiver.url}});
-	
-    return {
-        data: {
-            "username": `${twitchResponse.stream.channel.display_name}`,
-            "avatar_url": `${twitchResponse.stream.channel.logo}`,
-            "content": `${receiver.customMessage}`,
-            "embeds": [{
-                    "author": {
-                        "name": `${twitchResponse.stream.channel.display_name}`,
-                        "icon_url": `${twitchResponse.stream.channel.logo}`
-                    },
-                    "title": `EN VIVO: ${twitchResponse.stream.channel.status}`,
-                    "url": `${twitchResponse.stream.channel.url}`,
-                    "color": 6570404,
-                    "fields": [{
-                            "name": "Juego",
-                            "value": `${twitchResponse.stream.game}`,
-                            "inline": true
-                        },
-                        {
-                            "name": "Viewers",
-                            "value": `${twitchResponse.stream.viewers}`,
-                            "inline": true
-                        }
-                    ],
-                    "image": {
-                        "url": `${twitchResponse.stream.preview.large}`
-                    },
-                    "thumbnail": {
-                        "url": `${twitchResponse.stream.channel.logo}`
-                    },
-                    "footer": {
-                        "text": `/${twitchResponse.stream.channel.name}`,
-                        "icon_url": `https://cdn.discordapp.com/attachments/250501026958934020/313483431088619520/GlitchBadge_Purple_256px.png`
-                    }
-                }]
-        },
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
-}
-
-
-
-//  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  //  YOUTUBE  
 
 
 
