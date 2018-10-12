@@ -269,8 +269,12 @@ if (message.content.includes("huevo")) {
         message.channel.send(sayMessage);
     }
 	
+	
+	
+	
+	// BIG 
 
-	function isSpace(aChar){ //para big
+	function isSpace(aChar){ 
       myCharCode = aChar.charCodeAt(0);
    
       if(((myCharCode >  8) && (myCharCode < 14)) ||
@@ -281,6 +285,10 @@ if (message.content.includes("huevo")) {
    
       return false;
    }
+   
+   function isNumber(input) {
+    return !isNaN(input);
+}
 	
 	
 	 if (message.content.startsWith("!big")){
@@ -295,7 +303,7 @@ if (message.content.includes("huevo")) {
     if(isSpace(arr[i])){
 		salida = salida + "   ";	        
 	}else{
-	}if(isNaN(arr[i]){
+	}if(isNumber(arr[i])){
 	
 	if(arr[i]=="0") salida= salida + ":zero:";
 	if(arr[i]=="1") salida= salida + ":one:";
@@ -323,7 +331,7 @@ if (message.content.includes("huevo")) {
 	
 	
 	
-	
+	//BIG
 	
 	
     if (message.content.startsWith("!kick")){
@@ -524,7 +532,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
         return message.channel.send('No hay nada reproduciendose.');
     }
     if (message.content.startsWith("!music")){
-        return message.reply("\n!play (nombre o link) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion\n!quit - saca al bot del canal (en caso de bug)");
+        return message.reply("\n!play (nombre/link/playlist) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion\n!quit - saca al bot del canal (en caso de bug)");
     }
 	
 	
