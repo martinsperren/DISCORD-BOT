@@ -74,14 +74,14 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
                     return;
                 }
                 if (!twitchResponse.stream) {
-                    console.log(`Twitch ID ${stream.id} (${stream.nickname}) is not live`);
+                    console.log(`Twitch ID ${stream.id} (${stream.nickname}) está off.`);
                     return;
                 }
                 if (stream.latestStream === twitchResponse.stream._id) {
-                    console.log(`Already tracked this stream from Twitch ID ${stream.id} (${stream.nickname})`);
+                    console.log(`Stream ya posteado. Twitch ID ${stream.id} (${stream.nickname})`);
                     return;
                 }
-                console.log(`Twitch ID ${stream.id} (${stream.nickname}) has started streaming!`);
+                console.log(`Twitch ID ${stream.id} (${stream.nickname}) está stremeando!`);
                 stream.latestStream = twitchResponse.stream._id;
                 jsonfile.writeFile(configFile, config, (err) => {
                     if (err) {
@@ -104,6 +104,8 @@ const job = schedule.scheduleJob('/1 * * * * *', () => {
 
 function buildWebHook(twitchResponse, receiver) {
 	
+	
+	//Seteo el estado del bot al stream.
 	client.user.setPresence({ game: { name: receiver.nickname, type: "streaming", url: receiver.url}});
 	
     return {
@@ -268,6 +270,18 @@ if (message.content.includes("huevo")) {
     }
 	
 
+	function isSpace(aChar){ //para big
+      myCharCode = aChar.charCodeAt(0);
+   
+      if(((myCharCode >  8) && (myCharCode < 14)) ||
+         (myCharCode == 32))
+      {
+         return true;
+      }
+   
+      return false;
+   }
+	
 	
 	 if (message.content.startsWith("!big")){
         if (!message.member.roles.some(r => roles.includes(r.name)))
@@ -362,6 +376,7 @@ if (message.content.includes("huevo")) {
         message.channel.send(`<@${message.author.id}> le dio ban a <@${member.user.id}> por: ${reason}.`);
     }
 	
+	//Si se buggea el bot, para sacarlo del canal de voz.
 	if (message.content.startsWith("!quit")){
         message.member.voiceChannel.leave();
 	message.delete();
@@ -509,13 +524,19 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
         return message.channel.send('No hay nada reproduciendose.');
     }
     if (message.content.startsWith("!music")){
-        return message.reply("\n!play (nombre) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion");
+        return message.reply("\n!play (nombre) - reproduce o agrega a la lista\n!skip - salta la cancion\n!stop - para la musica\n!vol (1-10) - cambia el volumen\n!song - nombre de la cancion\n!list - muestra la lista de reproduccion\n!pause - pausa la reproduccion\n!resume - reanuda la reproduccion\n!quit - saca al bot del canal (en caso de bug)");
     }
+	
+	
 	 if (message.content.startsWith("!role")){
+		 if (!message.member.roles.some(r => roles.includes(r.name)))
+            return 0;
 	const sayMessage = args.join(" ");
 	var i = message.guild.roles.find("name", sayMessage).id;
  return message.reply(i); 
 	 }
+	 
+	 
 	if (message.content.startsWith("!uptime")){
 	 if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
@@ -538,25 +559,23 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 
 	
 	if (message.content.startsWith("!luz")){
+		message.delete(); 
 		const voiceChannel = message.member.voiceChannel;
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=2VcOvpeymjA');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-		message.delete();
-		message.delete();
+		message.channel.send('!cc 2'); 
 	}
 	
 	
 	
 	
 	if (message.content.startsWith("!cubilla")){
-		
-		
+		message.delete(); 
 		const voiceChannel = message.member.voiceChannel;
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=8HbVDzZPCPA');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-			wait(2500);
 		message.channel.send('!cc 2'); 
 		
 	}
@@ -568,13 +587,13 @@ message.channel.send(`__**BOT UPTIME:**__ ${days} DIAS ${hrs} HS ${mins} MINS`);
 	
 	
 	if (message.content.startsWith("!miami")){
-	
+	message.delete(); 
 
 const voiceChannel = message.member.voiceChannel;
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=4ue2a6wN_wo');
 		var playlist = false;
 	handleVideo(video, message, voiceChannel, playlist);
-			wait(2500);
+			
 		message.channel.send('!cc 2'); 
 		
 	}
@@ -583,7 +602,7 @@ const voiceChannel = message.member.voiceChannel;
 	
 	
 	if (message.content.startsWith("!bobo")){
-		
+		message.delete(); 
 		
 		const voiceChannel = message.member.voiceChannel;
 		var video = await youtube.getVideo('https://www.youtube.com/watch?v=57DmGvPzlfU');
