@@ -245,7 +245,7 @@ if (message.content.includes("huevo")) {
    if (message.content.startsWith("!cmds")||message.content.startsWith("!help")){
         if (!message.member.roles.some(r => roles.includes(r.name)))
             return 0;
-        return message.reply("\n!ping\n!say texto\n!kick @usuario razon\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario razon\n!nick @usuario nick\n!huevo\n!music (ayuda de musica)");
+        return message.reply("\n!cc num\n!rol nombre\n!uptime \n!server \n!ping\n!say texto\n!big texto\n!kick @usuario razon\n!mute @usuario\n!tmute @usuario 1s/m/h/d\n!unmute @usuario\n!ban @usuario razon\n!nick @usuario nick\n!music (ayuda de musica)");
     }
     if (message.content.startsWith("!nick")){
         if (!message.member.roles.some(r => roles.includes(r.name)))
