@@ -506,6 +506,21 @@ const voiceChannel = message.member.voiceChannel;
 		
 	}
 	
+	if (message.content.startsWith("!fbi")){
+	message.delete(); 
+
+const voiceChannel = message.member.voiceChannel;
+		var video = await youtube.getVideo('https://www.youtube.com/watch?v=6fB8QiPTadY');
+		var playlist = false;
+	handleVideo(video, message, voiceChannel, playlist);
+			
+		message.channel.send('!cc 2'); 
+		
+	}
+	
+	
+	
+	
 	
 	
 	
