@@ -134,12 +134,12 @@ client.on("message", async message => {
     const serverQueue = queue.get(message.guild.id);
    
 if (message.content.includes("huevo")) {
-        message.react(client.emojis.get("430508228976181248"));
+        message.react(client.emojis.get("537716691803570236"));
     }
 	
     if (message.content.startsWith("!huevo")){
         message.delete();
-        const ayy = client.emojis.get("430508228976181248");
+        const ayy = client.emojis.get("537716691803570236");
         message.channel.send(`¿y el ${ayy}?`);
     }
    if (message.content.startsWith("!cmds")||message.content.startsWith("!help")){
@@ -255,7 +255,7 @@ if (message.content.includes("huevo")) {
         let member = message.mentions.members.first();
         if (!member)
             return message.reply("Arrobá al usuario.");
-        member.addRole('429091253129576448');
+        member.addRole('537712385109262346');
         message.channel.send(`<@${member.user.id}> fue muteado por <@${message.author.id}>.`);
     }
    if (message.content.startsWith("!unmute")){
@@ -264,7 +264,7 @@ if (message.content.includes("huevo")) {
         let member = message.mentions.members.first();
         if (!member)
             return message.reply("Arrobá al usuario.");
-        member.removeRole('429091253129576448');
+        member.removeRole('537712385109262346');
         message.channel.send(`<@${message.author.id}> desmuteo a <@${member.user.id}>.`);
     }
     if (message.content.startsWith("!ban")){
@@ -538,7 +538,7 @@ const voiceChannel = message.member.voiceChannel;
 	}
 	
 
-	
+	/*
 	if (message.content.startsWith("!drop")){	
 		
 		
@@ -594,7 +594,7 @@ var options = {
 	}
 	
 	
-	
+	*/
 	
 	
 	
@@ -609,10 +609,10 @@ var options = {
         if (!tomute)
             return message.reply("Arrobá al usuario.");
 		 if(!mutetime) return message.reply("Agrega el tiempo despues de la mención!");
-	 await(tomute.addRole('429091253129576448'));
+	 await(tomute.addRole('537712385109262346'));
   message.channel.send(`<@${tomute.id}> fue muteado por ${message.author.username} durante: ${ms(ms(mutetime))}`);
   setTimeout(function(){
-    tomute.removeRole('429091253129576448');
+    tomute.removeRole('537712385109262346');
     message.channel.send(`<@${tomute.id}> ha sido desmuteado!`);
   }, ms(mutetime));
 	}
